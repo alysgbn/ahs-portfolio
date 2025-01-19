@@ -1,4 +1,5 @@
 import "./App.scss";
+
 import MyNavbar from "./components/Navbar";
 
 import myAvatar from "./assets/images/avatar-laptop.png";
@@ -7,6 +8,7 @@ import { Button } from "@heroui/button";
 import MachineLearning from "./assets/svg/MachineLearning";
 import DataScience from "./assets/svg/DataScience";
 import SoftwareDevelopment from "./assets/svg/SoftwareDevelopment";
+import Journey from "./components/Journey";
 function App() {
   return (
     <>
@@ -76,13 +78,7 @@ function App() {
           </div>
         </div>
       </div>
-
-      <div className="journey-page">
-        <div className="journey-header">
-          <p>JOURNEY</p>
-          <h1>Featured Project</h1>
-        </div>
-      </div>
+      <Journey />
     </>
   );
 }
