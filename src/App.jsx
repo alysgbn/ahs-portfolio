@@ -1,4 +1,5 @@
 import "./App.scss";
+import "./assets/css/journey.scss";
 import MyNavbar from "./components/Navbar";
 
 import myAvatar from "./assets/images/avatar-laptop.png";

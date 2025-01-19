@@ -1,0 +1,25 @@
+.journey-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .journey-header {
+        p {
+            font-size: 22px;
+            font-family: 'Poppins-Medium';
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #f32170,
+                    #ff6b08, #cf23cf, #eedd44);
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+        }
+
+        h1 {
+            font-family: 'Kugile';
+            font-size: 32px;
+        }
+    }
+}
