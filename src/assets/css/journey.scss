@@ -24,12 +24,19 @@
   }
 
   .journey-projects {
-    margin: 2rem 0 2rem 0;
-    display: flex;
-    gap: 2rem;
+    .containers {
+      margin: 2rem 0 2rem 0;
+      display: flex;
+      gap: 2rem;
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+    }
 
     .card {
       background-color: rgba(71, 9, 43, 0.11);
+      cursor: pointer;
+      transition: 0.2s ease-in;
 
       .card-header {
         color: white;
@@ -92,5 +99,68 @@
         font-family: "Poppins-Medium";
       }
     }
+    .card:hover {
+      background-color: rgba(71, 1, 48, 0.692);
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+  }
+
+  //   .logos {
+  //     display: flex;
+  //     justify-content: space-between;
+  .tech-stack {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    gap: 2rem;
+    // overflow: hidden;
+    .slider {
+      //   width: 50%;
+      //   overflow: hidden;
+      .slide-track {
+        // background-color: red;
+        max-width: 825px;
+        width: 100%;
+        // width: 700px;
+        // overflow: hidden;
+        // width: fit-content;
+        display: flex;
+        gap: 3em;
+        // overflow: hidden;
+        padding-left: 1rem;
+        // background-color: black;
+
+        .slide {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          animation: scroll 20s linear infinite;
+          gap: 1rem;
+          width: 100%;
+          max-width: 200px;
+
+          p {
+            font-size: 24px;
+            font-weight: bold;
+            font-family: "Poppins-Medium";
+          }
+          img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translatex(-50%);
+      }
+    }
   }
 }
+// }
