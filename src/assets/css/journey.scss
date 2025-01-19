@@ -1,25 +1,96 @@
 .journey-page {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-    .journey-header {
-        p {
-            font-size: 22px;
-            font-family: 'Poppins-Medium';
-            text-align: center;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, #f32170,
-                    #ff6b08, #cf23cf, #eedd44);
-            -webkit-text-fill-color: transparent;
-            -webkit-background-clip: text;
-        }
-
-        h1 {
-            font-family: 'Kugile';
-            font-size: 32px;
-        }
+  .journey-header {
+    p {
+      font-size: 22px;
+      font-family: "Poppins-Medium";
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
     }
+
+    h1 {
+      font-family: "Kugile";
+      font-size: 32px;
+      font-weight: 600;
+    }
+  }
+
+  .journey-projects {
+    margin: 2rem 0 2rem 0;
+    display: flex;
+    gap: 2rem;
+
+    .card {
+      background-color: rgba(71, 9, 43, 0.11);
+
+      .card-header {
+        color: white;
+
+        p {
+          background: linear-gradient(
+            to right,
+            #f32170,
+            #ff6b08,
+            #cf23cf,
+            #eedd44
+          );
+          -webkit-text-fill-color: transparent;
+          -webkit-background-clip: text;
+          font-family: "Poppins-Medium";
+          font-size: 14px;
+        }
+
+        small {
+          font-family: "Poppins-Medium";
+          margin-bottom: 0.5rem;
+        }
+
+        h4 {
+          font-family: "Kugile";
+          font-size: 22px;
+          font-weight: 400;
+        }
+      }
+
+      .card-body {
+        position: relative;
+
+        .arrows {
+          .left,
+          .right {
+            position: absolute;
+            background: linear-gradient(
+              to right,
+              #f32172a2,
+              #ff6b08a4,
+              #eedd44b4
+            );
+          }
+
+          .left {
+            top: 50%;
+            left: 5%;
+            transform: rotate(180deg);
+          }
+
+          .right {
+            top: 50%;
+            right: 5%;
+          }
+        }
+      }
+
+      .card-footer {
+        font-family: "Poppins-Medium";
+      }
+    }
+  }
 }
