@@ -12,6 +12,13 @@ import Galago4 from "../assets/images/Galago4.png";
 import ReactLogo from "../assets/logos/ReactLogo.png";
 import SassLogo from "../assets/logos/SassLogo.png";
 import BootstrapLogo from "../assets/logos/BootstrapLogo.png";
+import TailwindLogo from '../assets/logos/TailwindLogo.png'
+import GithubLogo from '../assets/logos/GithubLogo.png'
+import GitlabLogo from '../assets/logos/GitlabLogo.png'
+import NextJSLogo from '../assets/logos/NextJSLogo.png'
+import PostmanLogo from '../assets/logos/PostmanLogo.png'
+import TypeScriptLogo from '../assets/logos/TypeScriptLogo.png'
+
 import { RightArrow } from "../assets/svg/Arrow";
 
 import { motion } from "framer-motion";
@@ -267,13 +274,13 @@ const Journey = () => {
                 </div>{" "}
                 <div className="slide">
                   {" "}
-                  <img src={ReactLogo} alt="" width={50} height={50} />
-                  <p>REACT JS</p>
+                  <img src={TailwindLogo} alt="" width={30} height={30} />
+                  <p>Tailwind</p>
                 </div>{" "}
-                <div className="slide">
+                <div className="slide ">
                   {" "}
-                  <img src={ReactLogo} alt="" width={50} height={50} />
-                  <p>REACT JS</p>
+                  <img  src={GithubLogo} alt="" width={50} height={50} />
+                  <p>Github</p>
                 </div>
               </div>
             </div>
@@ -282,23 +289,35 @@ const Journey = () => {
               <div className="slide-track">
                 <div className="slide">
                   {" "}
-                  <img src={ReactLogo} alt="" width={50} height={50} />
+                  <img src={NextJSLogo} alt="" width={50} height={50} />
+                  <div>
+                  <p>NextJS</p>
+                  </div>
                 </div>
                 <div className="slide">
                   {" "}
-                  <img src={ReactLogo} alt="" width={50} height={50} />
+                  <img src={TailwindLogo} alt="" width={50} height={50} />
+                  <p>Tailwind</p>
                 </div>{" "}
                 <div className="slide">
                   {" "}
-                  <img src={ReactLogo} alt="" width={50} height={50} />
+                  <img src={SassLogo} alt="" width={50} height={50} />
+                  <p>SASS</p>
                 </div>{" "}
                 <div className="slide">
                   {" "}
-                  <img src={ReactLogo} alt="" width={50} height={50} />
+                  <img src={TypeScriptLogo} alt="" width={50} height={50} />
+                  <p>TypeScript</p>
                 </div>{" "}
                 <div className="slide">
                   {" "}
-                  <img src={ReactLogo} alt="" width={50} height={50} />
+                  <img src={GitlabLogo} alt="" width={50} height={50} />
+                  <p>GitLab</p>
+                </div>
+                <div className="slide">
+                  {" "}
+                  <img src={PostmanLogo} alt="" width={50} height={50} />
+                  <p>Postman</p>
                 </div>
               </div>
             </div>
