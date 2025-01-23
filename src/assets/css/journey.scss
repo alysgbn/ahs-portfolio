@@ -113,19 +113,18 @@
     .slider {
       max-width: 825px;
       overflow: hidden;
+
       .slide-track {
-        // width: calc(250px * 6 + 1rem * 6);
-   
         display: flex;
         gap: 1rem;
-        
+
 
         .slide {
           display: flex;
           align-items: center;
           animation: scroll 10s linear infinite;
           gap: 1rem;
- 
+
 
           p {
             font-size: 20px;
