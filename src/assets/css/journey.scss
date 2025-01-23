@@ -42,13 +42,11 @@
         color: white;
 
         p {
-          background: linear-gradient(
-            to right,
-            #f32170,
-            #ff6b08,
-            #cf23cf,
-            #eedd44
-          );
+          background: linear-gradient(to right,
+              #f32170,
+              #ff6b08,
+              #cf23cf,
+              #eedd44);
           -webkit-text-fill-color: transparent;
           -webkit-background-clip: text;
           font-family: "Poppins-Medium";
@@ -71,15 +69,14 @@
         position: relative;
 
         .arrows {
+
           .left,
           .right {
             position: absolute;
-            background: linear-gradient(
-              to right,
-              #f32172a2,
-              #ff6b08a4,
-              #eedd44b4
-            );
+            background: linear-gradient(to right,
+                #f32172a2,
+                #ff6b08a4,
+                #eedd44b4);
           }
 
           .left {
@@ -99,59 +96,47 @@
         font-family: "Poppins-Medium";
       }
     }
+
     .card:hover {
       background-color: rgba(71, 1, 48, 0.692);
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
   }
 
-  //   .logos {
-  //     display: flex;
-  //     justify-content: space-between;
+
   .tech-stack {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-content: space-between;
     gap: 2rem;
-    // overflow: hidden;
+
     .slider {
-      //   width: 50%;
-      //   overflow: hidden;
+      max-width: 825px;
+      overflow: hidden;
       .slide-track {
-        // background-color: red;
-        max-width: 825px;
-        width: 100%;
-        overflow: hidden;
-        // width: 700px;
-        // overflow: hidden;
-        // width: fit-content;
+        // width: calc(250px * 6 + 1rem * 6);
+   
         display: flex;
         gap: 1rem;
-        // overflow: hidden;
-        // padding-left: 1rem;
-        // background-color: black;
+        
 
         .slide {
           display: flex;
           align-items: center;
-          // justify-content: space-evenly;
-          animation: scroll 20s linear infinite;
+          animation: scroll 10s linear infinite;
           gap: 1rem;
-          // width: max-content;
-          // background-color: #cf23cf;
-          // border: 1px solid white;
-          width: 100%;
+ 
 
           p {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             font-family: "Poppins-Medium";
             width: 100%;
-            // background-color: red;
+            color: white;
           }
+
           img {
             max-width: 50px;
-            // width: 100%;
             height: 50px;
             object-fit: cover;
           }
@@ -163,10 +148,12 @@
       0% {
         transform: translateX(0);
       }
+
       100% {
-        transform: translatex(-50%);
+        transform: translateX(-600px);
       }
     }
   }
 }
+
 // }
