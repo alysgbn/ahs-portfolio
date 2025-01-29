@@ -9,6 +9,7 @@ import MachineLearning from "./assets/svg/MachineLearning";
 import DataScience from "./assets/svg/DataScience";
 import SoftwareDevelopment from "./assets/svg/SoftwareDevelopment";
 import Journey from "./components/Journey";
+import Craft from "./components/Craft";
 function App() {
   return (
     <>
@@ -79,6 +80,7 @@ function App() {
         </div>
       </div>
       <Journey />
+      <Craft/>
     </>
   );
 }
