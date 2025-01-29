@@ -1,5 +1,6 @@
 import React from "react";
 import "../assets/css/navbar.css";
+import logo from "../assets/logos/my-logo-gray.png";
 import {
   Navbar,
   NavbarBrand,
@@ -28,7 +29,8 @@ export default function MyNavbar() {
   return (
     <Navbar shouldHideOnScroll className="navbar">
       <NavbarBrand>
-        <AcmeLogo />
+        {/* <AcmeLogo /> */}
+        <img src={logo} alt="My Logo" width={50} className="mr-2 object-fill" />
         <p className="font-bold text-inherit title">aliyahworks</p>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
