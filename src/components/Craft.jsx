@@ -21,7 +21,8 @@ const Craft = () => {
                 >
                     <div className="journey-header">
                         <p>CRAFTS</p>
-                        <h1>Data Science</h1>
+                        <h1>Data Science test</h1>
+
                     </div>
                 </motion.div>
             </div>
