@@ -3,7 +3,6 @@ import "./App.scss";
 import MyNavbar from "./components/Navbar";
 
 import myAvatar from "./assets/images/avatar-laptop.png";
-import myAvatarLike from "./assets/images/avatar-like.png";
 import { Button } from "@heroui/button";
 import MachineLearning from "./assets/svg/MachineLearning";
 import DataScience from "./assets/svg/DataScience";

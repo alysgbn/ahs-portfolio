@@ -6,9 +6,6 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
 } from "@heroui/navbar";
 export const AcmeLogo = () => {
   return (
