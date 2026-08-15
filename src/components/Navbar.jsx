@@ -18,7 +18,7 @@ const navLinks = [
 
 export default function MyNavbar() {
   return (
-    <Navbar shouldHideOnScroll className="navbar">
+    <Navbar shouldHideOnScroll maxWidth="xl" className="navbar">
       <NavbarBrand>
         <a
           href="#"

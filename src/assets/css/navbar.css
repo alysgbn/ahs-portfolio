@@ -1,9 +1,18 @@
 .navbar {
     background-color: transparent;
     font-family: 'Poppins-Regular';
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
 
-    .title {
-        font-family: 'Vindey';
-        font-size: 22px;
+@media (max-width: 640px) {
+    .navbar {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
     }
+}
+
+.navbar .title {
+    font-family: 'Vindey';
+    font-size: 22px;
 }
