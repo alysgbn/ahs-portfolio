@@ -1,9 +1,18 @@
 .journey-page {
-  height: 100vh;
+  min-height: 140vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
+  padding: 6rem 2rem;
+  gap: 3rem;
+
+  .journey-sticky {
+    position: sticky;
+    top: 100px;
+    z-index: 3;
+    align-self: center;
+  }
 
   .journey-header {
     p {

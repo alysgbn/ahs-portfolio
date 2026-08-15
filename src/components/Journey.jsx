@@ -78,24 +78,26 @@ const Journey = () => {
 
   return (
     <div id="journey" className="journey-page">
-      <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{
-          opacity: 1,
-          y: 0,
-          transition: {
-            duration: 0.55,
-            delay: 0.1,
-            ease: [0.23, 1, 0.32, 1],
-          },
-        }}
-        viewport={{ once: true, amount: 0.3 }}
-      >
-        <div className="journey-header">
-          <p>PROFESSIONAL JOURNEY</p>
-          <h1>Featured Projects</h1>
-        </div>
-      </motion.div>
+      <div className="journey-sticky">
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 0.55,
+              delay: 0.1,
+              ease: [0.23, 1, 0.32, 1],
+            },
+          }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <div className="journey-header">
+            <p>PROFESSIONAL JOURNEY</p>
+            <h1>Featured Projects</h1>
+          </div>
+        </motion.div>
+      </div>
 
       <motion.div
         initial={{ opacity: 0, y: 80 }}
