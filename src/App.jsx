@@ -1,6 +1,6 @@
 import "./App.scss";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 import MyNavbar from "./components/Navbar";
 
@@ -24,6 +24,9 @@ import MagneticButton from "./components/MagneticButton";
 const ease = [0.23, 1, 0.32, 1];
 
 function App() {
+  const { scrollY } = useScroll();
+  const avatarY = useTransform(scrollY, [0, 700], [0, -100]);
+
   return (
     <>
       <ScrollProgress />
@@ -72,6 +75,7 @@ function App() {
           initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.1, ease }}
+          style={{ y: avatarY }}
         />
         <div className="hero-content">
           <motion.div
