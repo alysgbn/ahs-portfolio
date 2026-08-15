@@ -27,10 +27,10 @@ import Marquee from "./Marquee";
 const galagoImages = [Galago1, Galago2, Galago3, Galago4];
 
 const leftStack = [
-  { name: "Postman", src: PostmanLogo },
+  { name: "Postman", src: PostmanLogo, scale: 2.2 },
   { name: "GitLab", src: GitlabLogo },
   { name: "NextJS", src: NextJSLogo },
-  { name: "Tailwind", src: TailwindLogo, width: 60 },
+  { name: "Tailwind", src: TailwindLogo, scale: 1.4 },
   { name: "SASS", src: SassLogo },
   { name: "TypeScript", src: TypeScriptLogo },
 ];
@@ -38,14 +38,20 @@ const leftStack = [
 const rightStack = [
   { name: "React", src: ReactLogo },
   { name: "SASS", src: SassLogo },
-  { name: "Tailwind", src: TailwindLogo, width: 60 },
+  { name: "Tailwind", src: TailwindLogo, scale: 1.4 },
   { name: "Github", src: GithubLogo },
   { name: "Bootstrap", src: BootstrapLogo },
 ];
 
-const TechLogo = ({ src, name, width = 50 }) => (
+const TechLogo = ({ src, name, scale }) => (
   <div className="slide">
-    <img src={src} alt="" width={width} height={50} />
+    <div className="slide__logo">
+      <img
+        src={src}
+        alt=""
+        style={scale ? { transform: `scale(${scale})` } : undefined}
+      />
+    </div>
     <p>{name}</p>
   </div>
 );
