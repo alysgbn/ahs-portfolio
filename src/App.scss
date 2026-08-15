@@ -156,31 +156,33 @@
 .gradient {
   position: absolute;
   border-radius: 100%;
-  opacity: 0.6;
   mix-blend-mode: screen;
   transform: translate(-50%, -50%);
 }
 
 .gradient-1 {
-  background: rgb(224, 28, 170);
-  width: 700px;
-  height: 700px;
+  background: #ff2f8f;
+  opacity: 0.85;
+  width: 720px;
+  height: 720px;
   left: 60%;
   top: 40%;
 }
 
 .gradient-2 {
-  background: rgb(39, 4, 0);
-  width: 600px;
-  height: 600px;
-  left: 40%;
-  top: 60%;
+  background: #8b5cf6;
+  opacity: 0.75;
+  width: 620px;
+  height: 620px;
+  left: 38%;
+  top: 62%;
 }
 
 .gradient-3 {
-  background: rgb(240, 176, 144);
-  width: 500px;
-  height: 500px;
+  background: #ffa552;
+  opacity: 0.8;
+  width: 520px;
+  height: 520px;
   left: 50%;
   top: 50%;
 }
