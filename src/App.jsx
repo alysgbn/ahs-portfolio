@@ -12,6 +12,7 @@ import SoftwareDevelopment from "./assets/svg/SoftwareDevelopment";
 import Journey from "./components/Journey";
 import Craft from "./components/Craft";
 import About from "./components/About";
+import Experience from "./components/Experience";
 import AvailabilityBadge from "./components/AvailabilityBadge";
 import RoleRotator from "./components/RoleRotator";
 import MagneticButton from "./components/MagneticButton";
@@ -149,6 +150,7 @@ function App() {
       </div>
       <About />
       <Journey />
+      <Experience />
       <Craft />
     </>
   );
