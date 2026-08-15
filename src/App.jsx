@@ -14,6 +14,7 @@ import Craft from "./components/Craft";
 import About from "./components/About";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
+import Contact from "./components/Contact";
 import AvailabilityBadge from "./components/AvailabilityBadge";
 import RoleRotator from "./components/RoleRotator";
 import MagneticButton from "./components/MagneticButton";
@@ -154,6 +155,7 @@ function App() {
       <Experience />
       <Skills />
       <Craft />
+      <Contact />
     </>
   );
 }
