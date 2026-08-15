@@ -12,8 +12,8 @@ const values = [
     body: "A rushed interface is easy to spot. I sweat the small details because they compound into something that just feels right.",
   },
   {
-    title: "Simple by design",
-    body: "The best UI disappears. I aim for interfaces users move through without noticing the machinery underneath.",
+    title: "Full-stack, honestly",
+    body: "Frontend clarity is only worth so much without the data model to back it up. I care about the whole path from click to database and back.",
   },
   {
     title: "Motion with purpose",
@@ -50,17 +50,13 @@ export default function About() {
             className="about-heading"
             delayOffset={0.15}
           >
-            Frontend engineer with a soft spot for the details you don't usually notice.
+            Full-stack developer with a Data Science major and a soft spot for the details you don't usually notice.
           </WordReveal>
           <ScrubbedText>
-            I build web interfaces that feel considered — from the way a button
-            presses under your cursor to the timing of a section as it fades
-            into view. My background sits between engineering and design, and I
-            care about both.
+            I build web applications and the data models behind them. My focus is end-to-end — from the way a button presses under your cursor to the pipelines that keep the numbers honest.
           </ScrubbedText>
           <ScrubbedText>
-            Currently freelancing and open to full-time roles where craft
-            matters. Based in the Philippines, working globally.
+            Currently Data Solutions Engineer at Docquity, based in Pasig City. BS Computer Science, Data Science major, Magna Cum Laude from the Technological Institute of the Philippines.
           </ScrubbedText>
         </div>
 

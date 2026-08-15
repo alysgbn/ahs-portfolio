@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const defaultRoles = [
-  "Frontend Engineer",
+  "Data Solutions Engineer",
+  "Full Stack Developer",
   "Data Scientist",
-  "Machine Learning Engineer",
 ];
 
 export default function RoleRotator({ roles = defaultRoles, interval = 2400 }) {

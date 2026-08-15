@@ -124,9 +124,9 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.85, ease }}
           >
-            I specialize in developing cutting-edge web applications that
-            empower users and drive results. I’m ready to apply my skills and
-            help bring your projects to life.
+            I build full-stack web applications and the data pipelines behind
+            them. Currently at Docquity, working across Next.js on the surface
+            and FastAPI + Python for the machinery underneath.
           </motion.p>
 
           <motion.div
