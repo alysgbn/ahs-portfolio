@@ -137,6 +137,8 @@
   height: 100%;
   overflow: hidden;
   filter: blur(150px);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .gradient {
