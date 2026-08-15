@@ -12,6 +12,7 @@ import SoftwareDevelopment from "./assets/svg/SoftwareDevelopment";
 import Journey from "./components/Journey";
 import Craft from "./components/Craft";
 import About from "./components/About";
+import Manifesto from "./components/Manifesto";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
@@ -149,6 +150,7 @@ function App() {
         </div>
       </div>
       <About />
+      <Manifesto />
       <Journey />
       <Experience />
       <Skills />
