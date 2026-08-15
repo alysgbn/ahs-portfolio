@@ -1,0 +1,101 @@
+.about-section {
+  min-height: 80vh;
+  padding: 8rem 2rem 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: 5rem;
+
+  .about-inner {
+    max-width: 1100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .about-eyebrow {
+    font-family: "Poppins-Medium";
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #a0a0a0;
+    margin-bottom: 1rem;
+
+    @media (prefers-color-scheme: dark) {
+      color: #8a8a8a;
+    }
+  }
+
+  .about-heading {
+    font-family: "Kugile";
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    line-height: 1.05;
+    margin-bottom: 2rem;
+    color: inherit;
+  }
+
+  .about-bio {
+    p {
+      font-family: "Poppins-Regular";
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+      color: inherit;
+      max-width: 500px;
+    }
+
+    p:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .about-values {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .value-card {
+    padding: 1.5rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(6px);
+
+    @media (prefers-color-scheme: light) {
+      border-color: rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .value-number {
+      font-family: "Poppins-Medium";
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      color: #ff6b08;
+      margin-bottom: 0.5rem;
+    }
+
+    .value-title {
+      font-family: "Poppins-Medium";
+      font-size: 18px;
+      margin-bottom: 0.4rem;
+      color: inherit;
+    }
+
+    .value-body {
+      font-family: "Poppins-Regular";
+      font-size: 15px;
+      line-height: 1.5;
+      color: inherit;
+      opacity: 0.75;
+    }
+  }
+}
