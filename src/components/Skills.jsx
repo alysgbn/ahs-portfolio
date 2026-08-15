@@ -70,7 +70,7 @@ export default function Skills() {
           viewport={{ once: true, amount: 0.4 }}
           variants={headerReveal}
         >
-          <p className="skills-eyebrow">The stack</p>
+          <p className="skills-eyebrow">THE STACK</p>
           <h2 className="skills-heading">What I reach for.</h2>
           <p className="skills-sub">
             Tools I use day-to-day, grouped roughly by where they live in

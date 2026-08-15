@@ -54,7 +54,7 @@ export default function Experience() {
           viewport={{ once: true, amount: 0.4 }}
           variants={headerReveal}
         >
-          <p className="experience-eyebrow">The path so far</p>
+          <p className="experience-eyebrow">THE PATH SO FAR</p>
           <h2 className="experience-heading">Experience & education</h2>
         </motion.div>
 

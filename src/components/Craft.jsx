@@ -88,7 +88,7 @@ export default function Craft() {
           variants={headerReveal}
         >
           <div className="journey-header">
-            <p>Craft</p>
+            <p>CRAFT</p>
             <h1>Where the play lives.</h1>
           </div>
           <p className="craft-sub">

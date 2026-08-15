@@ -16,15 +16,17 @@
 
   .contact-eyebrow {
     font-family: "Poppins-Medium";
-    font-size: 14px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #a0a0a0;
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
     margin-bottom: 1rem;
-
-    @media (prefers-color-scheme: dark) {
-      color: #8a8a8a;
-    }
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .contact-heading {

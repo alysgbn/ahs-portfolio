@@ -39,7 +39,7 @@ export default function About() {
           viewport={{ once: true, amount: 0.3 }}
           variants={reveal}
         >
-          <p className="about-eyebrow">About</p>
+          <p className="about-eyebrow">ABOUT</p>
           <h2 className="about-heading">
             Frontend engineer with a soft spot for the details you don't
             usually notice.

@@ -60,7 +60,7 @@ export default function Contact() {
           viewport={{ once: true, amount: 0.5 }}
           variants={reveal(0)}
         >
-          Say hi
+          SAY HI
         </motion.p>
         <motion.h2
           className="contact-heading"
