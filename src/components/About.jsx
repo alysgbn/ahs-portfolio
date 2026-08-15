@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import ScrubbedText from "./ScrubbedText";
 import "../assets/css/about.scss";
 
 const ease = [0.23, 1, 0.32, 1];
@@ -32,29 +33,39 @@ export default function About() {
   return (
     <section id="about" className="about-section">
       <div className="about-inner">
-        <motion.div
-          className="about-bio"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={reveal}
-        >
-          <p className="about-eyebrow">ABOUT</p>
-          <h2 className="about-heading">
+        <div className="about-bio">
+          <motion.p
+            className="about-eyebrow"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={reveal}
+            custom={0}
+          >
+            ABOUT
+          </motion.p>
+          <motion.h2
+            className="about-heading"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={reveal}
+            custom={1}
+          >
             Frontend engineer with a soft spot for the details you don't
             usually notice.
-          </h2>
-          <p>
-            I build web interfaces that feel considered — from the way a
-            button presses under your cursor to the timing of a section as
-            it fades into view. My background sits between engineering and
-            design, and I care about both.
-          </p>
-          <p>
+          </motion.h2>
+          <ScrubbedText>
+            I build web interfaces that feel considered — from the way a button
+            presses under your cursor to the timing of a section as it fades
+            into view. My background sits between engineering and design, and I
+            care about both.
+          </ScrubbedText>
+          <ScrubbedText>
             Currently freelancing and open to full-time roles where craft
             matters. Based in the Philippines, working globally.
-          </p>
-        </motion.div>
+          </ScrubbedText>
+        </div>
 
         <motion.div
           className="about-values"
