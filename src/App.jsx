@@ -16,6 +16,7 @@ import Experience from "./components/Experience";
 import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import ScrollProgress from "./components/ScrollProgress";
 import AvailabilityBadge from "./components/AvailabilityBadge";
 import RoleRotator from "./components/RoleRotator";
 import MagneticButton from "./components/MagneticButton";
@@ -25,6 +26,7 @@ const ease = [0.23, 1, 0.32, 1];
 function App() {
   return (
     <>
+      <ScrollProgress />
       <MyNavbar className="w-100" />
       <div className="hero-page">
         <div className="img-container">
