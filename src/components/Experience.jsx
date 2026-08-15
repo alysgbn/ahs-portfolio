@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import ScrubbedText from "./ScrubbedText";
+import WordReveal from "./WordReveal";
 import "../assets/css/experience.scss";
 
 const ease = [0.23, 1, 0.32, 1];
@@ -141,7 +142,9 @@ export default function Experience() {
           variants={headerReveal}
         >
           <p className="experience-eyebrow">THE PATH SO FAR</p>
-          <h2 className="experience-heading">Experience & education</h2>
+          <WordReveal as="h2" className="experience-heading" delayOffset={0.15}>
+            Experience & education
+          </WordReveal>
         </motion.div>
 
         <div className="timeline">

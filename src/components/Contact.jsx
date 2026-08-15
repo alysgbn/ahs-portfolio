@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import WordReveal from "./WordReveal";
+import ScrubbedText from "./ScrubbedText";
 import "../assets/css/contact.scss";
 
 const ease = [0.23, 1, 0.32, 1];
@@ -62,25 +64,16 @@ export default function Contact() {
         >
           SAY HI
         </motion.p>
-        <motion.h2
+        <WordReveal
+          as="h2"
           className="contact-heading"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          variants={reveal(0.1)}
+          delayOffset={0.1}
         >
           Let's build something.
-        </motion.h2>
-        <motion.p
-          className="contact-sub"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
-          variants={reveal(0.2)}
-        >
-          Freelance projects, full-time roles, or just a chat about the
-          web — the inbox is open.
-        </motion.p>
+        </WordReveal>
+        <ScrubbedText className="contact-sub">
+          Freelance projects, full-time roles, or just a chat about the web — the inbox is open.
+        </ScrubbedText>
 
         <motion.a
           href="mailto:hello@aliyahworks.com"

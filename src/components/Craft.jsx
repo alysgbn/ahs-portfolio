@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import WordReveal from "./WordReveal";
 import "../assets/css/craft.scss";
 
 const ease = [0.23, 1, 0.32, 1];
@@ -89,7 +90,9 @@ export default function Craft() {
         >
           <div className="journey-header">
             <p>CRAFT</p>
-            <h1>Where the play lives.</h1>
+            <WordReveal as="h1" delayOffset={0.15}>
+              Where the play lives.
+            </WordReveal>
           </div>
           <p className="craft-sub">
             Smaller experiments, in-progress ideas, and the little tools I

@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import ScrubbedText from "./ScrubbedText";
+import WordReveal from "./WordReveal";
 import "../assets/css/about.scss";
 
 const ease = [0.23, 1, 0.32, 1];
@@ -44,17 +45,13 @@ export default function About() {
           >
             ABOUT
           </motion.p>
-          <motion.h2
+          <WordReveal
+            as="h2"
             className="about-heading"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={reveal}
-            custom={1}
+            delayOffset={0.15}
           >
-            Frontend engineer with a soft spot for the details you don't
-            usually notice.
-          </motion.h2>
+            Frontend engineer with a soft spot for the details you don't usually notice.
+          </WordReveal>
           <ScrubbedText>
             I build web interfaces that feel considered — from the way a button
             presses under your cursor to the timing of a section as it fades

@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import WordReveal from "./WordReveal";
 import "../assets/css/skills.scss";
 
 const ease = [0.23, 1, 0.32, 1];
@@ -71,7 +72,9 @@ export default function Skills() {
           variants={headerReveal}
         >
           <p className="skills-eyebrow">THE STACK</p>
-          <h2 className="skills-heading">What I reach for.</h2>
+          <WordReveal as="h2" className="skills-heading" delayOffset={0.15}>
+            What I reach for.
+          </WordReveal>
           <p className="skills-sub">
             Tools I use day-to-day, grouped roughly by where they live in
             the pipeline. Comfortable across the frontend spectrum with a
