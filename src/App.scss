@@ -79,6 +79,26 @@
     gap: 2rem;
   }
 
+  .hero-name-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .role-rotator {
+    font-family: "Poppins-Medium";
+    font-size: 22px;
+    color: #ff6b08;
+    height: 1.4em;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.01em;
+
+    > span {
+      display: inline-block;
+    }
+  }
+
   h1 {
     font-family: "Kugile";
     position: relative;
@@ -108,7 +128,11 @@
 
     button {
       font-family: "Poppins-Medium";
-      // background-color: red;
+      transition: transform 160ms ease-out;
+
+      &:active {
+        transform: scale(0.97);
+      }
     }
   }
 }

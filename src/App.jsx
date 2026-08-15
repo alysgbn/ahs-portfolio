@@ -1,5 +1,7 @@
 import "./App.scss";
 
+import { motion } from "framer-motion";
+
 import MyNavbar from "./components/Navbar";
 
 import myAvatar from "./assets/images/avatar-laptop.png";
@@ -10,6 +12,21 @@ import SoftwareDevelopment from "./assets/svg/SoftwareDevelopment";
 import Journey from "./components/Journey";
 import Craft from "./components/Craft";
 import AvailabilityBadge from "./components/AvailabilityBadge";
+import RoleRotator from "./components/RoleRotator";
+import MagneticButton from "./components/MagneticButton";
+
+const ease = [0.23, 1, 0.32, 1];
+
+const pill = {
+  hidden: { opacity: 0, x: -24, filter: "blur(4px)" },
+  visible: (i) => ({
+    opacity: 1,
+    x: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.55, delay: 0.25 + i * 0.1, ease },
+  }),
+};
+
 function App() {
   return (
     <>
@@ -17,63 +34,116 @@ function App() {
       <div className="hero-page">
         <div className="img-container">
           <div className="floating-content">
-            <div className="float-content">
-              <div className="svg">
-                <SoftwareDevelopment />
-              </div>
-              <p>Software Development</p>
-            </div>
-            <div className="float-content">
-              <div className="svg">
-                <DataScience />
-              </div>
-              <p>Data Science</p>
-            </div>
-            <div className="float-content">
-              <div className="svg">
-                <MachineLearning />
-              </div>
-              <p>Machine Learning</p>
-            </div>
+            {[
+              { Icon: SoftwareDevelopment, label: "Software Development" },
+              { Icon: DataScience, label: "Data Science" },
+              { Icon: MachineLearning, label: "Machine Learning" },
+            ].map(({ Icon, label }, i) => (
+              <motion.div
+                key={label}
+                className="float-content"
+                custom={i}
+                initial="hidden"
+                animate="visible"
+                variants={pill}
+              >
+                <div className="svg">
+                  <Icon />
+                </div>
+                <p>{label}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
-        <img src={myAvatar} alt="Aliyah Sagaban" />
+        <motion.img
+          src={myAvatar}
+          alt="Aliyah Sagaban"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.1, ease }}
+        />
         <div className="hero-content">
-          <div className="content-header">
+          <motion.div
+            className="content-header"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2, ease }}
+          >
             <div>
               <p>HELLO! I'M</p>
             </div>
             <AvailabilityBadge />
+          </motion.div>
+
+          <div className="hero-name-block">
+            <h1 className="font-bold hero-name">
+              <motion.span
+                initial={{ opacity: 0, y: 14, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.6, delay: 0.3, ease }}
+                style={{ display: "inline-block", marginRight: "0.35em" }}
+              >
+                Aliyah
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: 14, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.6, delay: 0.45, ease }}
+                style={{ display: "inline-block" }}
+              >
+                Sagaban
+              </motion.span>
+            </h1>
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7, ease }}
+            >
+              <RoleRotator />
+            </motion.div>
           </div>
-          <h1 className="font-bold">Aliyah Sagaban</h1>
-          <p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.85, ease }}
+          >
             I specialize in developing cutting-edge web applications that
             empower users and drive results. I’m ready to apply my skills and
             help bring your projects to life.
-          </p>
+          </motion.p>
 
-          <div className="hero-buttons">
-            <Button
-              className=" text-white shadow-lg"
-              radius="full"
-              variant="bordered"
-              fullWidth={true}
-            >
-              About Me
-            </Button>
+          <motion.div
+            className="hero-buttons"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.0, ease }}
+          >
+            <MagneticButton style={{ flex: 1, display: "inline-flex" }}>
+              <Button
+                className="text-white shadow-lg"
+                radius="full"
+                variant="bordered"
+                fullWidth={true}
+              >
+                About Me
+              </Button>
+            </MagneticButton>
 
-            <Button
-              className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg!"
-              fullWidth={true}
-              radius="full"
-            >
-              Contact Me
-            </Button>
-          </div>
+            <MagneticButton style={{ flex: 1, display: "inline-flex" }}>
+              <Button
+                className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg!"
+                fullWidth={true}
+                radius="full"
+              >
+                Contact Me
+              </Button>
+            </MagneticButton>
+          </motion.div>
         </div>
       </div>
       <Journey />
-      <Craft/>
+      <Craft />
     </>
   );
 }
