@@ -33,20 +33,20 @@ const timeline = [
     body: "Designed and delivered custom website solutions that automate business processes and power data-driven applications. Partnered with stakeholders on technical designs aligned with governance and security standards.",
   },
   {
-    year: 2025,
-    dateSuffix: "",
-    type: "Award",
-    role: "Highest Score, Internal Web Development Challenge",
-    org: "AIQUE Innovation Technology Corp.",
-    body: "Top score across all participants in AIQUE's internal web development challenge.",
-  },
-  {
     year: 2024,
     dateSuffix: "— 2025",
     type: "Work",
     role: "Junior Full Stack Developer",
     org: "AIQUE Innovation Technology Corp. · Taguig City, BGC",
     body: "Built and maintained the booking platform and shipped v2 enhancements — filtering, sorting, authentication, and bundled bookings. Stack: React, Next.js, Tailwind, SCSS, NextUI, NestJS, Express, Framer Motion. Resolved critical front-end bugs and shipped consistently within sprint deadlines.",
+  },
+  {
+    year: 2025,
+    dateSuffix: "",
+    type: "Award",
+    role: "Highest Score, Internal Web Development Challenge",
+    org: "AIQUE Innovation Technology Corp.",
+    body: "Top score across all participants in AIQUE's internal web development challenge.",
   },
   {
     year: 2024,
