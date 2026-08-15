@@ -168,7 +168,7 @@ export default function Craft() {
             style={{ rotate: tilt }}
           >
             <div className="tile-eyebrow">Working from</div>
-            <div className="tile-title">Manila, PH</div>
+            <div className="tile-title">Pasig, PH</div>
             <div className="location-time">{localTime}</div>
           </motion.div>
 

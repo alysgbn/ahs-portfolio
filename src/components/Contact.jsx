@@ -26,11 +26,6 @@ const GitHubIcon = () => (
   </svg>
 );
 
-const XIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
 
 const socials = [
   {
@@ -39,7 +34,6 @@ const socials = [
     Icon: LinkedInIcon,
   },
   { label: "GitHub", href: "https://github.com/alysgbn", Icon: GitHubIcon },
-  { label: "X", href: "https://x.com/", Icon: XIcon },
 ];
 
 const reveal = (delay = 0) => ({
@@ -72,11 +66,11 @@ export default function Contact() {
           Let's build something.
         </WordReveal>
         <ScrubbedText className="contact-sub">
-          Freelance projects, full-time roles, or just a chat about the web — the inbox is open.
+          Full-stack work, data engineering, or just a chat about the web and data — the inbox is open.
         </ScrubbedText>
 
         <motion.a
-          href="mailto:hello@aliyahworks.com"
+          href="mailto:aliyah.sagaban22@gmail.com"
           className="contact-cta"
           initial="hidden"
           whileInView="visible"
@@ -84,7 +78,7 @@ export default function Contact() {
           variants={reveal(0.3)}
         >
           <EmailIcon />
-          hello@aliyahworks.com
+          aliyah.sagaban22@gmail.com
         </motion.a>
 
         <motion.div
