@@ -140,10 +140,12 @@
 
     @media (max-width: 900px) {
       .card {
-        width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 0 !important;
 
         .card-header {
-          padding: 0.75rem 1rem 0;
+          padding: 0.75rem 1rem 0 !important;
 
           p {
             font-size: 12px;
@@ -159,20 +161,16 @@
           width: 100% !important;
           max-width: 100% !important;
           height: auto !important;
-          margin-top: 0 !important;
-          aspect-ratio: 16 / 10;
-          object-fit: cover;
-          object-position: top;
-          border-radius: 12px;
+          margin: 0 !important;
           display: block;
         }
 
         .card-body {
-          overflow: hidden !important;
-          padding: 0.75rem 1rem 3rem !important;
+          padding: 0.75rem 1rem 3.5rem !important;
 
           > div {
             position: relative;
+            width: 100%;
           }
 
           .arrows {
@@ -198,7 +196,7 @@
           p {
             font-size: 11px;
             line-height: 1.35;
-            max-width: 60%;
+            max-width: 55%;
           }
         }
       }
