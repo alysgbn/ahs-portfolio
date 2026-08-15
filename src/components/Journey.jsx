@@ -219,44 +219,44 @@ const Journey = () => {
           <div className="tech-stack">
             <div className={`slider ${isLeftHovered ? 'visible' : 'invisible'}`}>
               <div className="slide-track">
-                <div className="slide">
+                <div className="slide" key="l-postman-1">
                   {" "}
                   <img src={PostmanLogo} alt="" width={50} height={50} />
                   <p>Postman</p>
                 </div>
-                <div className="slide">
+                <div className="slide" key="l-gitlab-1">
                   {" "}
                   <img src={GitlabLogo} alt="" width={50} height={50} />
                   <p>GitLab</p>
                 </div>
-                <div className="slide">
+                <div className="slide" key="l-nextjs">
                   {" "}
                   <img src={NextJSLogo} alt="" width={50} height={50} />
                   <div>
                     <p>NextJS</p>
                   </div>
                 </div>
-                <div className="slide">
+                <div className="slide" key="l-tailwind">
                   {" "}
                   <img src={TailwindLogo} alt="" width={60} height={50} />
                   <p>Tailwind</p>
                 </div>{" "}
-                <div className="slide">
+                <div className="slide" key="l-sass">
                   {" "}
                   <img src={SassLogo} alt="" width={50} height={50} />
                   <p>SASS</p>
                 </div>{" "}
-                <div className="slide">
+                <div className="slide" key="l-typescript">
                   {" "}
                   <img src={TypeScriptLogo} alt="" width={50} height={50} />
                   <p>TypeScript</p>
                 </div>{" "}
-                <div className="slide">
+                <div className="slide" key="l-gitlab-2">
                   {" "}
                   <img src={GitlabLogo} alt="" width={50} height={50} />
                   <p>GitLab</p>
                 </div>
-                <div className="slide">
+                <div className="slide" key="l-postman-2">
                   {" "}
                   <img src={PostmanLogo} alt="" width={50} height={50} />
                   <p>Postman</p>
@@ -269,42 +269,42 @@ const Journey = () => {
 
             <div className={`slider ${isRightHovered ? 'visible' : 'invisible'}`}>
               <div className="slide-track">
-                <div className="slide">
+                <div className="slide" key="r-react-1">
                   {" "}
                   <img src={ReactLogo} alt="" width={50} height={50} />
                   <p>REACT</p>
                 </div>
-                <div className="slide">
+                <div className="slide" key="r-sass-1">
                   {" "}
                   <img src={SassLogo} alt="" width={50} height={50} />
                   <p>SASS</p>
                 </div>{" "}
-                <div className="slide">
+                <div className="slide" key="r-tailwind-1">
                   {" "}
                   <img src={TailwindLogo} alt="" width={60} height={50} />
                   <p>Tailwind</p>
                 </div>{" "}
-                <div className="slide ">
+                <div className="slide " key="r-github">
                   {" "}
                   <img src={GithubLogo} alt="" width={50} height={50} />
                   <p>Github</p>
                 </div>
-                <div className="slide">
+                <div className="slide" key="r-bootstrap">
                   {" "}
                   <img src={BootstrapLogo} alt="" width={50} height={50} />
                   <p>Bootstrap</p>
                 </div>{" "}
-                <div className="slide">
+                <div className="slide" key="r-react-2">
                   {" "}
                   <img src={ReactLogo} alt="" width={50} height={50} />
                   <p>REACT</p>
                 </div>
-                <div className="slide">
+                <div className="slide" key="r-sass-2">
                   {" "}
                   <img src={SassLogo} alt="" width={50} height={50} />
                   <p>SASS</p>
                 </div>{" "}
-                <div className="slide">
+                <div className="slide" key="r-tailwind-2">
                   {" "}
                   <img src={TailwindLogo} alt="" width={60} height={50} />
                   <p>Tailwind</p>

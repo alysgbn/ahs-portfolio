@@ -114,6 +114,10 @@
       max-width: 825px;
       overflow: hidden;
 
+      &.invisible .slide {
+        animation-play-state: paused;
+      }
+
       .slide-track {
         display: flex;
         gap: 1rem;
