@@ -9,26 +9,57 @@ const groups = [
   {
     label: "Frontend",
     items: [
-      "React",
+      "React.js",
       "Next.js",
       "TypeScript",
+      "JavaScript",
       "Tailwind CSS",
-      "Sass",
+      "SASS/SCSS",
       "Framer Motion",
+      "Zustand",
+      "TanStack Query",
+      "NextUI",
       "Bootstrap",
     ],
   },
   {
     label: "Backend & APIs",
-    items: ["Node.js", "Express", "REST APIs", "Postman"],
+    items: ["Node.js", "Express.js", "NestJS", "FastAPI", "REST APIs"],
+  },
+  {
+    label: "Databases",
+    items: ["SQL", "PostgreSQL", "MongoDB", "MySQL", "SQLite"],
   },
   {
     label: "Data & ML",
-    items: ["Python", "Pandas", "NumPy", "scikit-learn", "TensorFlow"],
+    items: [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Scikit-learn",
+      "TensorFlow",
+      "PyTorch",
+      "Keras",
+      "Matplotlib",
+      "Seaborn",
+      "NLP",
+      "Deep Learning",
+    ],
   },
   {
-    label: "Tools & Design",
-    items: ["Git", "GitHub", "GitLab", "Figma", "VS Code"],
+    label: "Tools & AI",
+    items: [
+      "Git",
+      "GitHub",
+      "GitLab",
+      "Docker",
+      "Postman",
+      "Figma",
+      "JIRA",
+      "Claude Code",
+      "OpenAI",
+      "Gemini",
+    ],
   },
 ];
 
@@ -77,8 +108,8 @@ export default function Skills() {
           </WordReveal>
           <p className="skills-sub">
             Tools I use day-to-day, grouped roughly by where they live in
-            the pipeline. Comfortable across the frontend spectrum with a
-            growing bench in data and ML.
+            the pipeline. Comfortable across the full stack with a strong
+            bench in data science and ML.
           </p>
         </motion.div>
 
