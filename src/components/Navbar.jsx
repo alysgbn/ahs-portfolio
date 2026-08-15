@@ -7,50 +7,53 @@ import {
   NavbarContent,
   NavbarItem,
 } from "@heroui/navbar";
-export const AcmeLogo = () => {
-  return (
-    <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
-      <path
-        clipRule="evenodd"
-        d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-  );
-};
+
+const navLinks = [
+  { label: "About", href: "#about" },
+  { label: "Journey", href: "#journey" },
+  { label: "Experience", href: "#experience" },
+  { label: "Skills", href: "#skills" },
+  { label: "Craft", href: "#craft" },
+];
 
 export default function MyNavbar() {
   return (
     <Navbar shouldHideOnScroll className="navbar">
       <NavbarBrand>
-        {/* <AcmeLogo /> */}
-        <img src={logo} alt="My Logo" width={50} className="mr-2 object-fill" />
-        <p className="font-bold text-inherit title">aliyahworks</p>
+        <a
+          href="#"
+          className="flex items-center"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <img
+            src={logo}
+            alt="aliyahworks logo"
+            width={50}
+            className="mr-2 object-fill"
+          />
+          <p className="font-bold text-inherit title">aliyahworks</p>
+        </a>
       </NavbarBrand>
+
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <a href="#journey" className="cursor-pointer hover:opacity-70 transition-opacity">
-            Journey
-          </a>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <a href="#craft" className="cursor-pointer hover:opacity-70 transition-opacity">
-            Craft
-          </a>
-        </NavbarItem>
-        <NavbarItem>
-          <a href="#explore" className="cursor-pointer hover:opacity-70 transition-opacity">
-            Explore
-          </a>
-        </NavbarItem>
+        {navLinks.map((link) => (
+          <NavbarItem key={link.href}>
+            <a
+              href={link.href}
+              className="cursor-pointer hover:opacity-70 transition-opacity"
+            >
+              {link.label}
+            </a>
+          </NavbarItem>
+        ))}
       </NavbarContent>
+
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          {/* <Link href="#">Login</Link> */}
-        </NavbarItem>
         <NavbarItem>
-          <a href="#contact" className="cursor-pointer hover:opacity-70 transition-opacity">
+          <a
+            href="#contact"
+            className="cursor-pointer hover:opacity-70 transition-opacity"
+          >
             Let's Connect
           </a>
         </NavbarItem>
