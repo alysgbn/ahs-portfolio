@@ -21,7 +21,7 @@ import TypeScriptLogo from '../assets/logos/TypeScriptLogo.png'
 
 import { RightArrow } from "../assets/svg/Arrow";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 const galagoImages = [Galago1, Galago2, Galago3, Galago4];
 const Journey = () => {
@@ -39,44 +39,20 @@ const Journey = () => {
     );
   };
 
-  //   For mouse effect on hover
-  const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0,
-  });
+  // Mouse follower driven by MotionValues — no React re-render on move
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const followX = useSpring(mouseX, { stiffness: 80, damping: 20 });
+  const followY = useSpring(mouseY, { stiffness: 80, damping: 20 });
 
   useEffect(() => {
     const updateMousePosition = (e) => {
-      setMousePosition((prev) => ({
-        ...prev,
-        x: e.clientX,
-        y: e.clientY,
-      }));
+      mouseX.set(e.clientX - 100);
+      mouseY.set(e.clientY - 100);
     };
-
     window.addEventListener("mousemove", updateMousePosition);
-
-    return () => {
-      window.removeEventListener("mousemove", updateMousePosition);
-    };
-  }, []);
-
-  const variants = {
-    initial: {
-      x: mousePosition.x - 100,
-      y: mousePosition.y - 100,
-      scale: 1,
-      rotate: 0,
-      borderRadius: "20%",
-    },
-    default: {
-      x: mousePosition.x - 250,
-      y: mousePosition.y - 250,
-      scale: [1, 2, 2, 1, 1],
-      rotate: [0, 0, 150, 150, 0],
-      borderRadius: ["20%", "20%", "50%", "50%", "20%"],
-    },
-  };
+    return () => window.removeEventListener("mousemove", updateMousePosition);
+  }, [mouseX, mouseY]);
 
   const style = {
     transform: "translate(-50%, -50%)",
@@ -128,27 +104,13 @@ const Journey = () => {
             {/* Left Container */}
             <motion.div
               className="absolute"
-              style={style}
-              variants={variants}
-              initial="initial"
-              animate="default"
-              transition={{
-                x: {
-                  duration: 0.1,
-                  ease: "linear",
-                  repeat: 0,
-                  type: "spring",
-                  stiffness: 80,
-                },
-                y: {
-                  duration: 0.1,
-                  ease: "linear",
-                  repeat: 0,
-                  type: "spring",
-                  stiffness: 80,
-                },
-                default: { duration: 2.5, repeat: Infinity },
+              style={{ ...style, x: followX, y: followY }}
+              animate={{
+                scale: [1, 2, 2, 1, 1],
+                rotate: [0, 0, 150, 150, 0],
+                borderRadius: ["20%", "20%", "50%", "50%", "20%"],
               }}
+              transition={{ duration: 2.5, repeat: Infinity }}
             />
 
             <Card
