@@ -28,7 +28,14 @@ const groups = [
   },
   {
     label: "Databases",
-    items: ["SQL", "PostgreSQL", "MongoDB", "MySQL", "SQLite"],
+    items: [
+      "SQL",
+      "PostgreSQL",
+      "Amazon Redshift",
+      "MongoDB",
+      "MySQL",
+      "SQLite",
+    ],
   },
   {
     label: "Data & ML",
