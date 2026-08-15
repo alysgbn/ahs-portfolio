@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useVelocity,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import WordReveal from "./WordReveal";
 import "../assets/css/craft.scss";
 
@@ -77,6 +83,13 @@ const handleSpotlight = (e) => {
 
 export default function Craft() {
   const localTime = useLocalClock("Asia/Manila");
+  const { scrollY } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  const smoothVelocity = useSpring(scrollVelocity, {
+    damping: 50,
+    stiffness: 400,
+  });
+  const tilt = useTransform(smoothVelocity, [-1500, 0, 1500], [2.5, 0, -2.5]);
 
   return (
     <section id="craft" className="craft-section">
@@ -109,6 +122,7 @@ export default function Craft() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
+            style={{ rotate: tilt }}
           >
             <div className="tile-feature-cursor" />
             <div className="tile-eyebrow">Studio</div>
@@ -124,6 +138,7 @@ export default function Craft() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
+            style={{ rotate: tilt }}
           >
             <div className="tile-eyebrow">Now playing</div>
             <div className="now-playing-row">
@@ -150,6 +165,7 @@ export default function Craft() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
+            style={{ rotate: tilt }}
           >
             <div className="tile-eyebrow">Working from</div>
             <div className="tile-title">Manila, PH</div>
@@ -163,6 +179,7 @@ export default function Craft() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
+            style={{ rotate: tilt }}
           >
             <div className="tile-eyebrow">Currently reading</div>
             <div>
@@ -178,6 +195,7 @@ export default function Craft() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
+            style={{ rotate: tilt }}
           >
             <div className="tile-eyebrow">Designed in</div>
             <div className="tile-title">Figma</div>
@@ -200,7 +218,7 @@ export default function Craft() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            style={{ textDecoration: "none", color: "inherit" }}
+            style={{ textDecoration: "none", color: "inherit", rotate: tilt }}
           >
             <div className="tile-eyebrow">Building in the open</div>
             <div>
