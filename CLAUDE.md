@@ -15,3 +15,5 @@ Examples:
 - `fix(hero): correct image aspect ratio on Safari`
 - `refactor(projects): extract card component`
 - `chore: bump dependencies`
+
+**Do not add a `Co-Authored-By:` trailer to commits.**
