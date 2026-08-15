@@ -33,42 +33,51 @@ function App() {
       <ScrollProgress />
       <MyNavbar className="w-100" />
       <div className="hero-page">
-        <motion.div className="avatar-orbit" style={{ y: avatarY }}>
-          <div className="avatar-glow" />
-          <motion.img
-            src={myAvatar}
-            alt="Aliyah Sagaban"
-            className="hero-avatar"
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.1, ease }}
-          />
-          {[
-            { Icon: SoftwareDevelopment, label: "Software Development" },
-            { Icon: DataScience, label: "Data Science" },
-            { Icon: MachineLearning, label: "Machine Learning" },
-          ].map(({ Icon, label }, i) => (
-            <div key={label} className={`orbit-track orbit-track-${i + 1}`}>
+        <div className="img-container">
+          <div className="floating-content">
+            {[
+              { Icon: SoftwareDevelopment, label: "Software Development" },
+              { Icon: DataScience, label: "Data Science" },
+              { Icon: MachineLearning, label: "Machine Learning" },
+            ].map(({ Icon, label }, i) => (
               <motion.div
-                className="orbit-content"
-                initial={{ opacity: 0, scale: 0.8, filter: "blur(4px)" }}
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                key={label}
+                className="float-content"
+                initial={{ opacity: 0, x: -24, filter: "blur(4px)" }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                  filter: "blur(0px)",
+                  y: [0, -8, 0],
+                }}
                 transition={{
-                  duration: 0.6,
-                  delay: 0.4 + i * 0.15,
-                  ease,
+                  opacity: { duration: 0.55, delay: 0.25 + i * 0.1, ease },
+                  x: { duration: 0.55, delay: 0.25 + i * 0.1, ease },
+                  filter: { duration: 0.55, delay: 0.25 + i * 0.1, ease },
+                  y: {
+                    duration: 3.4 + i * 0.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1.5 + i * 0.4,
+                  },
                 }}
               >
-                <div className="float-content">
-                  <div className="svg">
-                    <Icon />
-                  </div>
-                  <p>{label}</p>
+                <div className="svg">
+                  <Icon />
                 </div>
+                <p>{label}</p>
               </motion.div>
-            </div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+        </div>
+        <motion.img
+          src={myAvatar}
+          alt="Aliyah Sagaban"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.1, ease }}
+          style={{ y: avatarY }}
+        />
         <div className="hero-content">
           <motion.div
             className="content-header"
