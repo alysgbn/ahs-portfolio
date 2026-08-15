@@ -124,9 +124,9 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.85, ease }}
           >
-            I build full-stack web applications and the data pipelines behind
-            them. Currently at Docquity, working across Next.js on the surface
-            and FastAPI + Python for the machinery underneath.
+            I build full-stack web apps, data pipelines, and the analysis
+            tools that connect them. Currently at Docquity — wearing hats
+            across Next.js, FastAPI, Python, and SQL.
           </motion.p>
 
           <motion.div

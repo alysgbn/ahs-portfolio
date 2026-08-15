@@ -53,10 +53,10 @@ export default function About() {
             Full-stack developer with a Data Science major and a soft spot for the details you don't usually notice.
           </WordReveal>
           <ScrubbedText>
-            I build web applications and the data models behind them. My focus is end-to-end — from the way a button presses under your cursor to the pipelines that keep the numbers honest.
+            I build web applications, data pipelines, and analysis tools — end-to-end, from the way a button presses under your cursor to the SQL that surfaces client insights.
           </ScrubbedText>
           <ScrubbedText>
-            Currently Data Solutions Engineer at Docquity, based in Pasig City. BS Computer Science, Data Science major, Magna Cum Laude from the Technological Institute of the Philippines.
+            Currently Data Solutions Engineer at Docquity — full-stack development, data engineering, data science, and client-facing analytics all rolled into one role. Based in Pasig City. BS Computer Science, Data Science major, Magna Cum Laude from the Technological Institute of the Philippines.
           </ScrubbedText>
         </div>
 
