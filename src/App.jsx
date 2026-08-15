@@ -37,27 +37,23 @@ function App() {
             </div>
           </div>
         </div>
-        <h1>
-          <img src={myAvatar} alt="" />
-        </h1>
+        <img src={myAvatar} alt="Aliyah Sagaban" />
         <div className="hero-content">
           <div className="content-header">
             <div>
               <p>HELLO! I'M</p>
             </div>
-            <h1 className="available">
+            <div className="available">
               <div></div>
               <p>Available for new projects</p>
-            </h1>
+            </div>
           </div>
           <h1 className="font-bold">Aliyah Sagaban</h1>
-          <h1>
-            <p>
-              I specialize in developing cutting-edge web applications that
-              empower users and drive results. I’m ready to apply my skills and
-              help bring your projects to life.
-            </p>
-          </h1>
+          <p>
+            I specialize in developing cutting-edge web applications that
+            empower users and drive results. I’m ready to apply my skills and
+            help bring your projects to life.
+          </p>
 
           <div className="hero-buttons">
             <Button
