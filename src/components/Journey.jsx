@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../assets/css/journey.scss";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Button } from "@heroui/button";
@@ -21,7 +21,7 @@ import TypeScriptLogo from '../assets/logos/TypeScriptLogo.png'
 
 import { RightArrow } from "../assets/svg/Arrow";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 
 const galagoImages = [Galago1, Galago2, Galago3, Galago4];
 const Journey = () => {
@@ -39,32 +39,10 @@ const Journey = () => {
     );
   };
 
-  // Mouse follower driven by MotionValues — no React re-render on move
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const followX = useSpring(mouseX, { stiffness: 80, damping: 20 });
-  const followY = useSpring(mouseY, { stiffness: 80, damping: 20 });
-
-  useEffect(() => {
-    const updateMousePosition = (e) => {
-      mouseX.set(e.clientX - 100);
-      mouseY.set(e.clientY - 100);
-    };
-    window.addEventListener("mousemove", updateMousePosition);
-    return () => window.removeEventListener("mousemove", updateMousePosition);
-  }, [mouseX, mouseY]);
-
-  const style = {
-    transform: "translate(-50%, -50%)",
-    width: "200px",
-    height: "200px",
-    borderRadius: "50% 22% 40% 80%",
-    filter: " blur(40px)",
-    backgroundColor: "rgb(255, 67, 75)",
-    background: "linear-gradient(rgb(224, 28, 170), rgb(240, 176, 144))",
-    opacity: 0.4,
-    zIndex: 2,
-    pointerEvents: "none",
+  const handleSpotlight = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--x", `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty("--y", `${e.clientY - rect.top}px`);
   };
 
   return (
@@ -102,22 +80,12 @@ const Journey = () => {
         <div className="journey-projects">
           <div className="containers">
             {/* Left Container */}
-            <motion.div
-              className="absolute"
-              style={{ ...style, x: followX, y: followY }}
-              animate={{
-                scale: [1, 2, 2, 1, 1],
-                rotate: [0, 0, 150, 150, 0],
-                borderRadius: ["20%", "20%", "50%", "50%", "20%"],
-              }}
-              transition={{ duration: 2.5, repeat: Infinity }}
-            />
-
             <Card
               className="py-4 card"
               isFooterBlurred
               onMouseEnter={() => setIsLeftHovered(true)}
               onMouseLeave={() => setIsLeftHovered(false)}
+              onMouseMove={handleSpotlight}
             >
               <CardHeader className="pb-0 pt-2 px-4 flex-col items-start card-header">
                 <p className="text-tiny uppercase font-bold">
@@ -157,6 +125,7 @@ const Journey = () => {
               isFooterBlurred
               onMouseEnter={() => setIsRightHovered(true)}
               onMouseLeave={() => setIsRightHovered(false)}
+              onMouseMove={handleSpotlight}
             >
               <CardHeader className="pb-0 pt-2 px-4 flex-col items-start card-header">
                 <p className="text-tiny uppercase font-bold">

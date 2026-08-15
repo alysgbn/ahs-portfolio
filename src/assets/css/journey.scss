@@ -37,6 +37,29 @@
       background-color: rgba(71, 9, 43, 0.11);
       cursor: pointer;
       transition: 0.2s ease-in;
+      position: relative;
+      isolation: isolate;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(
+          circle 320px at var(--x, 50%) var(--y, 50%),
+          rgba(224, 28, 170, 0.55),
+          rgba(240, 176, 144, 0.18) 40%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 250ms cubic-bezier(0.23, 1, 0.32, 1);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      &:hover::before {
+        opacity: 1;
+      }
 
       .card-header {
         color: white;
