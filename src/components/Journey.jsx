@@ -68,7 +68,7 @@ const Journey = () => {
   };
 
   return (
-    <div className="journey-page">
+    <div id="journey" className="journey-page">
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         whileInView={{

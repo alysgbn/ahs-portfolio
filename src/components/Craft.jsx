@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const Craft = () => {
 
     return (
-        <div className='craft-section'>
+        <div id="craft" className='craft-section'>
 
             <div className="craft-header">
                 <motion.div

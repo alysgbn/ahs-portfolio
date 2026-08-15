@@ -10,8 +10,6 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@heroui/navbar";
-// import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Link } from "react-router";
 export const AcmeLogo = () => {
   return (
     <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
@@ -35,19 +33,19 @@ export default function MyNavbar() {
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <button as={Link} color="primary" href="#" variant="flat">
+          <a href="#journey" className="cursor-pointer hover:opacity-70 transition-opacity">
             Journey
-          </button>
+          </a>
         </NavbarItem>
         <NavbarItem isActive>
-          <button as={Link} color="primary" href="#" variant="flat">
+          <a href="#craft" className="cursor-pointer hover:opacity-70 transition-opacity">
             Craft
-          </button>
+          </a>
         </NavbarItem>
         <NavbarItem>
-          <button as={Link} color="primary" href="#" variant="flat">
+          <a href="#explore" className="cursor-pointer hover:opacity-70 transition-opacity">
             Explore
-          </button>
+          </a>
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
@@ -55,9 +53,9 @@ export default function MyNavbar() {
           {/* <Link href="#">Login</Link> */}
         </NavbarItem>
         <NavbarItem>
-          <button as={Link} color="primary" href="#" variant="flat">
+          <a href="#contact" className="cursor-pointer hover:opacity-70 transition-opacity">
             Let's Connect
-          </button>
+          </a>
         </NavbarItem>
       </NavbarContent>
     </Navbar>
