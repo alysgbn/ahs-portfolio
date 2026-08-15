@@ -17,16 +17,6 @@ import MagneticButton from "./components/MagneticButton";
 
 const ease = [0.23, 1, 0.32, 1];
 
-const pill = {
-  hidden: { opacity: 0, x: -24, filter: "blur(4px)" },
-  visible: (i) => ({
-    opacity: 1,
-    x: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.55, delay: 0.25 + i * 0.1, ease },
-  }),
-};
-
 function App() {
   return (
     <>
@@ -42,10 +32,24 @@ function App() {
               <motion.div
                 key={label}
                 className="float-content"
-                custom={i}
-                initial="hidden"
-                animate="visible"
-                variants={pill}
+                initial={{ opacity: 0, x: -24, filter: "blur(4px)" }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                  filter: "blur(0px)",
+                  y: [0, -8, 0],
+                }}
+                transition={{
+                  opacity: { duration: 0.55, delay: 0.25 + i * 0.1, ease },
+                  x: { duration: 0.55, delay: 0.25 + i * 0.1, ease },
+                  filter: { duration: 0.55, delay: 0.25 + i * 0.1, ease },
+                  y: {
+                    duration: 3.4 + i * 0.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1.5 + i * 0.4,
+                  },
+                }}
               >
                 <div className="svg">
                   <Icon />
