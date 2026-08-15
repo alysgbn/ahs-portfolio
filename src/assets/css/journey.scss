@@ -137,6 +137,63 @@
       background-color: rgba(71, 1, 48, 0.692);
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
+
+    @media (max-width: 900px) {
+      .card {
+        width: 100%;
+
+        .card-header {
+          padding: 0.75rem 1rem 0;
+
+          p {
+            font-size: 12px;
+          }
+
+          h4 {
+            font-size: 18px;
+            line-height: 1.2;
+          }
+        }
+
+        .card-body {
+          overflow: hidden !important;
+          padding: 0.75rem 1rem !important;
+
+          > img,
+          > div > img {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            margin-top: 0 !important;
+          }
+
+          .arrows {
+            .left {
+              left: 3%;
+            }
+
+            .right {
+              right: 3%;
+            }
+
+            button {
+              width: 32px !important;
+              min-width: 32px !important;
+              height: 32px !important;
+            }
+          }
+        }
+
+        .card-footer {
+          padding: 0.4rem 0.75rem !important;
+
+          p {
+            font-size: 11px;
+            line-height: 1.35;
+          }
+        }
+      }
+    }
   }
 
 
