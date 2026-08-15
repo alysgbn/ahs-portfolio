@@ -9,7 +9,16 @@ module.exports = {
     "./node_modules/@heroui/theme/dist/components/button.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        gradient: "gradient 8s linear infinite",
+      },
+      keyframes: {
+        gradient: {
+          to: { backgroundPosition: "300% 0" },
+        },
+      },
+    },
   },
   plugins: [heroui()],
 };

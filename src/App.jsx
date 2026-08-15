@@ -9,6 +9,7 @@ import DataScience from "./assets/svg/DataScience";
 import SoftwareDevelopment from "./assets/svg/SoftwareDevelopment";
 import Journey from "./components/Journey";
 import Craft from "./components/Craft";
+import AvailabilityBadge from "./components/AvailabilityBadge";
 function App() {
   return (
     <>
@@ -42,10 +43,7 @@ function App() {
             <div>
               <p>HELLO! I'M</p>
             </div>
-            <div className="available">
-              <div></div>
-              <p>Available for new projects</p>
-            </div>
+            <AvailabilityBadge />
           </div>
           <h1 className="font-bold">Aliyah Sagaban</h1>
           <p>
