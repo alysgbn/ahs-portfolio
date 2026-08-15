@@ -8,6 +8,10 @@
   z-index: 1;
   scroll-margin-top: 5rem;
 
+  @media (max-width: 640px) {
+    padding: 4rem 1.25rem;
+  }
+
   .craft-inner {
     max-width: 1100px;
     width: 100%;

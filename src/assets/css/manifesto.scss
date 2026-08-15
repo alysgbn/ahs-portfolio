@@ -8,6 +8,10 @@
   z-index: 1;
   scroll-margin-top: 5rem;
 
+  @media (max-width: 640px) {
+    padding: 6rem 1.25rem;
+  }
+
   .manifesto-inner {
     max-width: 1200px;
     width: 100%;

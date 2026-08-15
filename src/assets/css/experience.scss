@@ -8,6 +8,10 @@
   z-index: 1;
   scroll-margin-top: 5rem;
 
+  @media (max-width: 640px) {
+    padding: 4rem 1.25rem;
+  }
+
   .experience-inner {
     max-width: 900px;
     width: 100%;
