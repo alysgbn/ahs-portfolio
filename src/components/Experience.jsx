@@ -22,7 +22,7 @@ const timeline = [
     type: "Work",
     role: "Data Solutions Engineer",
     org: "Docquity · Taguig City, BGC",
-    body: "Building a full-stack web application end-to-end with Next.js and FastAPI — architecture, frontend, backend, database, and deployment. Designed data models and pipelines to support reporting and business requirements. Python and SQL analysis to surface engagement trends and business gaps.",
+    body: "Wearing multiple hats — full-stack development, data engineering, data science, and client-facing analysis. Built an end-to-end web app on Next.js + FastAPI, owning architecture, frontend, backend, database, and deployment. Designed data models and pipelines for reporting. Presented Python + SQL analyses (including sales analysis) to clients, and shipped internal tools that cut down ad-hoc dev requests across the team.",
   },
   {
     year: 2025,
@@ -37,8 +37,8 @@ const timeline = [
     dateSuffix: "",
     type: "Award",
     role: "Highest Score, Internal Web Development Challenge",
-    org: "Docquity",
-    body: "Top score across all participants in the company's internal web development challenge.",
+    org: "AIQUE Innovation Technology Corp.",
+    body: "Top score across all participants in AIQUE's internal web development challenge.",
   },
   {
     year: 2024,
