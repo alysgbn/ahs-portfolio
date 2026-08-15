@@ -13,6 +13,7 @@ import Journey from "./components/Journey";
 import Craft from "./components/Craft";
 import About from "./components/About";
 import Experience from "./components/Experience";
+import Skills from "./components/Skills";
 import AvailabilityBadge from "./components/AvailabilityBadge";
 import RoleRotator from "./components/RoleRotator";
 import MagneticButton from "./components/MagneticButton";
@@ -151,6 +152,7 @@ function App() {
       <About />
       <Journey />
       <Experience />
+      <Skills />
       <Craft />
     </>
   );
