@@ -22,8 +22,33 @@ import TypeScriptLogo from '../assets/logos/TypeScriptLogo.png'
 import { RightArrow } from "../assets/svg/Arrow";
 
 import { motion } from "framer-motion";
+import Marquee from "./Marquee";
 
 const galagoImages = [Galago1, Galago2, Galago3, Galago4];
+
+const leftStack = [
+  { name: "Postman", src: PostmanLogo },
+  { name: "GitLab", src: GitlabLogo },
+  { name: "NextJS", src: NextJSLogo },
+  { name: "Tailwind", src: TailwindLogo, width: 60 },
+  { name: "SASS", src: SassLogo },
+  { name: "TypeScript", src: TypeScriptLogo },
+];
+
+const rightStack = [
+  { name: "React", src: ReactLogo },
+  { name: "SASS", src: SassLogo },
+  { name: "Tailwind", src: TailwindLogo, width: 60 },
+  { name: "Github", src: GithubLogo },
+  { name: "Bootstrap", src: BootstrapLogo },
+];
+
+const TechLogo = ({ src, name, width = 50 }) => (
+  <div className="slide">
+    <img src={src} alt="" width={width} height={50} />
+    <p>{name}</p>
+  </div>
+);
 const Journey = () => {
   // Handling next and previous internship images
   const [currImage, setCurrImage] = useState(0);
@@ -188,103 +213,21 @@ const Journey = () => {
           </div>
 
           <div className="tech-stack">
-            <div className={`slider ${isLeftHovered ? 'visible' : 'invisible'}`}>
-              <div className="slide-track">
-                <div className="slide" key="l-postman-1">
-                  {" "}
-                  <img src={PostmanLogo} alt="" width={50} height={50} />
-                  <p>Postman</p>
-                </div>
-                <div className="slide" key="l-gitlab-1">
-                  {" "}
-                  <img src={GitlabLogo} alt="" width={50} height={50} />
-                  <p>GitLab</p>
-                </div>
-                <div className="slide" key="l-nextjs">
-                  {" "}
-                  <img src={NextJSLogo} alt="" width={50} height={50} />
-                  <div>
-                    <p>NextJS</p>
-                  </div>
-                </div>
-                <div className="slide" key="l-tailwind">
-                  {" "}
-                  <img src={TailwindLogo} alt="" width={60} height={50} />
-                  <p>Tailwind</p>
-                </div>{" "}
-                <div className="slide" key="l-sass">
-                  {" "}
-                  <img src={SassLogo} alt="" width={50} height={50} />
-                  <p>SASS</p>
-                </div>{" "}
-                <div className="slide" key="l-typescript">
-                  {" "}
-                  <img src={TypeScriptLogo} alt="" width={50} height={50} />
-                  <p>TypeScript</p>
-                </div>{" "}
-                <div className="slide" key="l-gitlab-2">
-                  {" "}
-                  <img src={GitlabLogo} alt="" width={50} height={50} />
-                  <p>GitLab</p>
-                </div>
-                <div className="slide" key="l-postman-2">
-                  {" "}
-                  <img src={PostmanLogo} alt="" width={50} height={50} />
-                  <p>Postman</p>
-                </div>
-
-
-              </div>
+            <div className={`slider ${isLeftHovered ? "slider--active" : ""}`}>
+              <Marquee className="[--duration:18s] [--gap:1rem]">
+                {leftStack.map((tech) => (
+                  <TechLogo key={tech.name} {...tech} />
+                ))}
+              </Marquee>
             </div>
 
-
-            <div className={`slider ${isRightHovered ? 'visible' : 'invisible'}`}>
-              <div className="slide-track">
-                <div className="slide" key="r-react-1">
-                  {" "}
-                  <img src={ReactLogo} alt="" width={50} height={50} />
-                  <p>REACT</p>
-                </div>
-                <div className="slide" key="r-sass-1">
-                  {" "}
-                  <img src={SassLogo} alt="" width={50} height={50} />
-                  <p>SASS</p>
-                </div>{" "}
-                <div className="slide" key="r-tailwind-1">
-                  {" "}
-                  <img src={TailwindLogo} alt="" width={60} height={50} />
-                  <p>Tailwind</p>
-                </div>{" "}
-                <div className="slide " key="r-github">
-                  {" "}
-                  <img src={GithubLogo} alt="" width={50} height={50} />
-                  <p>Github</p>
-                </div>
-                <div className="slide" key="r-bootstrap">
-                  {" "}
-                  <img src={BootstrapLogo} alt="" width={50} height={50} />
-                  <p>Bootstrap</p>
-                </div>{" "}
-                <div className="slide" key="r-react-2">
-                  {" "}
-                  <img src={ReactLogo} alt="" width={50} height={50} />
-                  <p>REACT</p>
-                </div>
-                <div className="slide" key="r-sass-2">
-                  {" "}
-                  <img src={SassLogo} alt="" width={50} height={50} />
-                  <p>SASS</p>
-                </div>{" "}
-                <div className="slide" key="r-tailwind-2">
-                  {" "}
-                  <img src={TailwindLogo} alt="" width={60} height={50} />
-                  <p>Tailwind</p>
-                </div>{" "}
-              </div>
+            <div className={`slider ${isRightHovered ? "slider--active" : ""}`}>
+              <Marquee reverse className="[--duration:18s] [--gap:1rem]">
+                {rightStack.map((tech) => (
+                  <TechLogo key={tech.name} {...tech} />
+                ))}
+              </Marquee>
             </div>
-
-
-
           </div>
         </div>
       </motion.div>

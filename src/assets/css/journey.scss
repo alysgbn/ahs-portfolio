@@ -136,48 +136,45 @@
 
     .slider {
       max-width: 825px;
-      overflow: hidden;
+      opacity: 0;
+      transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1);
+      mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+      );
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10%,
+        black 90%,
+        transparent
+      );
 
-      &.invisible .slide {
-        animation-play-state: paused;
+      &.slider--active {
+        opacity: 1;
       }
 
-      .slide-track {
+      .slide {
         display: flex;
+        align-items: center;
         gap: 1rem;
 
-
-        .slide {
-          display: flex;
-          align-items: center;
-          animation: scroll 10s linear infinite;
-          gap: 1rem;
-
-
-          p {
-            font-size: 20px;
-            font-weight: bold;
-            font-family: "Poppins-Medium";
-            width: 100%;
-            color: white;
-          }
-
-          img {
-            max-width: 50px;
-            height: 50px;
-            object-fit: cover;
-          }
+        p {
+          font-size: 20px;
+          font-weight: bold;
+          font-family: "Poppins-Medium";
+          width: max-content;
+          color: white;
         }
-      }
-    }
 
-    @keyframes scroll {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-600px);
+        img {
+          max-width: 60px;
+          height: 50px;
+          object-fit: contain;
+        }
       }
     }
   }
