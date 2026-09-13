@@ -6,7 +6,9 @@
 
 html,
 body {
-  overflow-x: hidden;
+  /* No overflow-x: hidden here — it breaks position: sticky in Chrome/Safari
+     because it moves the scroll container off the viewport. Individual sections
+     handle their own horizontal clipping via section-level overflow: hidden. */
   max-width: 100vw;
 }
 
