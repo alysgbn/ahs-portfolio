@@ -1,60 +1,83 @@
-import React from "react";
-import "../assets/css/navbar.css";
-import logo from "../assets/logos/my-logo-gray.png";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from "@heroui/navbar";
-export const AcmeLogo = () => {
-  return (
-    <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
-      <path
-        clipRule="evenodd"
-        d="M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-  );
-};
+import React, { useEffect, useState } from "react";
+import "../assets/css/navbar.scss";
+
+const navLinks = [
+  { label: "About", href: "#about" },
+  { label: "Journey", href: "#journey" },
+  { label: "Experience", href: "#experience" },
+  { label: "Skills", href: "#skills" },
+  { label: "Craft", href: "#craft" },
+];
+
+// Hysteresis thresholds: enter floating state past 80px, exit only below 24px.
+// The gap prevents the state from flickering when scroll dwells near the boundary.
+const ENTER = 80;
+const EXIT = 24;
 
 export default function MyNavbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setScrolled((prev) => (prev ? y > EXIT : y > ENTER));
+        ticking = false;
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <Navbar shouldHideOnScroll className="navbar">
-      <NavbarBrand>
-        {/* <AcmeLogo /> */}
-        <img src={logo} alt="My Logo" width={50} className="mr-2 object-fill" />
-        <p className="font-bold text-inherit title">aliyahworks</p>
-      </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <a href="#journey" className="cursor-pointer hover:opacity-70 transition-opacity">
-            Journey
-          </a>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <a href="#craft" className="cursor-pointer hover:opacity-70 transition-opacity">
-            Craft
-          </a>
-        </NavbarItem>
-        <NavbarItem>
-          <a href="#explore" className="cursor-pointer hover:opacity-70 transition-opacity">
-            Explore
-          </a>
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          {/* <Link href="#">Login</Link> */}
-        </NavbarItem>
-        <NavbarItem>
-          <a href="#contact" className="cursor-pointer hover:opacity-70 transition-opacity">
-            Let's Connect
-          </a>
-        </NavbarItem>
-      </NavbarContent>
-    </Navbar>
+    <div className="navbar-shell">
+      <nav className={`navbar${scrolled ? " navbar--floating" : ""}`}>
+        <a href="#top" className="navbar__brand" aria-label="Home">
+          <span className="title">aly.</span>
+        </a>
+
+        <div
+          className={`navbar__center${
+            menuOpen ? " navbar__center--open" : ""
+          }`}
+        >
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="navbar__link"
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
+        <a href="#contact" className="navbar__cta">
+          Let's Connect
+        </a>
+
+        <button
+          type="button"
+          className={`navbar__menu-btn${
+            menuOpen ? " navbar__menu-btn--open" : ""
+          }`}
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+        </button>
+      </nav>
+    </div>
   );
 }

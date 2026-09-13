@@ -27,20 +27,23 @@ import Marquee from "./Marquee";
 const galagoImages = [Galago1, Galago2, Galago3, Galago4];
 
 const leftStack = [
-  { name: "Postman", src: PostmanLogo, scale: 2.2 },
-  { name: "GitLab", src: GitlabLogo },
-  { name: "NextJS", src: NextJSLogo },
+  { name: "React", src: ReactLogo },
+  { name: "Next.js", src: NextJSLogo },
   { name: "Tailwind", src: TailwindLogo, scale: 1.4 },
-  { name: "SASS", src: SassLogo },
+  { name: "SCSS", src: SassLogo },
   { name: "TypeScript", src: TypeScriptLogo },
+  { name: "GitLab", src: GitlabLogo },
+  { name: "Postman", src: PostmanLogo, scale: 2.2 },
 ];
 
 const rightStack = [
   { name: "React", src: ReactLogo },
-  { name: "SASS", src: SassLogo },
+  { name: "Next.js", src: NextJSLogo },
   { name: "Tailwind", src: TailwindLogo, scale: 1.4 },
-  { name: "Github", src: GithubLogo },
-  { name: "Bootstrap", src: BootstrapLogo },
+  { name: "SASS", src: SassLogo },
+  { name: "TypeScript", src: TypeScriptLogo },
+  { name: "Postman", src: PostmanLogo, scale: 2.2 },
+  { name: "GitHub", src: GithubLogo },
 ];
 
 const TechLogo = ({ src, name, scale }) => (
@@ -122,9 +125,11 @@ const Journey = () => {
             >
               <CardHeader className="pb-0 pt-2 px-4 flex-col items-start card-header">
                 <p className="text-tiny uppercase font-bold">
-                  AIQUE Innovation Tech. Corp. • 2025
+                  AIQUE Innovation Tech. Corp. • 2024 – 2025
                 </p>
-                <small className="text-default-500">Junior Web Developer</small>
+                <small className="text-default-500">
+                  Junior Full Stack Developer
+                </small>
                 <h4 className="font-bold text-large">
                   Travel and Hotel Booking
                 </h4>
@@ -138,7 +143,7 @@ const Journey = () => {
                 />
               </CardBody>
               <CardFooter className=" card-footer justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-                <p className="text-tiny text-white/80">Available soon.</p>
+                <p className="text-tiny text-white/80">Shipped · v2 enhancements.</p>
                 <Button
                   className="text-tiny text-white bg-black/20"
                   color="default"
@@ -165,7 +170,7 @@ const Journey = () => {
                   AIQUE Innovation Tech. Corp. • 2024
                 </p>
                 <small className="text-default-500">
-                  Front-end Developer Intern
+                  Web Developer Intern
                 </small>
                 <h4 className="font-bold text-large">GalaGO! V2</h4>
               </CardHeader>
@@ -202,8 +207,8 @@ const Journey = () => {
               </CardBody>
               <CardFooter className="card-footer justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
                 <p className="text-tiny text-white/80">
-                  Created 10+ front-end pages during my 200-hour internship,
-                  focused on design consistency and user experience.
+                  Optimized and redesigned 15+ pages during a dynamic front-end
+                  internship.
                 </p>
                 <Button
                   className="text-tiny text-white bg-black/20"

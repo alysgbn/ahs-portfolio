@@ -1,79 +1,31 @@
 import "./App.scss";
 
 import MyNavbar from "./components/Navbar";
-
-import myAvatar from "./assets/images/avatar-laptop.png";
-import { Button } from "@heroui/button";
-import MachineLearning from "./assets/svg/MachineLearning";
-import DataScience from "./assets/svg/DataScience";
-import SoftwareDevelopment from "./assets/svg/SoftwareDevelopment";
+import HeroOrbit from "./components/HeroOrbit";
 import Journey from "./components/Journey";
 import Craft from "./components/Craft";
-import AvailabilityBadge from "./components/AvailabilityBadge";
+import About from "./components/About";
+import Manifesto from "./components/Manifesto";
+import Experience from "./components/Experience";
+import Skills from "./components/Skills";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+import ScrollProgress from "./components/ScrollProgress";
+
 function App() {
   return (
     <>
+      <ScrollProgress />
       <MyNavbar className="w-100" />
-      <div className="hero-page">
-        <div className="img-container">
-          <div className="floating-content">
-            <div className="float-content">
-              <div className="svg">
-                <SoftwareDevelopment />
-              </div>
-              <p>Software Development</p>
-            </div>
-            <div className="float-content">
-              <div className="svg">
-                <DataScience />
-              </div>
-              <p>Data Science</p>
-            </div>
-            <div className="float-content">
-              <div className="svg">
-                <MachineLearning />
-              </div>
-              <p>Machine Learning</p>
-            </div>
-          </div>
-        </div>
-        <img src={myAvatar} alt="Aliyah Sagaban" />
-        <div className="hero-content">
-          <div className="content-header">
-            <div>
-              <p>HELLO! I'M</p>
-            </div>
-            <AvailabilityBadge />
-          </div>
-          <h1 className="font-bold">Aliyah Sagaban</h1>
-          <p>
-            I specialize in developing cutting-edge web applications that
-            empower users and drive results. I’m ready to apply my skills and
-            help bring your projects to life.
-          </p>
-
-          <div className="hero-buttons">
-            <Button
-              className=" text-white shadow-lg"
-              radius="full"
-              variant="bordered"
-              fullWidth={true}
-            >
-              About Me
-            </Button>
-
-            <Button
-              className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg!"
-              fullWidth={true}
-              radius="full"
-            >
-              Contact Me
-            </Button>
-          </div>
-        </div>
-      </div>
+      <HeroOrbit />
+      <About />
+      <Manifesto />
       <Journey />
-      <Craft/>
+      <Experience />
+      <Skills />
+      <Craft />
+      <Contact />
+      <Footer />
     </>
   );
 }

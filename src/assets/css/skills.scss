@@ -1,0 +1,112 @@
+.skills-section {
+  min-height: 80vh;
+  padding: 6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  scroll-margin-top: 5rem;
+
+  @media (max-width: 640px) {
+    padding: 4rem 1.25rem;
+  }
+
+  .skills-inner {
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  .skills-header {
+    margin-bottom: 4rem;
+    max-width: 600px;
+  }
+
+  .skills-eyebrow {
+    font-family: "Inter";
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    margin-bottom: 0.75rem;
+    width: max-content;
+  }
+
+  .skills-heading {
+    font-family: "Fraunces";
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.1;
+    color: inherit;
+    margin-bottom: 1rem;
+  }
+
+  .skills-sub {
+    font-family: "Inter";
+    font-size: 16px;
+    line-height: 1.6;
+    color: inherit;
+    opacity: 0.7;
+  }
+
+  .skills-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .skills-group {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem;
+    align-items: baseline;
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+
+  .skills-group-label {
+    font-family: "Inter";
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ff6b08;
+    padding-top: 0.4rem;
+  }
+
+  .skills-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .skills-chip {
+    font-family: "Inter";
+    font-size: 14px;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(6px);
+    color: inherit;
+    transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 200ms cubic-bezier(0.23, 1, 0.32, 1),
+      border-color 200ms cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: default;
+
+    @media (prefers-color-scheme: light) {
+      border-color: rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 107, 8, 0.12);
+      border-color: rgba(255, 107, 8, 0.4);
+    }
+  }
+}

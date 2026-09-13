@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Local agent / tooling directories — not part of the app
+.agents/
+.claude/
+.impeccable/
+skills-lock.json
