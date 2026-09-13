@@ -64,6 +64,7 @@ export default function HeroNebula() {
     // visible and you'd be filling 9x the work.
     let dpr = Math.min(2, window.devicePixelRatio || 1);
     let rafId = 0;
+    let running = false;   // gates the rAF loop — see start/stop below
 
     const resize = () => {
       dpr = Math.min(2, window.devicePixelRatio || 1);
@@ -157,15 +158,57 @@ export default function HeroNebula() {
         ctx.fill();
       }
 
-      rafId = requestAnimationFrame(render);
+      // Only re-queue the next frame while the loop is meant to be
+      // running. Stopping just clears `running` and cancels the pending
+      // rAF; without this gate, reduced-motion or paused states would
+      // still be silently pumping 60fps redraws.
+      if (running) rafId = requestAnimationFrame(render);
     };
 
     resize();
     onScroll();
 
+    // Pause state: canvas is skipped when hero is out of viewport OR when
+    // the tab is hidden. Big win — the rAF loop stops burning CPU on
+    // starfield redraws that nobody is looking at.
+    let inView = true;
+    let tabVisible = !document.hidden;
+
+    const start = () => {
+      if (reduced || running) return;
+      running = true;
+      rafId = requestAnimationFrame(render);
+    };
+    const stop = () => {
+      running = false;
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+    };
+    const evaluate = () => {
+      if (inView && tabVisible) start();
+      else stop();
+    };
+
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        evaluate();
+      },
+      { threshold: 0 }
+    );
+    intersectionObserver.observe(container);
+
+    const onVisibilityChange = () => {
+      tabVisible = !document.hidden;
+      evaluate();
+    };
+
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
     window.addEventListener("scroll", onScroll, { passive: true });
+    document.addEventListener("visibilitychange", onVisibilityChange);
     if (canHover && !reduced) {
       window.addEventListener("mousemove", onMouseMove);
     }
@@ -174,13 +217,15 @@ export default function HeroNebula() {
       // Reduced motion: paint one static frame, no loop.
       render(0);
     } else {
-      rafId = requestAnimationFrame(render);
+      evaluate();
     }
 
     return () => {
-      cancelAnimationFrame(rafId);
+      stop();
+      intersectionObserver.disconnect();
       resizeObserver.disconnect();
       window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("mousemove", onMouseMove);
     };
   }, []);

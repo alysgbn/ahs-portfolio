@@ -51,23 +51,39 @@ const RADIUS_FRACTIONS = {
   outer: { start: 0.5, end: 0.64 },
 };
 
-function OrbitIcon({ config, stageSize, progress, rotation, scale, opacity }) {
+const DEG_TO_RAD = Math.PI / 180;
+
+// Wrapped in React.memo because the parent re-renders whenever stageSize
+// changes; without memo the 6 icons all re-render even when only motion
+// values (which don't need a re-render) have updated. All props are
+// stable references (config from module-scope array, motion values are
+// stable per-instance), so default shallow equality is enough.
+const OrbitIcon = React.memo(function OrbitIcon({
+  config,
+  stageSize,
+  progress,
+  rotation,
+  scale,
+  opacity,
+}) {
   const fractions = RADIUS_FRACTIONS[config.ring];
 
-  // Each icon's actual angle = base angle + scroll-driven rotation, so as
-  // the visitor scrolls the whole ring rotates and icons genuinely orbit
-  // the avatar (as opposed to just drifting outward).
-  const x = useTransform([progress, rotation], ([p, rot]) => {
-    const angleRad = ((config.angle + rot) * Math.PI) / 180;
-    const radius = stageSize * (fractions.start + p * (fractions.end - fractions.start));
-    return Math.cos(angleRad) * radius;
-  });
+  // Precompute what doesn't need to recompute per frame. Only rotation and
+  // progress change during scroll — angle-in-radians and the two radius
+  // constants only change when the icon or stageSize does.
+  const baseAngleRad = config.angle * DEG_TO_RAD;
+  const radiusStart = stageSize * fractions.start;
+  const radiusDelta = stageSize * (fractions.end - fractions.start);
 
-  const y = useTransform([progress, rotation], ([p, rot]) => {
-    const angleRad = ((config.angle + rot) * Math.PI) / 180;
-    const radius = stageSize * (fractions.start + p * (fractions.end - fractions.start));
-    return Math.sin(angleRad) * radius;
-  });
+  // Per frame: 2 multiplies, 1 add, 1 sin/cos. Was: 3 multiplies + 2
+  // divides + 2 adds + trig, twice (once per axis).
+  const x = useTransform([progress, rotation], ([p, rot]) =>
+    Math.cos(baseAngleRad + rot * DEG_TO_RAD) * (radiusStart + p * radiusDelta)
+  );
+
+  const y = useTransform([progress, rotation], ([p, rot]) =>
+    Math.sin(baseAngleRad + rot * DEG_TO_RAD) * (radiusStart + p * radiusDelta)
+  );
 
   return (
     <motion.div
@@ -77,7 +93,7 @@ function OrbitIcon({ config, stageSize, progress, rotation, scale, opacity }) {
       <img src={config.logo} alt={config.alt} />
     </motion.div>
   );
-}
+});
 
 export default function HeroOrbit() {
   const sectionRef = useRef(null);
