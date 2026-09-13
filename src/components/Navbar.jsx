@@ -1,12 +1,5 @@
-import React from "react";
-import "../assets/css/navbar.css";
-import logo from "../assets/logos/my-logo-gray.png";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from "@heroui/navbar";
+import React, { useEffect, useState } from "react";
+import "../assets/css/navbar.scss";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -16,48 +9,75 @@ const navLinks = [
   { label: "Craft", href: "#craft" },
 ];
 
-export default function MyNavbar() {
-  return (
-    <Navbar shouldHideOnScroll maxWidth="xl" className="navbar">
-      <NavbarBrand>
-        <a
-          href="#"
-          className="flex items-center"
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <img
-            src={logo}
-            alt="aliyahworks logo"
-            width={50}
-            className="mr-2 object-fill"
-          />
-          <p className="font-bold text-inherit title">aliyahworks</p>
-        </a>
-      </NavbarBrand>
+// Hysteresis thresholds: enter floating state past 80px, exit only below 24px.
+// The gap prevents the state from flickering when scroll dwells near the boundary.
+const ENTER = 80;
+const EXIT = 24;
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        {navLinks.map((link) => (
-          <NavbarItem key={link.href}>
+export default function MyNavbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setScrolled((prev) => (prev ? y > EXIT : y > ENTER));
+        ticking = false;
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <div className="navbar-shell">
+      <nav className={`navbar${scrolled ? " navbar--floating" : ""}`}>
+        <a href="#top" className="navbar__brand" aria-label="Home">
+          <span className="title">aly.</span>
+        </a>
+
+        <div
+          className={`navbar__center${
+            menuOpen ? " navbar__center--open" : ""
+          }`}
+        >
+          {navLinks.map((link) => (
             <a
+              key={link.href}
               href={link.href}
-              className="cursor-pointer hover:opacity-70 transition-opacity"
+              className="navbar__link"
+              onClick={() => setMenuOpen(false)}
             >
               {link.label}
             </a>
-          </NavbarItem>
-        ))}
-      </NavbarContent>
+          ))}
+        </div>
 
-      <NavbarContent justify="end">
-        <NavbarItem>
-          <a
-            href="#contact"
-            className="cursor-pointer hover:opacity-70 transition-opacity"
-          >
-            Let's Connect
-          </a>
-        </NavbarItem>
-      </NavbarContent>
-    </Navbar>
+        <a href="#contact" className="navbar__cta">
+          Let's Connect
+        </a>
+
+        <button
+          type="button"
+          className={`navbar__menu-btn${
+            menuOpen ? " navbar__menu-btn--open" : ""
+          }`}
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+        </button>
+      </nav>
+    </div>
   );
 }
