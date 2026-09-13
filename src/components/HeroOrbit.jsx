@@ -28,12 +28,15 @@ const ease = [0.23, 1, 0.32, 1];
 const AVATAR_STATE_1 = AvatarPortrait;
 const AVATAR_STATE_2 = AvatarLaptop;
 
+// Angles in screen coordinates (0° = right, 90° = bottom, 180° = left,
+// 270° = top). React is on the outer ring at 260° so it sits above the
+// avatar's head instead of over the face.
 const orbitConfig = [
   { logo: NextJSLogo, angle: 20, ring: "inner", alt: "Next.js" },
   { logo: TypeScriptLogo, angle: 140, ring: "inner", alt: "TypeScript" },
-  { logo: ReactLogo, angle: 260, ring: "inner", alt: "React" },
-  { logo: TailwindLogo, angle: 60, ring: "outer", alt: "Tailwind" },
-  { logo: PostmanLogo, angle: 180, ring: "outer", alt: "Postman" },
+  { logo: ReactLogo, angle: 225, ring: "outer", alt: "React" },
+  { logo: TailwindLogo, angle: 330, ring: "inner", alt: "Tailwind" },
+  { logo: PostmanLogo, angle: 210, ring: "inner", alt: "Postman" },
   { logo: GithubLogo, angle: 300, ring: "outer", alt: "GitHub" },
 ];
 

@@ -265,12 +265,17 @@
   }
 
   &__avatar-img {
+    // Extended portrait avatars (~3:4 aspect). Bottom-anchored to the ring
+    // with a taller-than-wrap height so the character stands on the ring
+    // and the head + shoulders extend above it — reference-style
+    // "popping out of the frame" look.
     position: absolute;
-    // Scaled slightly beyond the wrap so the character breaks the ring —
-    // reference-style "popping out of the frame" look.
-    inset: -8%;
-    width: 116%;
-    height: 116%;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 138%;
+    width: auto;
+    max-width: none;
     object-fit: contain;
     object-position: center bottom;
   }
