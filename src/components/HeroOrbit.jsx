@@ -132,25 +132,16 @@ export default function HeroOrbit() {
   const avatarScale = useTransform(progress, [0, 0.5], [1, 1.08]);
   const avatarY = useTransform(progress, [0, 0.5], [0, -12]);
 
-  // Phase 2 (0.2 → 0.7): icons drift outward + soften. Extended in Phase 4
-  // (0.85 → 1.0) so icons and rings actively dim as the hero closes,
-  // handing the user's attention off to the About section entering below.
+  // Phase 2 (0.2 → 0.7): icons drift outward + soften
   const iconScale = useTransform(progress, [0.2, 0.7], [1, 1.22]);
-  const iconOpacity = useTransform(progress, [0.2, 0.7, 1], [1, 0.9, 0.35]);
-  const ringOpacity = useTransform(progress, [0, 0.7, 1], [1, 0.85, 0.15]);
+  const iconOpacity = useTransform(progress, [0.2, 0.7], [1, 0.9]);
+  const ringOpacity = useTransform(progress, [0, 0.7], [1, 0.85]);
 
   // Phase 3 (0.5 → 0.9): decor A/S letters slide in from the sides
   const leftDecorX = useTransform(progress, [0.5, 0.9], [-80, 0]);
-  const leftDecorOpacity = useTransform(progress, [0.5, 0.7, 0.9, 1], [0, 0.3, 0.55, 0.25]);
+  const leftDecorOpacity = useTransform(progress, [0.5, 0.7, 0.9], [0, 0.3, 0.55]);
   const rightDecorX = useTransform(progress, [0.5, 0.9], [80, 0]);
-  const rightDecorOpacity = useTransform(progress, [0.5, 0.7, 0.9, 1], [0, 0.3, 0.55, 0.25]);
-
-  // Phase 4 (0.85 → 1.0): the exit. Whole hero content fades + drifts up
-  // as the pin releases. This "closes" the hero deliberately instead of
-  // just letting sticky end, and creates a motion vector that About's
-  // scroll-linked title entrance receives directly below.
-  const contentOpacity = useTransform(progress, [0.85, 1], [1, 0.4]);
-  const contentY = useTransform(progress, [0.85, 1], [0, -30]);
+  const rightDecorOpacity = useTransform(progress, [0.5, 0.7, 0.9], [0, 0.3, 0.55]);
 
   return (
     <section
@@ -194,10 +185,7 @@ export default function HeroOrbit() {
         </>
       )}
 
-      <motion.div
-        className="hero-orbit__content"
-        style={{ opacity: contentOpacity, y: contentY }}
-      >
+      <div className="hero-orbit__content">
         <div className="hero-orbit__text">
           <div className="hero-orbit__intro">
             <motion.div
@@ -316,7 +304,7 @@ export default function HeroOrbit() {
             </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
         </div>
       </div>
     </section>
