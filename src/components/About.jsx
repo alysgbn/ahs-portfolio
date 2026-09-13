@@ -56,6 +56,21 @@ export default function About() {
   const rightInset = useTransform(scrollYProgress, [0.15, 0.9], [100, 0]);
   const clipPath = useMotionTemplate`inset(0 ${rightInset}% 0 0)`;
 
+  // Scroll-linked title arrival — timed to catch the hero's exit phase.
+  // Range: section top at 90% viewport → section top at 40% viewport.
+  // This starts while the hero is still finishing its fade-out, so the
+  // two motions overlap in the seam instead of butting up against a hard
+  // section break. The ink-fill above still runs as a second beat after
+  // the title has settled.
+  const { scrollYProgress: arriveProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 90%", "start 40%"],
+  });
+  const titleY = useTransform(arriveProgress, [0, 1], [80, 0]);
+  const titleOpacity = useTransform(arriveProgress, [0, 0.6], [0, 1]);
+  const titleBlur = useTransform(arriveProgress, [0, 0.7], [12, 0]);
+  const titleFilter = useMotionTemplate`blur(${titleBlur}px)`;
+
   return (
     <section ref={sectionRef} className="about-section" id="about">
       <div className="about-section__container">
@@ -69,7 +84,10 @@ export default function About() {
           ABOUT
         </motion.p>
 
-        <div className="about-section__title-stack">
+        <motion.div
+          className="about-section__title-stack"
+          style={{ y: titleY, opacity: titleOpacity, filter: titleFilter }}
+        >
           <h2 className="about-section__title about-section__title--base">
             {heading}
           </h2>
@@ -80,7 +98,7 @@ export default function About() {
           >
             {heading}
           </motion.h2>
-        </div>
+        </motion.div>
 
         <motion.p
           className="about-section__bio"
