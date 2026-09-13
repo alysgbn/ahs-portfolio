@@ -24,14 +24,16 @@
   border-radius: 0;
   box-shadow: none;
   transform: translateY(0) scale(1);
-  // Only transition what visibly reads as the pill morphing. Dropped
-  // margin-top (folded into transform so the drop happens on the GPU),
-  // and dropped backdrop-filter — snapping the blur is imperceptible
-  // and saves the heaviest paint cost of this transition.
+  // Margin-top is folded into transform (composited on GPU instead of
+  // triggering layout). Backdrop-filter stays in the transition list but
+  // as a short 0.1s ease — see .navbar--floating for the delay trick
+  // that avoids painting the blur on the pre-morph rectangular geometry.
   transition:
     max-width 0.45s cubic-bezier(0.23, 1, 0.32, 1),
     padding 0.45s cubic-bezier(0.23, 1, 0.32, 1),
     background-color 0.35s ease,
+    backdrop-filter 0.1s ease,
+    -webkit-backdrop-filter 0.1s ease,
     border-color 0.35s ease,
     border-radius 0.45s cubic-bezier(0.23, 1, 0.32, 1),
     box-shadow 0.4s ease,
@@ -51,6 +53,21 @@
     0 12px 42px rgba(0, 0, 0, 0.35),
     0 0 0 1px rgba(255, 255, 255, 0.04) inset;
   transform: translateY(14px) scale(0.985);
+  // On float-in: delay the blur until the pill shape has (mostly) formed.
+  // Otherwise you see a wide rectangular "glass box" while border-radius
+  // is still growing from 0 → 999px. On float-out, the base .navbar
+  // transition (no delay) applies, so the blur clears immediately as the
+  // shape starts to unwind.
+  transition:
+    max-width 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    padding 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    background-color 0.35s ease,
+    backdrop-filter 0.1s ease 0.35s,
+    -webkit-backdrop-filter 0.1s ease 0.35s,
+    border-color 0.35s ease,
+    border-radius 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.4s ease,
+    transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
 
   @media (prefers-color-scheme: light) {
     background: rgba(255, 244, 224, 0.75);
