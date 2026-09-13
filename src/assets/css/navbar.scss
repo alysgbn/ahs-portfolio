@@ -19,18 +19,19 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1.1rem 1.75rem;
-  margin-top: 0;
   background: transparent;
   border: 1px solid transparent;
   border-radius: 0;
   box-shadow: none;
+  transform: translateY(0) scale(1);
+  // Only transition what visibly reads as the pill morphing. Dropped
+  // margin-top (folded into transform so the drop happens on the GPU),
+  // and dropped backdrop-filter — snapping the blur is imperceptible
+  // and saves the heaviest paint cost of this transition.
   transition:
     max-width 0.45s cubic-bezier(0.23, 1, 0.32, 1),
     padding 0.45s cubic-bezier(0.23, 1, 0.32, 1),
-    margin-top 0.45s cubic-bezier(0.23, 1, 0.32, 1),
     background-color 0.35s ease,
-    backdrop-filter 0.35s ease,
-    -webkit-backdrop-filter 0.35s ease,
     border-color 0.35s ease,
     border-radius 0.45s cubic-bezier(0.23, 1, 0.32, 1),
     box-shadow 0.4s ease,
@@ -41,7 +42,6 @@
 .navbar--floating {
   max-width: 780px;
   padding: 0.55rem 0.65rem 0.55rem 1.25rem;
-  margin-top: 14px;
   background: rgba(20, 21, 25, 0.62);
   backdrop-filter: blur(22px) saturate(1.6);
   -webkit-backdrop-filter: blur(22px) saturate(1.6);
@@ -50,7 +50,7 @@
   box-shadow:
     0 12px 42px rgba(0, 0, 0, 0.35),
     0 0 0 1px rgba(255, 255, 255, 0.04) inset;
-  transform: scale(0.985);
+  transform: translateY(14px) scale(0.985);
 
   @media (prefers-color-scheme: light) {
     background: rgba(255, 244, 224, 0.75);
@@ -82,7 +82,6 @@
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1;
-  transition: font-size 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .navbar--floating .title {
@@ -93,7 +92,6 @@
   display: flex;
   align-items: center;
   gap: 1.75rem;
-  transition: gap 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .navbar--floating .navbar__center {
@@ -148,7 +146,6 @@
   white-space: nowrap;
   flex-shrink: 0;
   transition:
-    padding 0.4s cubic-bezier(0.23, 1, 0.32, 1),
     background-color 0.25s ease,
     border-color 0.25s ease,
     color 0.25s ease;
