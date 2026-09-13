@@ -20,7 +20,7 @@
   }
 
   .manifesto-eyebrow {
-    font-family: "Poppins-Medium";
+    font-family: "Inter";
     font-size: 22px;
     letter-spacing: 0.05em;
     background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
@@ -35,7 +35,7 @@
   }
 
   .manifesto-text {
-    font-family: "Kugile";
+    font-family: "Fraunces";
     font-size: clamp(2rem, 4.6vw, 4.4rem);
     line-height: 1.18;
     color: inherit;
@@ -45,7 +45,7 @@
   }
 
   .manifesto-signature {
-    font-family: "Poppins-Medium";
+    font-family: "Inter";
     font-size: 14px;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -59,7 +59,7 @@
     top: -3rem;
     left: 50%;
     transform: translateX(-50%);
-    font-family: "Kugile";
+    font-family: "Fraunces";
     font-size: clamp(6rem, 15vw, 14rem);
     line-height: 1;
     color: transparent;

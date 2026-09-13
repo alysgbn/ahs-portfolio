@@ -29,7 +29,7 @@
   .journey-header {
     p {
       font-size: 22px;
-      font-family: "Poppins-Medium";
+      font-family: "Inter";
       text-align: center;
       margin-bottom: 1rem;
       background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
@@ -38,7 +38,7 @@
     }
 
     h1 {
-      font-family: "Kugile";
+      font-family: "Fraunces";
       font-size: 32px;
       font-weight: 600;
     }
@@ -100,17 +100,17 @@
               #eedd44);
           -webkit-text-fill-color: transparent;
           -webkit-background-clip: text;
-          font-family: "Poppins-Medium";
+          font-family: "Inter";
           font-size: 14px;
         }
 
         small {
-          font-family: "Poppins-Medium";
+          font-family: "Inter";
           margin-bottom: 0.5rem;
         }
 
         h4 {
-          font-family: "Kugile";
+          font-family: "Fraunces";
           font-size: 22px;
           font-weight: 400;
         }
@@ -144,7 +144,7 @@
       }
 
       .card-footer {
-        font-family: "Poppins-Medium";
+        font-family: "Inter";
       }
     }
 
@@ -261,7 +261,7 @@
         p {
           font-size: 20px;
           font-weight: bold;
-          font-family: "Poppins-Medium";
+          font-family: "Inter";
           width: max-content;
           color: white;
         }

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,6 +17,9 @@ html {
 body {
   background-color: rgba(255, 228, 196, 0.623);
   color: #1f2023;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   ::selection {
     background-color: bisque;
@@ -22,31 +27,28 @@ body {
   }
 }
 
+/* Small labels, eyebrows, and UI text originally used Poppins-Medium.
+   Inter needs explicit weight 500 to feel the same visual weight. */
+.about-eyebrow,
+.manifesto-eyebrow,
+.experience-eyebrow,
+.skills-eyebrow,
+.journey-header p,
+.craft-eyebrow,
+.contact-eyebrow,
+.value-number,
+.value-title,
+.timeline-type,
+.timeline-date,
+.timeline-role,
+.skills-group-label,
+button {
+  font-weight: 500;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #141519;
     color: #dadada;
   }
-}
-
-@font-face {
-  font-family: Poppins-Regular;
-  src: local("Poppins-Regular"),
-    url(./assets/fonts/Poppins-Regular.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: Poppins-Medium;
-  src: local("Poppins-Medium"),
-    url(./assets/fonts/Poppins-Medium.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: Kugile;
-  src: local("Kugile"), url(./assets/fonts/Kugile.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: Vindey;
-  src: local("Vindey"), url(./assets/fonts/Wasted-Vindey.ttf) format("truetype");
 }
