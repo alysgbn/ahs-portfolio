@@ -17,7 +17,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-inner">
         <div className="footer-brand">
-          <div className="footer-mark">aliyahworks</div>
+          <div className="footer-mark">aly.</div>
           <div className="footer-tag">
             Full-stack developer sweating the small details from Pasig, PH.
           </div>

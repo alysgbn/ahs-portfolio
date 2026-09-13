@@ -26,14 +26,18 @@
     max-width: 260px;
 
     .footer-mark {
-      font-family: "Vindey";
-      font-size: 20px;
+      font-family: "Instrument Serif", Georgia, serif;
+      font-style: italic;
+      font-size: 30px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1;
       color: inherit;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.65rem;
     }
 
     .footer-tag {
-      font-family: "Poppins-Regular";
+      font-family: "Inter";
       font-size: 13px;
       color: inherit;
       opacity: 0.6;
@@ -47,7 +51,7 @@
     flex-wrap: wrap;
 
     a {
-      font-family: "Poppins-Medium";
+      font-family: "Inter";
       font-size: 13px;
       color: inherit;
       text-decoration: none;
@@ -68,7 +72,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-family: "Poppins-Regular";
+    font-family: "Inter";
     font-size: 12px;
     color: inherit;
     opacity: 0.5;
