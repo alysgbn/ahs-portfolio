@@ -20,15 +20,17 @@ import TailwindLogo from "../assets/logos/TailwindLogo.png";
 import PostmanLogo from "../assets/logos/PostmanLogo.png";
 import GithubLogo from "../assets/logos/GithubLogo.png";
 
-import AvatarPortrait from "../assets/images/portfolio_avatar_2_transparent.png";
-import AvatarLaptop from "../assets/images/portfolio_avatar_3_transparent.png";
+// Hero avatars: WebP for size (~50KB each) with PNG fallback (~1MB each)
+// for old Safari. Both source variants get shipped through webpack so
+// they're hashed for cache-busting.
+import AvatarPortraitWebp from "../assets/images/hero-avatar-portrait.webp";
+import AvatarPortraitPng from "../assets/images/hero-avatar-portrait.png";
+import AvatarLaptopWebp from "../assets/images/hero-avatar-laptop.webp";
+import AvatarLaptopPng from "../assets/images/hero-avatar-laptop.png";
 
 import "../assets/css/hero-orbit.scss";
 
 const ease = [0.23, 1, 0.32, 1];
-
-const AVATAR_STATE_1 = AvatarPortrait;
-const AVATAR_STATE_2 = AvatarLaptop;
 
 // 6 icons distributed at 60° intervals around the full circle. Inner and
 // outer offset by 60° so no two icons stack. Avoids putting anything
@@ -288,19 +290,33 @@ export default function HeroOrbit() {
               className="hero-orbit__avatar"
               style={{ scale: avatarScale, y: avatarY }}
             >
-              <motion.img
-                src={AVATAR_STATE_1}
-                alt="Aliyah Sagaban"
-                className="hero-orbit__avatar-img"
-                style={{ opacity: avatar1Opacity }}
-              />
-              <motion.img
-                src={AVATAR_STATE_2}
-                alt=""
-                aria-hidden
-                className="hero-orbit__avatar-img"
-                style={{ opacity: avatar2Opacity }}
-              />
+              {/* Portrait pose — shown first. fetchPriority high because
+                  it's the LCP-adjacent element on initial paint. */}
+              <picture>
+                <source srcSet={AvatarPortraitWebp} type="image/webp" />
+                <motion.img
+                  src={AvatarPortraitPng}
+                  alt="Aliyah Sagaban"
+                  className="hero-orbit__avatar-img"
+                  style={{ opacity: avatar1Opacity }}
+                  fetchpriority="high"
+                  decoding="async"
+                />
+              </picture>
+              {/* Laptop pose — cross-fades in during scroll. Default
+                  priority (browser decides); still eager since it's
+                  above the fold and needs to be ready before the fade. */}
+              <picture>
+                <source srcSet={AvatarLaptopWebp} type="image/webp" />
+                <motion.img
+                  src={AvatarLaptopPng}
+                  alt=""
+                  aria-hidden
+                  className="hero-orbit__avatar-img"
+                  style={{ opacity: avatar2Opacity }}
+                  decoding="async"
+                />
+              </picture>
             </motion.div>
           </div>
         </div>
