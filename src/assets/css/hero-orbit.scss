@@ -19,16 +19,67 @@
     --hero-shadow: rgba(39, 4, 0, 0.25);
   }
 
-  min-height: 100vh;
-  width: 100%;
   position: relative;
-  overflow: hidden;
-  background: var(--hero-bg);
+  width: 100%;
   color: var(--hero-text);
-  // No padding-bottom — stage bottom-aligns to section edge for flush avatar.
-  padding: 6rem 3rem 0;
-  display: flex;
-  align-items: stretch;
+
+  // Pinned scroll-scrubbed sequence.
+  // pin-track defines the scroll journey: 100vh (visible sticky) + 500px
+  // (of scroll while the sticky stays pinned). Visitor can't proceed to
+  // the next section until they've scrolled through all 500px.
+  &__pin-track {
+    position: relative;
+    width: 100%;
+    height: calc(100vh + 500px);
+  }
+
+  // Sticky is what the visitor actually sees during the pin. Layout
+  // (background, padding, overflow, flex row) lives here instead of on
+  // the outer .hero-orbit shell.
+  //
+  // === HERO BACKGROUND OPTIONS =========================================
+  // Only ONE of these background lines should be active at a time.
+  //
+  // OPTION 1 (active): TRANSPARENT — the original GradientBackdrop
+  //   (rendered from src/index.js) shows its blurred pink/dark/peach
+  //   orbs through the hero. HeroNebula's stars overlay on top.
+  //
+  // OPTION 2: FULL NEBULA — set background: transparent AND uncomment
+  //   the mesh / vignette / horizon / noise elements inside
+  //   src/components/HeroNebula.jsx. Also comment out GradientBackdrop
+  //   in src/index.js if you don't want both layers competing.
+  //
+  // OPTION 3: SOLID BACKGROUND HERO — swap the background below to
+  //   `var(--hero-bg)`. The hero renders as a flat dark base with just
+  //   the canvas stars on top (no GradientBackdrop, no nebula mesh).
+  //   Cleanest, most minimal look.
+  //
+  //   background: var(--hero-bg);   // <-- Option 3
+  // =====================================================================
+  &__sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    overflow: hidden;
+    padding: 6rem 3rem 0;
+    display: flex;
+    align-items: stretch;
+  }
+
+  // Reduced-motion: skip the pin. Section collapses to normal 100vh,
+  // sticky is neutralised, static motion value keeps everything at frame 0.
+  &--static {
+    .hero-orbit__pin-track {
+      height: 100vh;
+    }
+
+    .hero-orbit__sticky {
+      position: static;
+      top: auto;
+    }
+  }
 
   &__orbs {
     position: absolute;
@@ -82,15 +133,16 @@
     z-index: 1;
     user-select: none;
 
+    // A anchored to bottom-left; S anchored to top-right. Diagonal composition.
     &--left {
       left: -4%;
-      top: 12%;
+      bottom: 4%;
       -webkit-text-stroke: 3px rgba(255, 107, 8, 0.42);
     }
 
     &--right {
       right: -4%;
-      bottom: 8%;
+      top: 8%;
       -webkit-text-stroke: 3px rgba(243, 33, 112, 0.42);
     }
   }
@@ -228,14 +280,30 @@
     z-index: 2;
   }
 
+  // Ring: solid hairline stroke that fades to transparent along the
+  // bottom via mask-image. Reads as an incomplete orbital arc that the
+  // character stands on the edge of — more modern than the old dashed
+  // circle. Border-color uses the hero pink accent at low alpha.
   &__ring {
     position: absolute;
     top: 50%;
     left: 50%;
     border-radius: 50%;
-    border: 1px dashed var(--hero-ring);
+    border: 1px solid var(--hero-ring);
     transform: translate(-50%, -50%);
     pointer-events: none;
+    mask-image: linear-gradient(
+      180deg,
+      #000 0%,
+      #000 55%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      #000 0%,
+      #000 55%,
+      transparent 100%
+    );
   }
 
   // Rings sized larger than the stage on purpose. Because the stage
@@ -292,24 +360,27 @@
     object-position: center bottom;
   }
 
+  // Modernised icon: circular glass chip. Cream fill with a soft inner
+  // highlight, wider ambient pink glow, and a subtle 1px light border
+  // that only reads at close range. Circular echoes the ring shape.
   &__icon {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 56px;
-    height: 56px;
+    width: 54px;
+    height: 54px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 251, 243, 0.95);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 16px;
-    // Softer, more diffuse shadow — no hard pink border, gentle drop +
-    // wider pink glow that reads as ambient light rather than an outline.
+    background: rgba(255, 251, 243, 0.92);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    border-radius: 50%;
     box-shadow:
-      0 6px 20px rgba(0, 0, 0, 0.12),
-      0 0 48px rgba(243, 33, 112, 0.12);
+      inset 0 1px 0 rgba(255, 255, 255, 0.6),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+      0 4px 14px rgba(6, 4, 12, 0.28),
+      0 0 34px rgba(243, 33, 112, 0.16);
     padding: 11px;
     z-index: 4;
 
@@ -321,8 +392,9 @@
   }
 
   @media (max-width: 900px) {
-    padding: 5rem 1.5rem 2.5rem;
-    min-height: auto;
+    &__sticky {
+      padding: 5rem 1.5rem 2.5rem;
+    }
 
     &__content {
       flex-direction: column;
@@ -359,13 +431,13 @@
       font-size: clamp(160px, 40vw, 260px);
 
       &--left {
-        top: 2%;
+        bottom: 2%;
         left: -8%;
         -webkit-text-stroke: 2px rgba(255, 107, 8, 0.32);
       }
 
       &--right {
-        bottom: 2%;
+        top: 2%;
         right: -8%;
         -webkit-text-stroke: 2px rgba(243, 33, 112, 0.32);
       }
@@ -373,7 +445,9 @@
   }
 
   @media (max-width: 480px) {
-    padding: 5rem 1.25rem 2rem;
+    &__sticky {
+      padding: 5rem 1.25rem 2rem;
+    }
 
     &__meta {
       flex-direction: column;

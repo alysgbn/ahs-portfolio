@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import {
   motion,
+  useMotionValue,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -10,6 +11,7 @@ import { Button } from "@heroui/button";
 import AvailabilityBadge from "./AvailabilityBadge";
 import RoleRotator from "./RoleRotator";
 import MagneticButton from "./MagneticButton";
+import HeroNebula from "./HeroNebula";
 
 import ReactLogo from "../assets/logos/ReactLogo.png";
 import NextJSLogo from "../assets/logos/NextJSLogo.png";
@@ -78,6 +80,7 @@ function OrbitIcon({ config, stageSize, progress, rotation, scale, opacity }) {
 }
 
 export default function HeroOrbit() {
+  const sectionRef = useRef(null);
   const stageRef = useRef(null);
   const reduced = useReducedMotion();
   const [stageSize, setStageSize] = useState(500);
@@ -92,44 +95,60 @@ export default function HeroOrbit() {
     return () => observer.disconnect();
   }, []);
 
-  // Scroll-driven: first ~250px of scroll transitions state 1 → state 2.
-  const { scrollY } = useScroll();
-  const progress = useTransform(
-    scrollY,
-    [0, reduced ? 100000 : 250],
-    [0, 1]
-  );
+  // PINNED scroll-scrubbed sequence. The section is tall (100vh sticky
+  // child + 1500px scroll journey); scrollYProgress goes 0 → 1 across
+  // the pin. Visitor can't proceed to the next section until they scroll
+  // through the whole animation.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+  const staticProgress = useMotionValue(0);
+  const progress = reduced ? staticProgress : scrollYProgress;
 
-  // Subtle scroll-driven drift — icons nudge along the ring as you scroll
-  // (~30° total), enough to feel alive without becoming a full revolution.
-  const iconRotation = useTransform(
-    scrollY,
-    [0, reduced ? 100000 : 1000],
-    [0, 30]
-  );
+  // Subtle icon orbital drift (~45°) across the full pin.
+  const iconRotation = useTransform(progress, [0, 1], [0, 45]);
 
-  const avatar1Opacity = useTransform(progress, [0, 0.4, 0.6], [1, 0.5, 0]);
-  const avatar2Opacity = useTransform(progress, [0.4, 0.6, 1], [0, 0.5, 1]);
-  const avatarScale = useTransform(progress, [0, 1], [1, 1.4]);
-  const avatarY = useTransform(progress, [0, 1], [0, -22]);
+  // Sequenced across the pinned range so each beat has its own moment.
+  // Phase 1 (0 → 0.35): avatar cross-fade from portrait to laptop pose
+  const avatar1Opacity = useTransform(progress, [0, 0.2, 0.35], [1, 0.5, 0]);
+  const avatar2Opacity = useTransform(progress, [0.2, 0.35, 0.6], [0, 0.5, 1]);
+  const avatarScale = useTransform(progress, [0, 0.5], [1, 1.08]);
+  const avatarY = useTransform(progress, [0, 0.5], [0, -12]);
 
-  const iconScale = useTransform(progress, [0, 1], [1, 1.24]);
-  const iconOpacity = useTransform(progress, [0, 1], [1, 0.92]);
+  // Phase 2 (0.2 → 0.7): icons drift outward + soften
+  const iconScale = useTransform(progress, [0.2, 0.7], [1, 1.22]);
+  const iconOpacity = useTransform(progress, [0.2, 0.7], [1, 0.9]);
+  const ringOpacity = useTransform(progress, [0, 0.7], [1, 0.85]);
 
-  const ringOpacity = useTransform(progress, [0, 1], [1, 0.85]);
-
-  const leftDecorX = useTransform(progress, [0, 1], [-80, 0]);
-  const leftDecorOpacity = useTransform(progress, [0, 0.4, 1], [0, 0.15, 0.55]);
-  const rightDecorX = useTransform(progress, [0, 1], [80, 0]);
-  const rightDecorOpacity = useTransform(progress, [0, 0.4, 1], [0, 0.15, 0.55]);
+  // Phase 3 (0.5 → 0.9): decor A/S letters slide in from the sides
+  const leftDecorX = useTransform(progress, [0.5, 0.9], [-80, 0]);
+  const leftDecorOpacity = useTransform(progress, [0.5, 0.7, 0.9], [0, 0.3, 0.55]);
+  const rightDecorX = useTransform(progress, [0.5, 0.9], [80, 0]);
+  const rightDecorOpacity = useTransform(progress, [0.5, 0.7, 0.9], [0, 0.3, 0.55]);
 
   return (
-    <section className="hero-orbit">
-      <div className="hero-orbit__orbs" aria-hidden>
-        <div className="hero-orbit__orb hero-orbit__orb--pink" />
-        <div className="hero-orbit__orb hero-orbit__orb--dark" />
-        <div className="hero-orbit__orb hero-orbit__orb--peach" />
-      </div>
+    <section
+      ref={sectionRef}
+      className={`hero-orbit${reduced ? " hero-orbit--static" : ""}`}
+    >
+      <div className="hero-orbit__pin-track">
+        <div className="hero-orbit__sticky">
+          {/* Hero-scoped nebula: mesh + horizon + starfield + grain,
+              rendered as an absolute layer inside the sticky so it stays
+              confined to the hero section. Page-wide version is in
+              components/NebulaBackground.jsx and can be re-enabled from
+              src/index.js if you want to compare. */}
+          <HeroNebula />
+
+          {/* Original hero orbs kept commented out for reference — the
+              nebula's mesh gradient now provides the ambient warm glow.
+              <div className="hero-orbit__orbs" aria-hidden>
+                <div className="hero-orbit__orb hero-orbit__orb--pink" />
+                <div className="hero-orbit__orb hero-orbit__orb--dark" />
+                <div className="hero-orbit__orb hero-orbit__orb--peach" />
+              </div>
+          */}
 
       {!reduced && (
         <>
@@ -268,6 +287,8 @@ export default function HeroOrbit() {
               />
             </motion.div>
           </div>
+        </div>
+      </div>
         </div>
       </div>
     </section>
