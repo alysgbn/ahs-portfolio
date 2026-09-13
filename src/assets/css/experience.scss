@@ -13,7 +13,7 @@
   }
 
   .experience-inner {
-    max-width: 900px;
+    max-width: 1240px;
     width: 100%;
   }
 
@@ -22,7 +22,7 @@
   }
 
   .experience-eyebrow {
-    font-family: "Poppins-Medium";
+    font-family: "Inter";
     font-size: 22px;
     letter-spacing: 0.05em;
     background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
@@ -35,7 +35,7 @@
   }
 
   .experience-heading {
-    font-family: "Kugile";
+    font-family: "Fraunces";
     font-size: clamp(2rem, 3.5vw, 3rem);
     line-height: 1.1;
     color: inherit;
@@ -46,16 +46,46 @@
     padding-left: 0;
   }
 
+  .timeline-progress {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(130px + 2rem + 16px);
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      #ff6b08 0%,
+      #f32170 35%,
+      #cf23cf 70%,
+      #eedd44 100%
+    );
+    transform-origin: top center;
+    transform: translateX(-1px) scaleY(0);
+    border-radius: 2px;
+    z-index: 1;
+    pointer-events: none;
+    filter: drop-shadow(0 0 8px rgba(255, 107, 8, 0.35));
+
+    @media (max-width: 900px) {
+      left: calc(80px + 1rem + 12px);
+    }
+  }
+
   .timeline-item {
     display: grid;
-    grid-template-columns: 130px 32px 1fr;
-    gap: 1.5rem;
-    padding-bottom: 3rem;
+    grid-template-columns: 130px 32px minmax(0, 480px) 1fr;
+    column-gap: 2rem;
+    padding-bottom: 3.5rem;
     position: relative;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 130px 32px 1fr;
+    }
 
     @media (max-width: 700px) {
       grid-template-columns: 80px 24px 1fr;
-      gap: 1rem;
+      column-gap: 1rem;
+      padding-bottom: 3rem;
     }
 
     &:last-child {
@@ -68,7 +98,7 @@
   }
 
   .timeline-date {
-    font-family: "Poppins-Medium";
+    font-family: "Inter";
     font-size: 14px;
     letter-spacing: 0.06em;
     color: #a0a0a0;
@@ -119,7 +149,7 @@
   }
 
   .timeline-type {
-    font-family: "Poppins-Medium";
+    font-family: "Inter";
     font-size: 11px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -128,14 +158,14 @@
   }
 
   .timeline-role {
-    font-family: "Poppins-Medium";
+    font-family: "Inter";
     font-size: 20px;
     color: inherit;
     margin-bottom: 0.3rem;
   }
 
   .timeline-org {
-    font-family: "Poppins-Regular";
+    font-family: "Inter";
     font-size: 15px;
     color: inherit;
     opacity: 0.85;
@@ -143,7 +173,7 @@
   }
 
   .timeline-body {
-    font-family: "Poppins-Regular";
+    font-family: "Inter";
     font-size: 15px;
     line-height: 1.6;
     color: inherit;
@@ -153,5 +183,78 @@
 
   .timeline-date-suffix {
     opacity: 0.7;
+  }
+
+  .timeline-image {
+    grid-column: 4;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
+    width: min(100%, 300px);
+    margin: 0;
+    padding: 0;
+    padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    will-change: transform, opacity;
+    transform-origin: center center;
+
+    @media (max-width: 1024px) {
+      grid-column: 3;
+      grid-row: auto;
+      justify-self: start;
+      width: min(100%, 320px);
+      margin-top: 1.25rem;
+      padding-top: 0;
+    }
+
+    @media (max-width: 700px) {
+      grid-column: 1 / -1;
+      width: 100%;
+      max-width: 340px;
+      margin-top: 1rem;
+      margin-left: calc(80px + 24px + 1rem);
+    }
+
+    @media (max-width: 480px) {
+      margin-left: 0;
+    }
+  }
+
+  .timeline-image-frame {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    aspect-ratio: 4 / 3;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  .timeline-image-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.35),
+      0 0 16px currentColor;
+  }
+
+  .timeline-image-caption {
+    font-family: "Inter";
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    padding-left: 2px;
   }
 }

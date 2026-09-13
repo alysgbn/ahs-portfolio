@@ -1,7 +1,17 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import ScrubbedText from "./ScrubbedText";
 import WordReveal from "./WordReveal";
+import WebDeveloper from "../assets/images/WebDeveloper.png";
+import Galago1 from "../assets/images/Galago1.png";
+import AvatarLaptop from "../assets/images/avatar-laptop.png";
+import AvatarLike from "../assets/images/avatar-like.png";
 import "../assets/css/experience.scss";
 
 const ease = [0.23, 1, 0.32, 1];
@@ -23,6 +33,9 @@ const timeline = [
     role: "Data Solutions Engineer",
     org: "Docquity · Taguig City, BGC",
     body: "Wearing multiple hats — full-stack development, data engineering, data science, and client-facing analysis. Built an end-to-end web app on Next.js + FastAPI, owning architecture, frontend, backend, database, and deployment. Designed data models and pipelines for reporting. Presented Python + SQL analyses (including sales analysis) to clients, and shipped internal tools that cut down ad-hoc dev requests across the team.",
+    image: AvatarLaptop,
+    imageAlt: "Aliyah working on a laptop",
+    imageCaption: "shipping full-stack + data",
   },
   {
     year: 2025,
@@ -39,6 +52,9 @@ const timeline = [
     role: "Junior Full Stack Developer",
     org: "AIQUE Innovation Technology Corp. · Taguig City, BGC",
     body: "Built and maintained the booking platform and shipped v2 enhancements — filtering, sorting, authentication, and bundled bookings. Stack: React, Next.js, Tailwind, SCSS, NextUI, NestJS, Express, Framer Motion. Resolved critical front-end bugs and shipped consistently within sprint deadlines.",
+    image: WebDeveloper,
+    imageAlt: "AIQUE booking platform screenshot",
+    imageCaption: "AIQUE · Travel + Hotel Booking",
   },
   {
     year: 2025,
@@ -47,6 +63,9 @@ const timeline = [
     role: "Highest Score, Internal Web Development Challenge",
     org: "AIQUE Innovation Technology Corp.",
     body: "Top score across all participants in AIQUE's internal web development challenge.",
+    image: AvatarLike,
+    imageAlt: "Celebratory avatar",
+    imageCaption: "gold across the board",
   },
   {
     year: 2024,
@@ -55,6 +74,9 @@ const timeline = [
     role: "Web Developer Intern",
     org: "AIQUE Innovation Technology Corp. · Taguig City, BGC",
     body: "Optimized and redesigned 15+ pages using HTML, CSS, React, TypeScript, Tailwind, and SASS. Contributed to CMS development with Next.js and Postman for API testing.",
+    image: Galago1,
+    imageAlt: "GalaGO! travel product screenshot",
+    imageCaption: "GalaGO! · redesigned 15+ pages",
   },
   {
     year: 2022,
@@ -138,7 +160,140 @@ function CountUpYear({ target, className }) {
   );
 }
 
+function TimelineItem({ entry, i }) {
+  const itemRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: itemRef,
+    offset: ["start end", "end start"],
+  });
+
+  const rawImageY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const rawImageRotate = useTransform(scrollYProgress, [0, 1], [-4, 4]);
+  const imageOpacity = useTransform(
+    scrollYProgress,
+    [0.05, 0.25, 0.75, 0.95],
+    [0, 1, 1, 0]
+  );
+  const imageScale = useTransform(
+    scrollYProgress,
+    [0.05, 0.35, 0.75, 0.95],
+    [0.85, 1, 1, 0.92]
+  );
+
+  const imageY = useSpring(rawImageY, { stiffness: 90, damping: 20 });
+  const imageRotate = useSpring(rawImageRotate, {
+    stiffness: 90,
+    damping: 20,
+  });
+
+  const yearScale = useTransform(scrollYProgress, [0.3, 0.55], [1, 1.08]);
+  const yearColor = useTransform(
+    scrollYProgress,
+    [0.3, 0.55],
+    ["#8a8a8a", typeColor[entry.type] || "#ff6b08"]
+  );
+
+  const dotScale = useTransform(scrollYProgress, [0.25, 0.5], [1, 1.35]);
+  const dotGlow = useTransform(
+    scrollYProgress,
+    [0.25, 0.5],
+    [`0 0 0 4px ${typeColor[entry.type]}22`, `0 0 0 8px ${typeColor[entry.type]}44`]
+  );
+
+  return (
+    <motion.div
+      ref={itemRef}
+      className={`timeline-item${entry.image ? " has-image" : ""}`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+      variants={item}
+      custom={i}
+    >
+      <motion.div
+        className="timeline-date"
+        style={{ scale: yearScale, color: yearColor }}
+      >
+        <CountUpYear target={entry.year} />
+        {entry.dateSuffix && (
+          <span className="timeline-date-suffix"> {entry.dateSuffix}</span>
+        )}
+      </motion.div>
+      <div className="timeline-marker">
+        <motion.div
+          className="timeline-dot"
+          style={{
+            background: typeColor[entry.type],
+            scale: dotScale,
+            boxShadow: dotGlow,
+          }}
+        />
+        <div className="timeline-line" />
+      </div>
+      <div className="timeline-content">
+        <span
+          className="timeline-type"
+          style={{ color: typeColor[entry.type] }}
+        >
+          {entry.type}
+        </span>
+        <div className="timeline-role">{entry.role}</div>
+        <div className="timeline-org">{entry.org}</div>
+        <ScrubbedText className="timeline-body">{entry.body}</ScrubbedText>
+      </div>
+
+      {entry.image && (
+        <motion.figure
+          className="timeline-image"
+          style={{
+            y: imageY,
+            rotate: imageRotate,
+            opacity: imageOpacity,
+            scale: imageScale,
+          }}
+        >
+          <div
+            className="timeline-image-frame"
+            style={{
+              boxShadow: `0 30px 80px -30px ${typeColor[entry.type]}66, 0 8px 24px -12px rgba(0,0,0,0.4)`,
+            }}
+          >
+            <img src={entry.image} alt={entry.imageAlt || ""} />
+            <span
+              className="timeline-image-badge"
+              style={{ background: typeColor[entry.type] }}
+              aria-hidden
+            />
+          </div>
+          {entry.imageCaption && (
+            <figcaption
+              className="timeline-image-caption"
+              style={{ color: typeColor[entry.type] }}
+            >
+              {entry.imageCaption}
+            </figcaption>
+          )}
+        </motion.figure>
+      )}
+    </motion.div>
+  );
+}
+
 export default function Experience() {
+  const timelineRef = useRef(null);
+
+  const { scrollYProgress: timelineProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 0.6", "end 0.4"],
+  });
+
+  const smoothProgress = useSpring(timelineProgress, {
+    stiffness: 80,
+    damping: 25,
+    restDelta: 0.001,
+  });
+
   return (
     <section id="experience" className="experience-section">
       <div className="experience-inner">
@@ -155,50 +310,18 @@ export default function Experience() {
           </WordReveal>
         </motion.div>
 
-        <div className="timeline">
+        <div className="timeline" ref={timelineRef}>
+          <motion.div
+            className="timeline-progress"
+            style={{ scaleY: smoothProgress }}
+            aria-hidden
+          />
           {timeline.map((entry, i) => (
-            <motion.div
+            <TimelineItem
               key={`${entry.role}-${entry.year}-${i}`}
-              className="timeline-item"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={item}
-              custom={i}
-            >
-              <div className="timeline-date">
-                <CountUpYear target={entry.year} />
-                {entry.dateSuffix && (
-                  <span className="timeline-date-suffix">
-                    {" "}
-                    {entry.dateSuffix}
-                  </span>
-                )}
-              </div>
-              <div className="timeline-marker">
-                <div
-                  className="timeline-dot"
-                  style={{
-                    background: typeColor[entry.type],
-                    boxShadow: `0 0 0 4px ${typeColor[entry.type]}22`,
-                  }}
-                />
-                <div className="timeline-line" />
-              </div>
-              <div className="timeline-content">
-                <span
-                  className="timeline-type"
-                  style={{ color: typeColor[entry.type] }}
-                >
-                  {entry.type}
-                </span>
-                <div className="timeline-role">{entry.role}</div>
-                <div className="timeline-org">{entry.org}</div>
-                <ScrubbedText className="timeline-body">
-                  {entry.body}
-                </ScrubbedText>
-              </div>
-            </motion.div>
+              entry={entry}
+              i={i}
+            />
           ))}
         </div>
       </div>
