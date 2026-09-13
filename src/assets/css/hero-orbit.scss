@@ -25,9 +25,10 @@
   overflow: hidden;
   background: var(--hero-bg);
   color: var(--hero-text);
-  padding: 6rem 3rem 3rem;
+  // No padding-bottom — stage bottom-aligns to section edge for flush avatar.
+  padding: 6rem 3rem 0;
   display: flex;
-  align-items: center;
+  align-items: stretch;
 
   &__orbs {
     position: absolute;
@@ -97,21 +98,26 @@
   &__content {
     max-width: 1400px;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
     position: relative;
     z-index: 2;
     width: 100%;
+    display: flex;
+    align-items: flex-end;      // Both columns bottom-align to section edge.
+    justify-content: center;
+    gap: 2rem;
   }
 
   &__text {
-    flex: 0 1 540px;
+    flex: 1 1 540px;
+    max-width: 540px;
     min-width: 0;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    padding-bottom: 6rem;       // Text has its own bottom padding.
+    align-self: center;         // Text stays vertically centered.
+    position: relative;
+    z-index: 3;
   }
 
   &__intro {
@@ -206,15 +212,20 @@
     }
   }
 
+  // Stage is the right column of the two-column split. It bottom-aligns
+  // to the section edge via the parent's `align-items: flex-end`, and the
+  // avatar image inside is bottom-anchored — so the character's base
+  // sits flush with the section bottom.
   &__stage {
     position: relative;
-    flex: 0 1 560px;
+    flex: 1 1 640px;
+    max-width: 640px;
     min-width: 0;
     aspect-ratio: 1;
-    max-width: 560px;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
   }
 
   &__ring {
@@ -227,32 +238,31 @@
     pointer-events: none;
   }
 
+  // Rings sized larger than the stage on purpose. Because the stage
+  // bottom-aligns to the section bottom (via the flex parent's
+  // `align-items: flex-end`), the bottom half of each ring extends past
+  // the section edge and gets clipped by the section's `overflow: hidden`.
+  // That produces the reference's "orbit cut off at the bottom" look.
   &__ring--inner {
-    width: 64%;
-    height: 64%;
+    width: 88%;
+    height: 88%;
   }
 
   &__ring--outer {
-    width: 92%;
-    height: 92%;
+    width: 128%;
+    height: 128%;
   }
 
+  // Wrap now fills the entire stage so the avatar image can be sized
+  // relative to the stage (not a tiny 56% inner circle). The pink ring
+  // shadow is removed because the visible framing is now provided by the
+  // dashed orbit rings themselves — one less overlapping circle.
   &__avatar-wrap {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 56%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    // Transparent PNGs — let the character extend beyond the ring, no clipping.
+    inset: 0;
+    width: 100%;
+    height: 100%;
     overflow: visible;
-    // Decorative ring + soft glow. No solid background — hero bg shows through
-    // the transparent portions of the avatar PNG.
-    box-shadow:
-      0 0 0 2px rgba(243, 33, 112, 0.32),
-      0 0 60px rgba(243, 33, 112, 0.28),
-      0 20px 60px var(--hero-shadow);
     background: transparent;
     z-index: 3;
   }
@@ -265,15 +275,17 @@
   }
 
   &__avatar-img {
-    // Extended portrait avatars (~3:4 aspect). Bottom-anchored to the ring
-    // with a taller-than-wrap height so the character stands on the ring
-    // and the head + shoulders extend above it — reference-style
-    // "popping out of the frame" look.
+    // Extended portrait avatars (~3:4 aspect). Bottom-anchored with a
+    // negative offset so the character extends slightly below the stage
+    // (the section's overflow: hidden clips anything past the edge).
+    // This compensates for the transparent PNG's whitespace so the
+    // blazer visibly touches the section bottom instead of floating
+    // a few pixels above it.
     position: absolute;
     left: 50%;
-    bottom: 0;
+    bottom: -8%;
     transform: translateX(-50%);
-    height: 138%;
+    height: 118%;
     width: auto;
     max-width: none;
     object-fit: contain;
@@ -284,18 +296,21 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 58px;
-    height: 58px;
+    width: 56px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--hero-icon-bg);
-    border-radius: 14px;
+    background: rgba(255, 251, 243, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 16px;
+    // Softer, more diffuse shadow — no hard pink border, gentle drop +
+    // wider pink glow that reads as ambient light rather than an outline.
     box-shadow:
-      0 8px 24px rgba(0, 0, 0, 0.35),
-      0 0 22px rgba(243, 33, 112, 0.18),
-      0 0 0 1px rgba(243, 33, 112, 0.18);
-    padding: 10px;
+      0 6px 20px rgba(0, 0, 0, 0.12),
+      0 0 48px rgba(243, 33, 112, 0.12);
+    padding: 11px;
     z-index: 4;
 
     img {
@@ -312,20 +327,23 @@
     &__content {
       flex-direction: column;
       gap: 2.5rem;
+      min-height: auto;
     }
 
     &__text {
       order: 2;
-      flex: 1 1 auto;
       max-width: 100%;
       width: 100%;
       gap: 1.25rem;
     }
 
+    // Mobile: stage returns to flow layout above the text.
     &__stage {
+      position: relative;
+      right: auto;
+      bottom: auto;
       order: 1;
-      flex: 0 0 auto;
-      max-width: 400px;
+      max-width: 380px;
       width: 100%;
       margin: 0 auto;
     }

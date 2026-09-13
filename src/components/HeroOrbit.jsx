@@ -28,33 +28,41 @@ const ease = [0.23, 1, 0.32, 1];
 const AVATAR_STATE_1 = AvatarPortrait;
 const AVATAR_STATE_2 = AvatarLaptop;
 
-// Angles in screen coordinates (0° = right, 90° = bottom, 180° = left,
-// 270° = top). React is on the outer ring at 260° so it sits above the
-// avatar's head instead of over the face.
+// 6 icons distributed at 60° intervals around the full circle. Inner and
+// outer offset by 60° so no two icons stack. Avoids putting anything
+// directly at 270° (top), which is where the extended avatar's face lives.
 const orbitConfig = [
-  { logo: NextJSLogo, angle: 20, ring: "inner", alt: "Next.js" },
-  { logo: TypeScriptLogo, angle: 140, ring: "inner", alt: "TypeScript" },
-  { logo: ReactLogo, angle: 225, ring: "outer", alt: "React" },
-  { logo: TailwindLogo, angle: 330, ring: "inner", alt: "Tailwind" },
+  { logo: NextJSLogo, angle: 30, ring: "inner", alt: "Next.js" },
+  { logo: TypeScriptLogo, angle: 150, ring: "inner", alt: "TypeScript" },
   { logo: PostmanLogo, angle: 210, ring: "inner", alt: "Postman" },
-  { logo: GithubLogo, angle: 300, ring: "outer", alt: "GitHub" },
+  { logo: TailwindLogo, angle: 330, ring: "outer", alt: "Tailwind" },
+  { logo: GithubLogo, angle: 90, ring: "outer", alt: "GitHub" },
+  { logo: ReactLogo, angle: 240, ring: "outer", alt: "React" },
 ];
 
+// Fractions of stage width — icons START at .start radius (initial),
+// drift OUT to .end radius on scroll. .end matches the visual ring width
+// (88%/2 = 0.44 inner, 128%/2 = 0.64 outer) so at scroll-end the icons
+// land exactly on the ring line.
 const RADIUS_FRACTIONS = {
-  inner: { start: 0.32, end: 0.44 },
-  outer: { start: 0.46, end: 0.6 },
+  inner: { start: 0.34, end: 0.44 },
+  outer: { start: 0.5, end: 0.64 },
 };
 
-function OrbitIcon({ config, stageSize, progress, scale, opacity }) {
-  const angleRad = (config.angle * Math.PI) / 180;
+function OrbitIcon({ config, stageSize, progress, rotation, scale, opacity }) {
   const fractions = RADIUS_FRACTIONS[config.ring];
 
-  const x = useTransform(progress, (p) => {
+  // Each icon's actual angle = base angle + scroll-driven rotation, so as
+  // the visitor scrolls the whole ring rotates and icons genuinely orbit
+  // the avatar (as opposed to just drifting outward).
+  const x = useTransform([progress, rotation], ([p, rot]) => {
+    const angleRad = ((config.angle + rot) * Math.PI) / 180;
     const radius = stageSize * (fractions.start + p * (fractions.end - fractions.start));
     return Math.cos(angleRad) * radius;
   });
 
-  const y = useTransform(progress, (p) => {
+  const y = useTransform([progress, rotation], ([p, rot]) => {
+    const angleRad = ((config.angle + rot) * Math.PI) / 180;
     const radius = stageSize * (fractions.start + p * (fractions.end - fractions.start));
     return Math.sin(angleRad) * radius;
   });
@@ -90,6 +98,14 @@ export default function HeroOrbit() {
     scrollY,
     [0, reduced ? 100000 : 250],
     [0, 1]
+  );
+
+  // Subtle scroll-driven drift — icons nudge along the ring as you scroll
+  // (~30° total), enough to feel alive without becoming a full revolution.
+  const iconRotation = useTransform(
+    scrollY,
+    [0, reduced ? 100000 : 1000],
+    [0, 30]
   );
 
   const avatar1Opacity = useTransform(progress, [0, 0.4, 0.6], [1, 0.5, 0]);
@@ -226,6 +242,7 @@ export default function HeroOrbit() {
               config={config}
               stageSize={stageSize}
               progress={progress}
+              rotation={iconRotation}
               scale={iconScale}
               opacity={iconOpacity}
             />
