@@ -1,0 +1,378 @@
+﻿.hero-orbit {
+  --hero-bg: #141519;
+  --hero-text: #dadada;
+  --hero-text-muted: rgba(218, 218, 218, 0.65);
+  --hero-avatar-bg: #1a1b20;
+  --hero-icon-bg: #fffbf3;
+  --hero-cta-text: #141519;
+  --hero-ring: rgba(243, 33, 112, 0.32);
+  --hero-shadow: rgba(0, 0, 0, 0.5);
+
+  @media (prefers-color-scheme: light) {
+    --hero-bg: #ffe4c4;
+    --hero-text: #1f2023;
+    --hero-text-muted: rgba(31, 32, 35, 0.7);
+    --hero-avatar-bg: #ffe4c4;
+    --hero-icon-bg: #fffbf3;
+    --hero-cta-text: #ffffff;
+    --hero-ring: rgba(224, 28, 170, 0.35);
+    --hero-shadow: rgba(39, 4, 0, 0.25);
+  }
+
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background: var(--hero-bg);
+  color: var(--hero-text);
+  padding: 6rem 3rem 3rem;
+  display: flex;
+  align-items: center;
+
+  &__orbs {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    filter: blur(150px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &__orb {
+    position: absolute;
+    border-radius: 100%;
+    opacity: 0.6;
+    mix-blend-mode: screen;
+    transform: translate(-50%, -50%);
+
+    &--pink {
+      background: rgb(224, 28, 170);
+      width: 700px;
+      height: 700px;
+      left: 60%;
+      top: 40%;
+    }
+
+    &--dark {
+      background: rgb(39, 4, 0);
+      width: 600px;
+      height: 600px;
+      left: 40%;
+      top: 60%;
+    }
+
+    &--peach {
+      background: rgb(240, 176, 144);
+      width: 500px;
+      height: 500px;
+      left: 50%;
+      top: 50%;
+    }
+  }
+
+  &__decor {
+    position: absolute;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: clamp(220px, 28vw, 480px);
+    font-weight: 900;
+    color: transparent;
+    pointer-events: none;
+    line-height: 0.85;
+    z-index: 1;
+    user-select: none;
+
+    &--left {
+      left: -4%;
+      top: 12%;
+      -webkit-text-stroke: 3px rgba(255, 107, 8, 0.42);
+    }
+
+    &--right {
+      right: -4%;
+      bottom: 8%;
+      -webkit-text-stroke: 3px rgba(243, 33, 112, 0.42);
+    }
+  }
+
+  &__content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  &__text {
+    flex: 0 1 540px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    p {
+      font-family: "Inter", sans-serif;
+      font-size: 16px;
+      letter-spacing: 0;
+      color: var(--hero-text);
+      opacity: 0.75;
+      margin: 0;
+    }
+  }
+
+  &__role-wrap {
+    .role-rotator {
+      font-family: "Inter", sans-serif;
+      font-size: 20px;
+      color: #f56c9c;
+      text-shadow: 0 0 22px rgba(245, 108, 156, 0.35);
+      letter-spacing: 0.01em;
+      height: 1.5em;
+      line-height: 1.5;
+      overflow: hidden;
+      position: relative;
+      font-weight: 500;
+    }
+  }
+
+  &__tagline {
+    font-family: "Fraunces", Georgia, serif;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    font-size: clamp(2.75rem, 6vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--hero-text);
+    font-weight: 600;
+  }
+
+  &__lede {
+    font-family: "Inter", sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--hero-text-muted);
+    max-width: 480px;
+    margin: 0;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 0.9rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__btn--outline {
+    border-color: rgba(255, 255, 255, 0.25) !important;
+    color: var(--hero-text) !important;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    @media (prefers-color-scheme: light) {
+      border-color: rgba(31, 32, 35, 0.25) !important;
+
+      &:hover {
+        background-color: rgba(31, 32, 35, 0.05) !important;
+      }
+    }
+  }
+
+  &__btn--primary {
+    background: linear-gradient(135deg, #f472b6 0%, #ffb347 100%) !important;
+    color: #141519 !important;
+    border: none !important;
+
+    &:hover {
+      background: linear-gradient(135deg, #ec4899 0%, #ff9a3c 100%) !important;
+    }
+  }
+
+  &__stage {
+    position: relative;
+    flex: 0 1 560px;
+    min-width: 0;
+    aspect-ratio: 1;
+    max-width: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    border: 1px dashed var(--hero-ring);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  &__ring--inner {
+    width: 64%;
+    height: 64%;
+  }
+
+  &__ring--outer {
+    width: 92%;
+    height: 92%;
+  }
+
+  &__avatar-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    // Transparent PNGs — let the character extend beyond the ring, no clipping.
+    overflow: visible;
+    // Decorative ring + soft glow. No solid background — hero bg shows through
+    // the transparent portions of the avatar PNG.
+    box-shadow:
+      0 0 0 2px rgba(243, 33, 112, 0.32),
+      0 0 60px rgba(243, 33, 112, 0.28),
+      0 20px 60px var(--hero-shadow);
+    background: transparent;
+    z-index: 3;
+  }
+
+  &__avatar {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-origin: center 55%;
+  }
+
+  &__avatar-img {
+    position: absolute;
+    // Scaled slightly beyond the wrap so the character breaks the ring —
+    // reference-style "popping out of the frame" look.
+    inset: -8%;
+    width: 116%;
+    height: 116%;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--hero-icon-bg);
+    border-radius: 14px;
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.35),
+      0 0 22px rgba(243, 33, 112, 0.18),
+      0 0 0 1px rgba(243, 33, 112, 0.18);
+    padding: 10px;
+    z-index: 4;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  @media (max-width: 900px) {
+    padding: 5rem 1.5rem 2.5rem;
+    min-height: auto;
+
+    &__content {
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    &__text {
+      order: 2;
+      flex: 1 1 auto;
+      max-width: 100%;
+      width: 100%;
+      gap: 1.25rem;
+    }
+
+    &__stage {
+      order: 1;
+      flex: 0 0 auto;
+      max-width: 400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    &__icon {
+      width: 46px;
+      height: 46px;
+      padding: 8px;
+      border-radius: 11px;
+    }
+
+    &__decor {
+      font-size: clamp(160px, 40vw, 260px);
+
+      &--left {
+        top: 2%;
+        left: -8%;
+        -webkit-text-stroke: 2px rgba(255, 107, 8, 0.32);
+      }
+
+      &--right {
+        bottom: 2%;
+        right: -8%;
+        -webkit-text-stroke: 2px rgba(243, 33, 112, 0.32);
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 5rem 1.25rem 2rem;
+
+    &__meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    &__buttons {
+      flex-direction: column;
+      width: 100%;
+
+      > * {
+        width: 100%;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+
+    &__stage {
+      max-width: 320px;
+    }
+  }
+}
