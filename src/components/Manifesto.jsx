@@ -22,10 +22,10 @@ export default function Manifesto() {
           A PHILOSOPHY
         </motion.p>
         <ScrubbedText className="manifesto-text">
-          The best software makes hard work disappear. A data request that
-          took half a day now takes minutes. A messy warehouse becomes one
-          number everyone trusts. From the pipeline to the last pixel, I build
-          the version people stop noticing, because it simply works.
+          I don't wait to be handed the problem. When a team loses hours to
+          work a tool could do, I build that tool end to end and stay with it
+          until nobody remembers the old way. My title has changed three
+          times. My question hasn't: what's slowing everyone down?
         </ScrubbedText>
         <motion.div
           className="manifesto-signature"
