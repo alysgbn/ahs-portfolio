@@ -288,7 +288,8 @@ export default function Craft() {
             <div>
               <div className="tile-title">github.com/alysgbn</div>
               <div className="tile-sub">
-                Notes, experiments, and side projects.
+                Most of my work ships behind company walls. The rest lives
+                here.
               </div>
             </div>
             <div className="github-arrow">
