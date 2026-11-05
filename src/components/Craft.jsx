@@ -183,8 +183,8 @@ export default function Craft() {
           >
             <div className="tile-eyebrow">Currently reading</div>
             <div>
-              <div className="tile-title">A Philosophy of Software Design</div>
-              <div className="tile-sub">John Ousterhout</div>
+              <div className="tile-title">To Kill a Mockingbird</div>
+              <div className="tile-sub">Harper Lee</div>
             </div>
           </motion.div>
 
