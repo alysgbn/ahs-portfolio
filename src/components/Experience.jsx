@@ -10,7 +10,7 @@ import ScrubbedText from "./ScrubbedText";
 import WordReveal from "./WordReveal";
 import WebDeveloper from "../assets/images/WebDeveloper.png";
 import Galago1 from "../assets/images/Galago1.png";
-import AvatarLaptop from "../assets/images/avatar-laptop.png";
+import DataDev from "../assets/images/data-dev.svg";
 import AvatarLike from "../assets/images/avatar-like.png";
 import "../assets/css/experience.scss";
 
@@ -34,8 +34,8 @@ const timeline = [
     role: "Data Analyst (Data Solutions & Full-Stack Engineering)",
     org: "Docquity · Taguig City, BGC",
     body: "Sole developer behind Strata, a self-service data platform (Next.js, FastAPI, Redshift, AWS Lightsail) that cut data-request turnaround from 4–8 hours to minutes for 20+ commercial users across SE Asia. Built cron-scheduled Python/SQL ETL pipelines on Redshift processing millions of rows, the Journey Sequence App mapping each HCP's content journey across campaigns, and a Claude MCP server the team adopted as its single source of truth for campaign metrics. Automated enrichment of 400K+ company records with Claude-driven web scraping, and delivered analysis for client business reviews that contributed to a renewal.",
-    image: AvatarLaptop,
-    imageAlt: "Aliyah working on a laptop",
+    image: DataDev,
+    imageAlt: "Illustration of a database feeding a bar chart and a code window",
     imageCaption: "shipping full-stack + data",
   },
   {
