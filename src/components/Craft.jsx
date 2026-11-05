@@ -140,7 +140,7 @@ export default function Craft() {
             viewport={{ once: true, amount: 0.2 }}
             style={{ rotate: tilt }}
           >
-            <div className="tile-eyebrow">Now playing</div>
+            <div className="tile-eyebrow">Listening to</div>
             <div className="now-playing-row">
               <div className="now-playing-cover" />
               <div>
