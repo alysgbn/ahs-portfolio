@@ -145,9 +145,9 @@ export default function Craft() {
               <div className="now-playing-cover" />
               <div>
                 <div className="tile-title" style={{ fontSize: "14px" }}>
-                  Sunflower
+                  Hard Times
                 </div>
-                <div className="tile-sub">Post Malone, Swae Lee</div>
+                <div className="tile-sub">Paramore</div>
               </div>
             </div>
             <div className="now-playing-bars">
