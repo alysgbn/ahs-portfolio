@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import WordReveal from "./WordReveal";
-import ScrubbedText from "./ScrubbedText";
 import "../assets/css/contact.scss";
 
 const ease = [0.23, 1, 0.32, 1];
@@ -65,9 +64,15 @@ export default function Contact() {
         >
           Let's build something.
         </WordReveal>
-        <ScrubbedText className="contact-sub">
+        <WordReveal
+          as="p"
+          className="contact-sub"
+          delayBase={0.03}
+          delayOffset={0.35}
+          amount={0.6}
+        >
           Full-stack work, data engineering, or just a chat about the web and data — the inbox is open.
-        </ScrubbedText>
+        </WordReveal>
 
         <motion.a
           href="mailto:aliyah.sagaban22@gmail.com"
