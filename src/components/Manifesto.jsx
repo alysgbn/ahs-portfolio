@@ -22,9 +22,10 @@ export default function Manifesto() {
           A PHILOSOPHY
         </motion.p>
         <ScrubbedText className="manifesto-text">
-          I notice what most people scroll past: a misaligned pixel, a query
-          that runs twice, a name that almost fits. I like structure, clean
-          output, and work that holds up when someone looks closely. And yes,
+          I notice what most people scroll past: a query that runs twice, a
+          pipeline that quietly drops a row, an API name that almost fits. I
+          like structure, numbers that add up, and work that holds up when
+          someone looks closely. And yes,
           I'm competitive. Mostly with the version of me that shipped it
           yesterday.
         </ScrubbedText>
