@@ -21,6 +21,7 @@ const typeColor = {
   Education: "#cf23cf",
   Competition: "#f32170",
   Organization: "#eedd44",
+  Project: "#ff6b08",
   Certification: "#ff6b08",
   Award: "#f32170",
 };
@@ -77,6 +78,14 @@ const timeline = [
     image: Galago1,
     imageAlt: "GalaGO! travel product screenshot",
     imageCaption: "GalaGO! · redesigned 15+ pages",
+  },
+  {
+    year: 2023,
+    dateSuffix: "— 2024",
+    type: "Project",
+    role: "Image Forgery Detection & Localization",
+    org: "University Project · T.I.P. Quezon City",
+    body: "Engineered an image forgery detection and localization system combining EfficientNetV2 transfer learning and U-Net (TensorFlow), served via a Flask REST API with a Flutter front end and Firebase backend.",
   },
   {
     year: 2022,
