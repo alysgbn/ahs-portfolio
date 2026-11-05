@@ -132,7 +132,7 @@ export default function Craft() {
           </motion.div>
 
           <motion.div
-            className="tile tile-now-playing"
+            className="tile tile--tinted tint-magenta tile-now-playing"
             variants={tileReveal}
             custom={1}
             initial="hidden"
@@ -159,7 +159,7 @@ export default function Craft() {
           </motion.div>
 
           <motion.div
-            className="tile tile-location"
+            className="tile tile--tinted tint-orange tile-location"
             variants={tileReveal}
             custom={2}
             initial="hidden"
@@ -173,7 +173,7 @@ export default function Craft() {
           </motion.div>
 
           <motion.div
-            className="tile tile-reading"
+            className="tile tile--tinted tint-yellow tile-reading"
             variants={tileReveal}
             custom={3}
             initial="hidden"
@@ -189,7 +189,7 @@ export default function Craft() {
           </motion.div>
 
           <motion.div
-            className="tile tile-figma"
+            className="tile tile--tinted tint-pink tile-figma"
             variants={tileReveal}
             custom={4}
             initial="hidden"
@@ -209,7 +209,7 @@ export default function Craft() {
           </motion.div>
 
           <motion.div
-            className="tile tile-playing"
+            className="tile tile--tinted tint-pink tile-playing"
             variants={tileReveal}
             custom={5}
             initial="hidden"
@@ -225,7 +225,7 @@ export default function Craft() {
           </motion.div>
 
           <motion.div
-            className="tile tile-watching"
+            className="tile tile--tinted tint-magenta tile-watching"
             variants={tileReveal}
             custom={6}
             initial="hidden"
@@ -241,7 +241,7 @@ export default function Craft() {
           </motion.div>
 
           <motion.div
-            className="tile tile-wide"
+            className="tile tile--tinted tint-orange tile-wide"
             variants={tileReveal}
             custom={7}
             initial="hidden"
@@ -257,7 +257,7 @@ export default function Craft() {
           </motion.div>
 
           <motion.div
-            className="tile tile-wide"
+            className="tile tile--tinted tint-yellow tile-wide"
             variants={tileReveal}
             custom={8}
             initial="hidden"
@@ -276,7 +276,7 @@ export default function Craft() {
             href="https://github.com/alysgbn"
             target="_blank"
             rel="noopener noreferrer"
-            className="tile tile-github tile-wide"
+            className="tile tile--tinted tint-pink tile-github tile-wide"
             variants={tileReveal}
             custom={9}
             initial="hidden"
