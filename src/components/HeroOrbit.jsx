@@ -251,13 +251,11 @@ export default function HeroOrbit() {
             <MagneticButton style={{ display: "inline-flex" }}>
               <Button
                 as="a"
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#contact"
                 radius="full"
                 className="hero-orbit__btn--primary shadow-lg"
               >
-                Resume
+                Get in Touch
               </Button>
             </MagneticButton>
           </motion.div>
