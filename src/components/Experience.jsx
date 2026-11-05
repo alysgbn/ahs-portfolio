@@ -87,20 +87,12 @@ const timeline = [
     body: "Gold at both the Regional (September 2022) and District (June 2022) TESDA skills competitions in Web Technology.",
   },
   {
-    year: 2021,
+    year: 2020,
     dateSuffix: "— 2022",
     type: "Organization",
     role: "Vice-President for Communications",
     org: "ACM Student Chapter · T.I.P. Quezon City",
-    body: "Coordinated with the Dean's office on chapter initiatives and official documentation. Managed communications channels for announcements, events, and deadlines.",
-  },
-  {
-    year: 2020,
-    dateSuffix: "— 2021",
-    type: "Organization",
-    role: "Jr Communications & Creatives Officer",
-    org: "ACM Student Chapter · T.I.P. Quezon City",
-    body: "Managed organizational communications and produced promotional materials in Adobe Photoshop for the chapter's social media presence.",
+    body: "Promoted from Jr Communications & Creatives Officer (2020–2021). Ran the chapter's communications channels for announcements, events, and deadlines, produced promotional materials in Adobe Photoshop, and coordinated with the Dean's office on chapter initiatives and official documentation.",
   },
   {
     year: 2020,
