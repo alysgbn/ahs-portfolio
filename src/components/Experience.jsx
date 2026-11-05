@@ -10,7 +10,7 @@ import ScrubbedText from "./ScrubbedText";
 import WordReveal from "./WordReveal";
 import WebDeveloper from "../assets/images/WebDeveloper.png";
 import Galago1 from "../assets/images/Galago1.png";
-import DataDev from "../assets/images/data-dev.svg";
+import DataDevVisual from "./DataDevVisual";
 import AvatarLike from "../assets/images/avatar-like.png";
 import "../assets/css/experience.scss";
 
@@ -34,8 +34,7 @@ const timeline = [
     role: "Data Analyst (Data Solutions & Full-Stack Engineering)",
     org: "Docquity · Taguig City, BGC",
     body: "Sole developer behind Strata, a self-service data platform (Next.js, FastAPI, Redshift, AWS Lightsail) that cut data-request turnaround from 4–8 hours to minutes for 20+ commercial users across SE Asia. Built cron-scheduled Python/SQL ETL pipelines on Redshift processing millions of rows, the Journey Sequence App mapping each HCP's content journey across campaigns, and a Claude MCP server the team adopted as its single source of truth for campaign metrics. Automated enrichment of 400K+ company records with Claude-driven web scraping, and delivered analysis for client business reviews that contributed to a renewal.",
-    image: DataDev,
-    imageAlt: "Illustration of a database feeding a bar chart and a code window",
+    visual: <DataDevVisual />,
     imageCaption: "shipping full-stack + data",
   },
   {
@@ -205,7 +204,7 @@ function TimelineItem({ entry, i }) {
   return (
     <motion.div
       ref={itemRef}
-      className={`timeline-item${entry.image ? " has-image" : ""}`}
+      className={`timeline-item${entry.image || entry.visual ? " has-image" : ""}`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
@@ -244,7 +243,7 @@ function TimelineItem({ entry, i }) {
         <ScrubbedText className="timeline-body">{entry.body}</ScrubbedText>
       </div>
 
-      {entry.image && (
+      {(entry.image || entry.visual) && (
         <motion.figure
           className="timeline-image"
           style={{
@@ -260,7 +259,7 @@ function TimelineItem({ entry, i }) {
               boxShadow: `0 30px 80px -30px ${typeColor[entry.type]}66, 0 8px 24px -12px rgba(0,0,0,0.4)`,
             }}
           >
-            <img src={entry.image} alt={entry.imageAlt || ""} />
+            {entry.visual || <img src={entry.image} alt={entry.imageAlt || ""} />}
             <span
               className="timeline-image-badge"
               style={{ background: typeColor[entry.type] }}
