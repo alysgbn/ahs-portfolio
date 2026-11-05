@@ -25,9 +25,8 @@ export default function Manifesto() {
           I notice what most people scroll past: a query that runs twice, a
           pipeline that quietly drops a row, an API name that almost fits. I
           like structure, numbers that add up, and work that holds up when
-          someone looks closely. And yes,
-          I'm competitive. Mostly with the version of me that shipped it
-          yesterday.
+          someone looks closely. I hold my own work to that bar first, and
+          raise it a little every time I ship.
         </ScrubbedText>
         <motion.div
           className="manifesto-signature"
