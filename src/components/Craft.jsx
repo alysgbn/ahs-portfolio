@@ -208,13 +208,45 @@ export default function Craft() {
             </div>
           </motion.div>
 
+          <motion.div
+            className="tile tile-playing"
+            variants={tileReveal}
+            custom={5}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ rotate: tilt }}
+          >
+            <div className="tile-eyebrow">Currently playing</div>
+            <div>
+              <div className="tile-title">Badminton</div>
+              <div className="tile-sub">or Valorant</div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="tile tile-watching"
+            variants={tileReveal}
+            custom={6}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ rotate: tilt }}
+          >
+            <div className="tile-eyebrow">Currently watching</div>
+            <div>
+              <div className="tile-title">Woman of the Hour</div>
+              <div className="tile-sub">Netflix</div>
+            </div>
+          </motion.div>
+
           <motion.a
             href="https://github.com/alysgbn"
             target="_blank"
             rel="noopener noreferrer"
             className="tile tile-github tile-wide"
             variants={tileReveal}
-            custom={5}
+            custom={7}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
