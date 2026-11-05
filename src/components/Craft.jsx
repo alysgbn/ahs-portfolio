@@ -127,7 +127,7 @@ export default function Craft() {
             <div className="tile-feature-cursor" />
             <div className="tile-eyebrow">Studio</div>
             <div className="tile-feature-line">
-              Clean, structured, and a little competitive about it.
+              Precise, structured, and a little competitive about it.
             </div>
           </motion.div>
 
