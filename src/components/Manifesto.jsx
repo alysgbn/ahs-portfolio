@@ -22,10 +22,11 @@ export default function Manifesto() {
           A PHILOSOPHY
         </motion.p>
         <ScrubbedText className="manifesto-text">
-          I don't wait to be handed the problem. When a team loses hours to
-          work a tool could do, I build that tool end to end and stay with it
-          until nobody remembers the old way. My title has changed three
-          times. My question hasn't: what's slowing everyone down?
+          I notice what most people scroll past: a misaligned pixel, a query
+          that runs twice, a name that almost fits. I like structure, clean
+          output, and work that holds up when someone looks closely. And yes,
+          I'm competitive. Mostly with the version of me that shipped it
+          yesterday.
         </ScrubbedText>
         <motion.div
           className="manifesto-signature"
