@@ -22,10 +22,10 @@ export default function Manifesto() {
           A PHILOSOPHY
         </motion.p>
         <ScrubbedText className="manifesto-text">
-          Great software feels obvious. Every animation lands where your eye
-          was already looking, every button presses the exact moment you
-          expected. That takes ten times longer to build than "just working" —
-          and I like the ten-times-longer version.
+          The best software makes hard work disappear. A data request that
+          took half a day now takes minutes. A messy warehouse becomes one
+          number everyone trusts. From the pipeline to the last pixel, I build
+          the version people stop noticing, because it simply works.
         </ScrubbedText>
         <motion.div
           className="manifesto-signature"
