@@ -11,7 +11,14 @@ import WordReveal from "./WordReveal";
 import WebDeveloper from "../assets/images/WebDeveloper.png";
 import Galago1 from "../assets/images/Galago1.png";
 import DataDevVisual from "./DataDevVisual";
-import AvatarLike from "../assets/images/avatar-like.png";
+import {
+  IntranetVisual,
+  LeaderboardVisual,
+  ForgeryVisual,
+  MedalsVisual,
+  BroadcastVisual,
+  ScatterVisual,
+} from "./TimelineVisuals";
 import "../assets/css/experience.scss";
 
 const ease = [0.23, 1, 0.32, 1];
@@ -44,6 +51,8 @@ const timeline = [
     role: "Associate Web Developer",
     org: "Merck Group · Taguig City, BGC",
     body: "Designed, delivered, and maintained 5+ web applications on Merck's global intranet for clients across Poland, Japan, and other markets within six months, serving 1,000+ users. Owned each solution end to end for 30+ client stakeholders: requirements, UX and technical design, build, testing, and documentation.",
+    visual: <IntranetVisual />,
+    imageCaption: "global intranet · PL, JP & more",
   },
   {
     year: 2024,
@@ -63,9 +72,8 @@ const timeline = [
     role: "Highest Score, AIQUE Web Development Challenge",
     org: "AIQUE Innovation Technology Corp.",
     body: "Top score among 7+ developers in AIQUE's internal web development challenge.",
-    image: AvatarLike,
-    imageAlt: "Celebratory avatar",
-    imageCaption: "gold across the board",
+    visual: <LeaderboardVisual />,
+    imageCaption: "#1 of 7+ developers",
   },
   {
     year: 2024,
@@ -85,6 +93,8 @@ const timeline = [
     role: "Image Forgery Detection & Localization",
     org: "University Project · T.I.P. Quezon City",
     body: "Engineered an image forgery detection and localization system combining EfficientNetV2 transfer learning and U-Net (TensorFlow), served via a Flask REST API with a Flutter front end and Firebase backend.",
+    visual: <ForgeryVisual />,
+    imageCaption: "detect · localize · u-net",
   },
   {
     year: 2022,
@@ -93,6 +103,8 @@ const timeline = [
     role: "Gold Medalist — TESDA Skills Competition",
     org: "Web Technology, Regional & District",
     body: "Gold at both the Regional (September 2022) and District (June 2022) TESDA skills competitions in Web Technology.",
+    visual: <MedalsVisual />,
+    imageCaption: "gold ×2 · web technology",
   },
   {
     year: 2020,
@@ -101,6 +113,8 @@ const timeline = [
     role: "Vice-President for Communications",
     org: "ACM Student Chapter · T.I.P. Quezon City",
     body: "Promoted from Jr Communications & Creatives Officer (2020–2021). Ran the chapter's communications channels for announcements, events, and deadlines, produced promotional materials in Adobe Photoshop, and coordinated with the Dean's office on chapter initiatives and official documentation.",
+    visual: <BroadcastVisual />,
+    imageCaption: "jr officer → vp",
   },
   {
     year: 2020,
@@ -109,6 +123,8 @@ const timeline = [
     role: "BS Computer Science, Major in Data Science",
     org: "Technological Institute of the Philippines · Quezon City",
     body: "Graduated August 2024, Magna Cum Laude (GPA 1.22). L.A.N.I Full Scholarship and T.I.P. Full Academic Scholar. Coursework in software engineering, algorithms, NLP, machine learning, and OOP.",
+    visual: <ScatterVisual />,
+    imageCaption: "magna cum laude · data science",
   },
 ];
 
