@@ -19,7 +19,7 @@ export default function Footer() {
         <div className="footer-brand">
           <div className="footer-mark">ali.</div>
           <div className="footer-tag">
-            Full-stack developer sweating the small details from Pasig, PH.
+            Full-stack and data engineer based in Pasig, PH.
           </div>
         </div>
 
