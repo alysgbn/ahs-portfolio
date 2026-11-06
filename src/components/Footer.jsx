@@ -19,7 +19,7 @@ export default function Footer() {
         <div className="footer-brand">
           <div className="footer-mark">ali.</div>
           <div className="footer-tag">
-            Data Solutions Engineer based in Pasig, PH.
+            Full-Stack & Data Solutions Engineer based in Pasig, PH.
           </div>
         </div>
 
