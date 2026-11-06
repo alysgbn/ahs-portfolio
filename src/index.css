@@ -16,6 +16,39 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Firefox only: Chromium ignores the ::-webkit-scrollbar styles below
+   whenever the standard properties are set, so scope them away from it. */
+@supports not selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #f2457e #141519;
+  }
+}
+
+/* Chromium / Safari: slim track in the page's dark tone, brand-gradient
+   thumb inset by a border so it floats inside the track. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #141519;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #f32170, #ff6b08 55%, #cf23cf);
+  border: 3px solid #141519;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  border-width: 2px;
+}
+
+::-webkit-scrollbar-corner {
+  background: #141519;
+}
 body {
   background-color: rgba(255, 228, 196, 0.623);
   color: #1f2023;
