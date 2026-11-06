@@ -11,7 +11,6 @@ import Galago4 from "../assets/images/Galago4.png";
 
 import ReactLogo from "../assets/logos/ReactLogo.png";
 import SassLogo from "../assets/logos/SassLogo.png";
-import BootstrapLogo from "../assets/logos/BootstrapLogo.png";
 import TailwindLogo from '../assets/logos/TailwindLogo.png'
 import GithubLogo from '../assets/logos/GithubLogo.png'
 import GitlabLogo from '../assets/logos/GitlabLogo.png'
