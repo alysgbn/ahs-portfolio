@@ -41,7 +41,7 @@ export default function MyNavbar() {
     <div className="navbar-shell">
       <nav className={`navbar${scrolled ? " navbar--floating" : ""}`}>
         <a href="#top" className="navbar__brand" aria-label="Home">
-          <span className="title">aly.</span>
+          <span className="title">ali.</span>
         </a>
 
         <div

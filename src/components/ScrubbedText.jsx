@@ -10,26 +10,34 @@ function Word({ progress, range, children }) {
   );
 }
 
-export default function ScrubbedText({ children, className, as: Tag = "p" }) {
+// Words brighten one by one with scroll. By default it tracks its own
+// position; pass `progress` (a 0–1 motion value, e.g. from a pinned
+// section) and `span` to run the words across part of that instead.
+export default function ScrubbedText({
+  children,
+  className,
+  as: Tag = "p",
+  offset = ["start 0.85", "start 0.2"],
+  progress,
+  span = [0, 1],
+}) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.85", "start 0.2"],
+    offset,
   });
+  const driver = progress || scrollYProgress;
 
   const words = String(children).split(" ");
+  const step = (span[1] - span[0]) / words.length;
 
   return (
     <Tag ref={ref} className={className}>
       {words.map((word, i) => {
-        const start = i / words.length;
-        const end = Math.min(1, start + 1 / words.length);
+        const start = span[0] + i * step;
+        const end = Math.min(span[1], start + step);
         return (
-          <Word
-            key={`${word}-${i}`}
-            progress={scrollYProgress}
-            range={[start, end]}
-          >
+          <Word key={`${word}-${i}`} progress={driver} range={[start, end]}>
             {word}
           </Word>
         );

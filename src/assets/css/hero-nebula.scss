@@ -1,0 +1,147 @@
+// Hero-scoped nebula. Same layered technique as the page-wide
+// NebulaBackground (mesh + horizon + noise + starfield), but positioned
+// absolutely INSIDE the hero's sticky container so it stays confined to
+// the hero section. Gradient opacities are ~30% lower than the page-wide
+// version for a slightly darker, more restrained feel.
+.hero-nebula {
+  position: absolute;
+  inset: 0;
+  z-index: 0;              // sits behind hero content (which is z-index 2+)
+  overflow: hidden;
+  pointer-events: none;    // never intercepts clicks
+  isolation: isolate;      // contain blend modes to this layer
+
+  &__mesh {
+    position: absolute;
+    inset: -10%;
+    background:
+      // Warm pink hotspot, upper right — pushed vivid
+      radial-gradient(
+        ellipse 55% 45% at 78% 22%,
+        rgba(245, 108, 156, 0.55),
+        transparent 62%
+      ),
+      // Amber ember, mid-left — bumped
+      radial-gradient(
+        ellipse 50% 55% at 15% 55%,
+        rgba(255, 128, 40, 0.35),
+        transparent 65%
+      ),
+      // Vivid magenta, upper left
+      radial-gradient(
+        ellipse 40% 40% at 8% 12%,
+        rgba(224, 28, 170, 0.32),
+        transparent 70%
+      ),
+      // Cool violet accent, mid-right
+      radial-gradient(
+        ellipse 40% 40% at 88% 62%,
+        rgba(139, 92, 246, 0.28),
+        transparent 68%
+      ),
+      // Deep plum floor — grounds the composition
+      radial-gradient(
+        ellipse 90% 45% at 50% 92%,
+        rgba(61, 20, 74, 0.55),
+        transparent 60%
+      ),
+      // Dark void in the upper-mid — creates negative space against the
+      // vivid glows, drives contrast so the colours read as popping.
+      radial-gradient(
+        ellipse 45% 50% at 45% 35%,
+        rgba(6, 4, 12, 0.55),
+        transparent 55%
+      ),
+      // Second dark pocket, lower-right, near the character's frame edge
+      radial-gradient(
+        ellipse 35% 40% at 90% 88%,
+        rgba(6, 4, 12, 0.5),
+        transparent 55%
+      );
+    filter: blur(60px);
+    will-change: transform;
+  }
+
+  // Vignette layer — subtle darkening around the outer edges. Deepens
+  // the shadows and pushes the eye toward the vivid centre glows.
+  &__vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 90% 80% at 50% 50%,
+      transparent 45%,
+      rgba(6, 4, 12, 0.55) 100%
+    );
+    pointer-events: none;
+  }
+
+  // Horizon wash — soft floor of light along the bottom edge, dimmer than
+  // the page-wide version so the character's blazer edge is more defined.
+  &__horizon {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(245, 108, 156, 0.10) 0%,
+      rgba(255, 128, 40, 0.04) 18%,
+      transparent 38%
+    );
+  }
+
+  &__stars {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  // SVG feTurbulence grain — technical purpose is dithering (breaks up
+  // gradient banding on 8-bit displays); aesthetic softness is a side effect.
+  &__noise {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.16;
+    mix-blend-mode: overlay;
+  }
+
+  @media (prefers-color-scheme: light) {
+    &__mesh {
+      background:
+        radial-gradient(
+          ellipse 55% 45% at 78% 22%,
+          rgba(245, 108, 156, 0.16),
+          transparent 62%
+        ),
+        radial-gradient(
+          ellipse 50% 55% at 15% 55%,
+          rgba(255, 128, 40, 0.10),
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 90% 45% at 50% 92%,
+          rgba(224, 28, 170, 0.14),
+          transparent 60%
+        ),
+        radial-gradient(
+          ellipse 40% 40% at 8% 12%,
+          rgba(224, 28, 170, 0.08),
+          transparent 70%
+        );
+    }
+
+    &__horizon {
+      background: linear-gradient(
+        to top,
+        rgba(224, 28, 170, 0.06) 0%,
+        transparent 30%
+      );
+    }
+
+    &__noise {
+      opacity: 0.06;
+    }
+  }
+}

@@ -127,12 +127,12 @@ export default function Craft() {
             <div className="tile-feature-cursor" />
             <div className="tile-eyebrow">Studio</div>
             <div className="tile-feature-line">
-              Interfaces that don't waste your time.
+              Precise, structured, and a little competitive about it.
             </div>
           </motion.div>
 
           <motion.div
-            className="tile tile-now-playing"
+            className="tile tile--tinted tint-magenta tile-now-playing"
             variants={tileReveal}
             custom={1}
             initial="hidden"
@@ -140,14 +140,14 @@ export default function Craft() {
             viewport={{ once: true, amount: 0.2 }}
             style={{ rotate: tilt }}
           >
-            <div className="tile-eyebrow">Now playing</div>
+            <div className="tile-eyebrow">Listening to</div>
             <div className="now-playing-row">
               <div className="now-playing-cover" />
               <div>
                 <div className="tile-title" style={{ fontSize: "14px" }}>
-                  Sunflower
+                  Hard Times
                 </div>
-                <div className="tile-sub">Post Malone, Swae Lee</div>
+                <div className="tile-sub">Paramore</div>
               </div>
             </div>
             <div className="now-playing-bars">
@@ -159,7 +159,7 @@ export default function Craft() {
           </motion.div>
 
           <motion.div
-            className="tile tile-location"
+            className="tile tile--tinted tint-orange tile-location"
             variants={tileReveal}
             custom={2}
             initial="hidden"
@@ -173,7 +173,7 @@ export default function Craft() {
           </motion.div>
 
           <motion.div
-            className="tile tile-reading"
+            className="tile tile--tinted tint-yellow tile-reading"
             variants={tileReveal}
             custom={3}
             initial="hidden"
@@ -183,13 +183,13 @@ export default function Craft() {
           >
             <div className="tile-eyebrow">Currently reading</div>
             <div>
-              <div className="tile-title">A Philosophy of Software Design</div>
-              <div className="tile-sub">John Ousterhout</div>
+              <div className="tile-title">To Kill a Mockingbird</div>
+              <div className="tile-sub">Harper Lee</div>
             </div>
           </motion.div>
 
           <motion.div
-            className="tile tile-figma"
+            className="tile tile--tinted tint-pink tile-figma"
             variants={tileReveal}
             custom={4}
             initial="hidden"
@@ -208,13 +208,77 @@ export default function Craft() {
             </div>
           </motion.div>
 
+          <motion.div
+            className="tile tile--tinted tint-pink tile-playing"
+            variants={tileReveal}
+            custom={5}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ rotate: tilt }}
+          >
+            <div className="tile-eyebrow">Currently playing</div>
+            <div>
+              <div className="tile-title">Badminton</div>
+              <div className="tile-sub">or Valorant</div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="tile tile--tinted tint-magenta tile-watching"
+            variants={tileReveal}
+            custom={6}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ rotate: tilt }}
+          >
+            <div className="tile-eyebrow">Currently watching</div>
+            <div>
+              <div className="tile-title">Woman of the Hour</div>
+              <div className="tile-sub">Netflix</div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="tile tile--tinted tint-orange tile-wide"
+            variants={tileReveal}
+            custom={7}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ rotate: tilt }}
+          >
+            <div className="tile-eyebrow">Off the clock</div>
+            <div>
+              <div className="tile-title">Baking · Hiking · Travel</div>
+              <div className="tile-sub">Sometimes a baker, sometimes on a trail.</div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="tile tile--tinted tint-yellow tile-wide"
+            variants={tileReveal}
+            custom={8}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ rotate: tilt }}
+          >
+            <div className="tile-eyebrow">Currently into</div>
+            <div>
+              <div className="tile-title">Claude & AI · Mechanical keyboards</div>
+              <div className="tile-sub">Building with one, typing on the other.</div>
+            </div>
+          </motion.div>
+
           <motion.a
             href="https://github.com/alysgbn"
             target="_blank"
             rel="noopener noreferrer"
-            className="tile tile-github tile-wide"
+            className="tile tile--tinted tint-pink tile-github tile-wide"
             variants={tileReveal}
-            custom={5}
+            custom={9}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
@@ -224,7 +288,8 @@ export default function Craft() {
             <div>
               <div className="tile-title">github.com/alysgbn</div>
               <div className="tile-sub">
-                Notes, experiments, and side projects.
+                Most of my work ships behind company walls. The rest lives
+                here.
               </div>
             </div>
             <div className="github-arrow">

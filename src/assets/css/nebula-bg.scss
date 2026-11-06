@@ -1,0 +1,124 @@
+// Nebula background — layered mesh gradient + horizon glow + starfield +
+// SVG grain. Fixed-position, sits behind all page content.
+.nebula-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none; // never intercepts clicks
+  isolation: isolate;   // contain blend modes to this layer
+
+  // The mesh: four overlapping radial gradients on the site's warm
+  // palette. Each fades to transparent so they compound rather than
+  // stacking flat. Blurred so the edges are smooth aurora, not orbs.
+  &__mesh {
+    position: absolute;
+    inset: -10%;
+    background:
+      // Warm pink glow, upper right
+      radial-gradient(
+        ellipse 55% 45% at 78% 22%,
+        rgba(245, 108, 156, 0.32),
+        transparent 62%
+      ),
+      // Amber ember, mid-left
+      radial-gradient(
+        ellipse 50% 55% at 15% 55%,
+        rgba(255, 128, 40, 0.22),
+        transparent 65%
+      ),
+      // Deep plum, lower center — grounds the composition
+      radial-gradient(
+        ellipse 90% 45% at 50% 92%,
+        rgba(61, 20, 74, 0.55),
+        transparent 60%
+      ),
+      // Magenta whisper, upper left
+      radial-gradient(
+        ellipse 40% 40% at 8% 12%,
+        rgba(224, 28, 170, 0.18),
+        transparent 70%
+      ),
+      // Cool violet accent, mid-right
+      radial-gradient(
+        ellipse 40% 40% at 88% 62%,
+        rgba(139, 92, 246, 0.18),
+        transparent 68%
+      );
+    filter: blur(60px);
+    will-change: transform;
+  }
+
+  // Horizon wash — a subtle floor of light along the bottom edge that
+  // grounds subjects sitting on it (avatar in hero, cards elsewhere).
+  &__horizon {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(245, 108, 156, 0.14) 0%,
+      rgba(255, 128, 40, 0.05) 18%,
+      transparent 38%
+    );
+  }
+
+  // Canvas starfield — drawn in JS, animated via rAF, parallax + hover.
+  &__stars {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  // SVG feTurbulence grain — sits on top as a subtle dither. Purpose is
+  // technical (breaks up gradient banding on 8-bit displays); the
+  // aesthetic softness is a side effect.
+  &__noise {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.18;
+    mix-blend-mode: overlay;
+  }
+
+  @media (prefers-color-scheme: light) {
+    // Softer, warmer values against a light body bg.
+    &__mesh {
+      background:
+        radial-gradient(
+          ellipse 55% 45% at 78% 22%,
+          rgba(245, 108, 156, 0.22),
+          transparent 62%
+        ),
+        radial-gradient(
+          ellipse 50% 55% at 15% 55%,
+          rgba(255, 128, 40, 0.16),
+          transparent 65%
+        ),
+        radial-gradient(
+          ellipse 90% 45% at 50% 92%,
+          rgba(224, 28, 170, 0.18),
+          transparent 60%
+        ),
+        radial-gradient(
+          ellipse 40% 40% at 8% 12%,
+          rgba(224, 28, 170, 0.1),
+          transparent 70%
+        );
+    }
+
+    &__horizon {
+      background: linear-gradient(
+        to top,
+        rgba(224, 28, 170, 0.08) 0%,
+        transparent 30%
+      );
+    }
+
+    &__noise {
+      opacity: 0.08;
+    }
+  }
+}

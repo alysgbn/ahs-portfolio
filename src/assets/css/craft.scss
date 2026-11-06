@@ -118,6 +118,59 @@
     }
   }
 
+  // Tinted glass: each tile carries one brand hue as a soft wash, a tinted
+  // edge, and a label color mixed toward the foreground so it stays legible.
+  .tint-pink {
+    --tint: 243, 33, 112;
+    --tint-rgb: rgb(243, 33, 112);
+  }
+  .tint-orange {
+    --tint: 255, 107, 8;
+    --tint-rgb: rgb(255, 107, 8);
+  }
+  .tint-magenta {
+    --tint: 207, 35, 207;
+    --tint-rgb: rgb(207, 35, 207);
+  }
+  .tint-yellow {
+    --tint: 238, 221, 68;
+    --tint-rgb: rgb(238, 221, 68);
+  }
+
+  .tile.tile--tinted {
+    background: linear-gradient(
+        155deg,
+        rgba(var(--tint), 0.18),
+        rgba(var(--tint), 0.05) 65%,
+        rgba(var(--tint), 0.02)
+      ),
+      rgba(255, 255, 255, 0.03);
+    border-color: rgba(var(--tint), 0.22);
+
+    .tile-eyebrow {
+      color: color-mix(in oklab, var(--tint-rgb) 62%, white);
+    }
+
+    &:hover {
+      border-color: rgba(var(--tint), 0.5);
+    }
+
+    @media (prefers-color-scheme: light) {
+      background: linear-gradient(
+          155deg,
+          rgba(var(--tint), 0.2),
+          rgba(var(--tint), 0.07) 65%,
+          rgba(var(--tint), 0.03)
+        ),
+        rgba(255, 255, 255, 0.6);
+      border-color: rgba(var(--tint), 0.3);
+
+      .tile-eyebrow {
+        color: color-mix(in oklab, var(--tint-rgb) 55%, black);
+      }
+    }
+  }
+
   .tile-feature {
     grid-column: span 2;
     grid-row: span 2;

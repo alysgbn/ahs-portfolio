@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import {
   motion,
+  useMotionValue,
   useReducedMotion,
   useScroll,
   useTransform,
@@ -10,51 +11,83 @@ import { Button } from "@heroui/button";
 import AvailabilityBadge from "./AvailabilityBadge";
 import RoleRotator from "./RoleRotator";
 import MagneticButton from "./MagneticButton";
+import HeroNebula from "./HeroNebula";
 
 import ReactLogo from "../assets/logos/ReactLogo.png";
 import NextJSLogo from "../assets/logos/NextJSLogo.png";
 import TypeScriptLogo from "../assets/logos/TypeScriptLogo.png";
 import TailwindLogo from "../assets/logos/TailwindLogo.png";
-import PostmanLogo from "../assets/logos/PostmanLogo.png";
 import GithubLogo from "../assets/logos/GithubLogo.png";
+import PythonLogo from "../assets/logos/PythonLogo.svg";
 
-import AvatarPortrait from "../assets/images/portfolio_avatar_2_transparent.png";
-import AvatarLaptop from "../assets/images/portfolio_avatar_3_transparent.png";
+// Hero avatars: WebP for size (~50KB each) with PNG fallback (~1MB each)
+// for old Safari. Both source variants get shipped through webpack so
+// they're hashed for cache-busting.
+import AvatarPortraitWebp from "../assets/images/hero-avatar-portrait.webp";
+import AvatarPortraitPng from "../assets/images/hero-avatar-portrait.png";
+import AvatarLaptopWebp from "../assets/images/hero-avatar-laptop.webp";
+import AvatarLaptopPng from "../assets/images/hero-avatar-laptop.png";
 
 import "../assets/css/hero-orbit.scss";
 
 const ease = [0.23, 1, 0.32, 1];
 
-const AVATAR_STATE_1 = AvatarPortrait;
-const AVATAR_STATE_2 = AvatarLaptop;
-
+// Three icons per side, mirrored around the avatar's head (the laptop pose
+// is shifted in CSS so both poses share one head axis). Angles: 0° = right,
+// clockwise. Right-side icons turn clockwise across the pin and their mirrors
+// turn counter-clockwise, so the layout stays symmetric at every frame.
+// Placement was solved against both avatars' alpha masks: every icon clears
+// the body, face and laptop for the whole scroll, stays on screen at 1366px,
+// and misses the availability pill.
+//   right: 304 → 320, 324 → 340, 344 → 0     left: mirrors (180 − angle)
+const ICON_TURN = 16; // degrees each icon turns across the pin
 const orbitConfig = [
-  { logo: NextJSLogo, angle: 20, ring: "inner", alt: "Next.js" },
-  { logo: TypeScriptLogo, angle: 140, ring: "inner", alt: "TypeScript" },
-  { logo: ReactLogo, angle: 260, ring: "inner", alt: "React" },
-  { logo: TailwindLogo, angle: 60, ring: "outer", alt: "Tailwind" },
-  { logo: PostmanLogo, angle: 180, ring: "outer", alt: "Postman" },
-  { logo: GithubLogo, angle: 300, ring: "outer", alt: "GitHub" },
+  { logo: NextJSLogo, angle: 304, dir: 1, alt: "Next.js" },
+  { logo: PythonLogo, angle: 324, dir: 1, alt: "Python" },
+  { logo: TailwindLogo, angle: 344, dir: 1, alt: "Tailwind" },
+  { logo: ReactLogo, angle: 236, dir: -1, alt: "React" },
+  { logo: TypeScriptLogo, angle: 216, dir: -1, alt: "TypeScript" },
+  { logo: GithubLogo, angle: 196, dir: -1, alt: "GitHub" },
 ];
 
-const RADIUS_FRACTIONS = {
-  inner: { start: 0.32, end: 0.44 },
-  outer: { start: 0.46, end: 0.6 },
-};
+// Fractions of stage width. Icons ride the inner ring (104% / 2 = 0.52),
+// easing out onto its line from just inside it.
+const RADIUS_FRACTIONS = { start: 0.5, end: 0.52 };
 
-function OrbitIcon({ config, stageSize, progress, scale, opacity }) {
-  const angleRad = (config.angle * Math.PI) / 180;
-  const fractions = RADIUS_FRACTIONS[config.ring];
+const DEG_TO_RAD = Math.PI / 180;
 
-  const x = useTransform(progress, (p) => {
-    const radius = stageSize * (fractions.start + p * (fractions.end - fractions.start));
-    return Math.cos(angleRad) * radius;
-  });
+// Wrapped in React.memo because the parent re-renders whenever stageSize
+// changes; without memo the 6 icons all re-render even when only motion
+// values (which don't need a re-render) have updated. All props are
+// stable references (config from module-scope array, motion values are
+// stable per-instance), so default shallow equality is enough.
+const OrbitIcon = React.memo(function OrbitIcon({
+  config,
+  stageSize,
+  progress,
+  rotation,
+  scale,
+  opacity,
+}) {
+  const fractions = RADIUS_FRACTIONS;
 
-  const y = useTransform(progress, (p) => {
-    const radius = stageSize * (fractions.start + p * (fractions.end - fractions.start));
-    return Math.sin(angleRad) * radius;
-  });
+  // Precompute what doesn't need to recompute per frame. Only rotation and
+  // progress change during scroll — angle-in-radians and the two radius
+  // constants only change when the icon or stageSize does.
+  const baseAngleRad = config.angle * DEG_TO_RAD;
+  const radiusStart = stageSize * fractions.start;
+  const radiusDelta = stageSize * (fractions.end - fractions.start);
+
+  // Per frame: 2 multiplies, 1 add, 1 sin/cos. Was: 3 multiplies + 2
+  // divides + 2 adds + trig, twice (once per axis).
+  const turn = config.dir * DEG_TO_RAD;
+  const x = useTransform([progress, rotation], ([p, rot]) =>
+    Math.cos(baseAngleRad + rot * turn) * (radiusStart + p * radiusDelta)
+  );
+
+  const y = useTransform([progress, rotation], ([p, rot]) =>
+    Math.sin(baseAngleRad + rot * turn) * (radiusStart + p * radiusDelta)
+  );
 
   return (
     <motion.div
@@ -64,9 +97,10 @@ function OrbitIcon({ config, stageSize, progress, scale, opacity }) {
       <img src={config.logo} alt={config.alt} />
     </motion.div>
   );
-}
+});
 
 export default function HeroOrbit() {
+  const sectionRef = useRef(null);
   const stageRef = useRef(null);
   const reduced = useReducedMotion();
   const [stageSize, setStageSize] = useState(500);
@@ -81,36 +115,60 @@ export default function HeroOrbit() {
     return () => observer.disconnect();
   }, []);
 
-  // Scroll-driven: first ~250px of scroll transitions state 1 → state 2.
-  const { scrollY } = useScroll();
-  const progress = useTransform(
-    scrollY,
-    [0, reduced ? 100000 : 250],
-    [0, 1]
-  );
+  // PINNED scroll-scrubbed sequence. The section is tall (100vh sticky
+  // child + 1500px scroll journey); scrollYProgress goes 0 → 1 across
+  // the pin. Visitor can't proceed to the next section until they scroll
+  // through the whole animation.
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"],
+  });
+  const staticProgress = useMotionValue(0);
+  const progress = reduced ? staticProgress : scrollYProgress;
 
-  const avatar1Opacity = useTransform(progress, [0, 0.4, 0.6], [1, 0.5, 0]);
-  const avatar2Opacity = useTransform(progress, [0.4, 0.6, 1], [0, 0.5, 1]);
-  const avatarScale = useTransform(progress, [0, 1], [1, 1.4]);
-  const avatarY = useTransform(progress, [0, 1], [0, -22]);
+  // Subtle mirrored orbital drift across the full pin.
+  const iconRotation = useTransform(progress, [0, 1], [0, ICON_TURN]);
 
-  const iconScale = useTransform(progress, [0, 1], [1, 1.24]);
-  const iconOpacity = useTransform(progress, [0, 1], [1, 0.92]);
+  // Sequenced across the pinned range so each beat has its own moment.
+  // Phase 1 (0 → 0.35): avatar cross-fade from portrait to laptop pose
+  const avatar1Opacity = useTransform(progress, [0, 0.2, 0.35], [1, 0.5, 0]);
+  const avatar2Opacity = useTransform(progress, [0.2, 0.35, 0.6], [0, 0.5, 1]);
+  const avatarScale = useTransform(progress, [0, 0.5], [1, 1.08]);
+  const avatarY = useTransform(progress, [0, 0.5], [0, -12]);
 
-  const ringOpacity = useTransform(progress, [0, 1], [1, 0.85]);
+  // Phase 2 (0.2 → 0.7): icons drift outward + soften
+  const iconScale = useTransform(progress, [0.2, 0.7], [1, 1.22]);
+  const iconOpacity = useTransform(progress, [0.2, 0.7], [1, 0.9]);
+  const ringOpacity = useTransform(progress, [0, 0.7], [1, 0.85]);
 
-  const leftDecorX = useTransform(progress, [0, 1], [-80, 0]);
-  const leftDecorOpacity = useTransform(progress, [0, 0.4, 1], [0, 0.15, 0.55]);
-  const rightDecorX = useTransform(progress, [0, 1], [80, 0]);
-  const rightDecorOpacity = useTransform(progress, [0, 0.4, 1], [0, 0.15, 0.55]);
+  // Phase 3 (0.5 → 0.9): decor A/S letters slide in from the sides
+  const leftDecorX = useTransform(progress, [0.5, 0.9], [-80, 0]);
+  const leftDecorOpacity = useTransform(progress, [0.5, 0.7, 0.9], [0, 0.3, 0.55]);
+  const rightDecorX = useTransform(progress, [0.5, 0.9], [80, 0]);
+  const rightDecorOpacity = useTransform(progress, [0.5, 0.7, 0.9], [0, 0.3, 0.55]);
 
   return (
-    <section className="hero-orbit">
-      <div className="hero-orbit__orbs" aria-hidden>
-        <div className="hero-orbit__orb hero-orbit__orb--pink" />
-        <div className="hero-orbit__orb hero-orbit__orb--dark" />
-        <div className="hero-orbit__orb hero-orbit__orb--peach" />
-      </div>
+    <section
+      ref={sectionRef}
+      className={`hero-orbit${reduced ? " hero-orbit--static" : ""}`}
+    >
+      <div className="hero-orbit__pin-track">
+        <div className="hero-orbit__sticky">
+          {/* Hero-scoped nebula: mesh + horizon + starfield + grain,
+              rendered as an absolute layer inside the sticky so it stays
+              confined to the hero section. Page-wide version is in
+              components/NebulaBackground.jsx and can be re-enabled from
+              src/index.js if you want to compare. */}
+          <HeroNebula />
+
+          {/* Original hero orbs kept commented out for reference — the
+              nebula's mesh gradient now provides the ambient warm glow.
+              <div className="hero-orbit__orbs" aria-hidden>
+                <div className="hero-orbit__orb hero-orbit__orb--pink" />
+                <div className="hero-orbit__orb hero-orbit__orb--dark" />
+                <div className="hero-orbit__orb hero-orbit__orb--peach" />
+              </div>
+          */}
 
       {!reduced && (
         <>
@@ -170,7 +228,7 @@ export default function HeroOrbit() {
             transition={{ duration: 0.55, delay: 0.85, ease }}
           >
             I build full-stack web apps, data pipelines, and the analysis
-            tools that connect them. Currently at Docquity — wearing hats
+            tools that connect them. Currently at Docquity, wearing hats
             across Next.js, FastAPI, Python, and SQL.
           </motion.p>
 
@@ -195,13 +253,11 @@ export default function HeroOrbit() {
             <MagneticButton style={{ display: "inline-flex" }}>
               <Button
                 as="a"
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#contact"
                 radius="full"
                 className="hero-orbit__btn--primary shadow-lg"
               >
-                Resume
+                Get in Touch
               </Button>
             </MagneticButton>
           </motion.div>
@@ -223,6 +279,7 @@ export default function HeroOrbit() {
               config={config}
               stageSize={stageSize}
               progress={progress}
+              rotation={iconRotation}
               scale={iconScale}
               opacity={iconOpacity}
             />
@@ -233,21 +290,37 @@ export default function HeroOrbit() {
               className="hero-orbit__avatar"
               style={{ scale: avatarScale, y: avatarY }}
             >
-              <motion.img
-                src={AVATAR_STATE_1}
-                alt="Aliyah Sagaban"
-                className="hero-orbit__avatar-img"
-                style={{ opacity: avatar1Opacity }}
-              />
-              <motion.img
-                src={AVATAR_STATE_2}
-                alt=""
-                aria-hidden
-                className="hero-orbit__avatar-img"
-                style={{ opacity: avatar2Opacity }}
-              />
+              {/* Portrait pose — shown first. fetchPriority high because
+                  it's the LCP-adjacent element on initial paint. */}
+              <picture>
+                <source srcSet={AvatarPortraitWebp} type="image/webp" />
+                <motion.img
+                  src={AvatarPortraitPng}
+                  alt="Aliyah Sagaban"
+                  className="hero-orbit__avatar-img"
+                  style={{ opacity: avatar1Opacity }}
+                  fetchpriority="high"
+                  decoding="async"
+                />
+              </picture>
+              {/* Laptop pose — cross-fades in during scroll. Default
+                  priority (browser decides); still eager since it's
+                  above the fold and needs to be ready before the fade. */}
+              <picture>
+                <source srcSet={AvatarLaptopWebp} type="image/webp" />
+                <motion.img
+                  src={AvatarLaptopPng}
+                  alt=""
+                  aria-hidden
+                  className="hero-orbit__avatar-img hero-orbit__avatar-img--laptop"
+                  style={{ opacity: avatar2Opacity }}
+                  decoding="async"
+                />
+              </picture>
             </motion.div>
           </div>
+        </div>
+      </div>
         </div>
       </div>
     </section>

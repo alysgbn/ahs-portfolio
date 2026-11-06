@@ -11,7 +11,6 @@ import Galago4 from "../assets/images/Galago4.png";
 
 import ReactLogo from "../assets/logos/ReactLogo.png";
 import SassLogo from "../assets/logos/SassLogo.png";
-import BootstrapLogo from "../assets/logos/BootstrapLogo.png";
 import TailwindLogo from '../assets/logos/TailwindLogo.png'
 import GithubLogo from '../assets/logos/GithubLogo.png'
 import GitlabLogo from '../assets/logos/GitlabLogo.png'
@@ -111,133 +110,117 @@ const Journey = () => {
             ease: [0.23, 1, 0.32, 1],
           },
         }}
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.05 }}
       >
         <div className="journey-projects">
           <div className="containers">
-            {/* Left Container */}
-            <Card
-              className="py-4 card"
-              isFooterBlurred
-              onMouseEnter={() => setIsLeftHovered(true)}
-              onMouseLeave={() => setIsLeftHovered(false)}
-              onMouseMove={handleSpotlight}
-            >
-              <CardHeader className="pb-0 pt-2 px-4 flex-col items-start card-header">
-                <p className="text-tiny uppercase font-bold">
-                  AIQUE Innovation Tech. Corp. • 2024 – 2025
-                </p>
-                <small className="text-default-500">
-                  Junior Full Stack Developer
-                </small>
-                <h4 className="font-bold text-large">
-                  Travel and Hotel Booking
-                </h4>
-              </CardHeader>
-              <CardBody className="overflow-visible py-2">
-                <img
-                  alt="Card background"
-                  className="object-cover rounded-xl"
-                  src={WebDeveloper}
-                  width={800}
-                />
-              </CardBody>
-              <CardFooter className=" card-footer justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-                <p className="text-tiny text-white/80">Shipped · v2 enhancements.</p>
-                <Button
-                  className="text-tiny text-white bg-black/20"
-                  color="default"
-                  radius="lg"
-                  size="sm"
-                  variant="flat"
-                >
-                  Notify me
-                </Button>
-              </CardFooter>
-            </Card>
-
-            {/* Right Container  */}
-
-            <Card
-              className="py-4 card"
-              isFooterBlurred
-              onMouseEnter={() => setIsRightHovered(true)}
-              onMouseLeave={() => setIsRightHovered(false)}
-              onMouseMove={handleSpotlight}
-            >
-              <CardHeader className="pb-0 pt-2 px-4 flex-col items-start card-header">
-                <p className="text-tiny uppercase font-bold">
-                  AIQUE Innovation Tech. Corp. • 2024
-                </p>
-                <small className="text-default-500">
-                  Web Developer Intern
-                </small>
-                <h4 className="font-bold text-large">GalaGO! V2</h4>
-              </CardHeader>
-              <CardBody className="overflow-visible py-2 card-body">
-                <div>
+            {/* Each project carries its own stack marquee directly beneath it */}
+            <div className="project">
+              <Card
+                className="py-4 card"
+                isFooterBlurred
+                onMouseEnter={() => setIsLeftHovered(true)}
+                onMouseLeave={() => setIsLeftHovered(false)}
+                onMouseMove={handleSpotlight}
+              >
+                <CardHeader className="pb-0 pt-2 px-4 flex-col items-start card-header">
+                  <p className="text-tiny uppercase font-bold">
+                    AIQUE Innovation Tech. Corp. • 2024 – 2025
+                  </p>
+                  <small className="text-default-500">
+                    Junior Full Stack Developer
+                  </small>
+                  <h4 className="font-bold text-large">
+                    Travel and Hotel Booking
+                  </h4>
+                </CardHeader>
+                <CardBody className="overflow-visible py-2">
                   <img
                     alt="Card background"
-                    className="object-cover rounded-xl mt-[70px]"
-                    src={galagoImages[currImage]}
+                    className="object-cover rounded-xl"
+                    src={WebDeveloper}
                     width={800}
                   />
-                  <div className="arrows">
-                    <Button
-                      isIconOnly
-                      aria-label="left arrow"
-                      className="left"
-                      onPress={handlePrevImage}
-                      radius="full"
-                    >
-                      <RightArrow />
-                    </Button>
-                    <Button
-                      isIconOnly
-                      aria-label="left arrow"
-                      className="right"
-                      onPress={handleNextImage}
-                      radius="full"
-                      variant="flat"
-                    >
-                      <RightArrow />
-                    </Button>
-                  </div>
+                </CardBody>
+                <CardFooter className="card-footer justify-center text-center before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+                  <p className="text-tiny text-white/80">Shipped · v2 enhancements.</p>
+                </CardFooter>
+              </Card>
+              <div className="tech-stack">
+                <div className={`slider ${isLeftHovered ? "slider--active" : ""}`}>
+                  <Marquee className="[--duration:18s] [--gap:1rem]">
+                    {leftStack.map((tech) => (
+                      <TechLogo key={tech.name} {...tech} />
+                    ))}
+                  </Marquee>
                 </div>
-              </CardBody>
-              <CardFooter className="card-footer justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
-                <p className="text-tiny text-white/80">
-                  Optimized and redesigned 15+ pages during a dynamic front-end
-                  internship.
-                </p>
-                <Button
-                  className="text-tiny text-white bg-black/20"
-                  color="default"
-                  radius="lg"
-                  size="sm"
-                  variant="flat"
-                >
-                  Visit App
-                </Button>
-              </CardFooter>
-            </Card>
-          </div>
-
-          <div className="tech-stack">
-            <div className={`slider ${isLeftHovered ? "slider--active" : ""}`}>
-              <Marquee className="[--duration:18s] [--gap:1rem]">
-                {leftStack.map((tech) => (
-                  <TechLogo key={tech.name} {...tech} />
-                ))}
-              </Marquee>
+              </div>
             </div>
 
-            <div className={`slider ${isRightHovered ? "slider--active" : ""}`}>
-              <Marquee reverse className="[--duration:18s] [--gap:1rem]">
-                {rightStack.map((tech) => (
-                  <TechLogo key={tech.name} {...tech} />
-                ))}
-              </Marquee>
+            <div className="project">
+              <Card
+                className="py-4 card"
+                isFooterBlurred
+                onMouseEnter={() => setIsRightHovered(true)}
+                onMouseLeave={() => setIsRightHovered(false)}
+                onMouseMove={handleSpotlight}
+              >
+                <CardHeader className="pb-0 pt-2 px-4 flex-col items-start card-header">
+                  <p className="text-tiny uppercase font-bold">
+                    AIQUE Innovation Tech. Corp. • 2024
+                  </p>
+                  <small className="text-default-500">
+                    Web Developer Intern
+                  </small>
+                  <h4 className="font-bold text-large">GalaGO! V2</h4>
+                </CardHeader>
+                <CardBody className="overflow-visible py-2 card-body">
+                  <div>
+                    <img
+                      alt="Card background"
+                      className="object-cover rounded-xl mt-[70px]"
+                      src={galagoImages[currImage]}
+                      width={800}
+                    />
+                    <div className="arrows">
+                      <Button
+                        isIconOnly
+                        aria-label="left arrow"
+                        className="left"
+                        onPress={handlePrevImage}
+                        radius="full"
+                      >
+                        <RightArrow />
+                      </Button>
+                      <Button
+                        isIconOnly
+                        aria-label="left arrow"
+                        className="right"
+                        onPress={handleNextImage}
+                        radius="full"
+                        variant="flat"
+                      >
+                        <RightArrow />
+                      </Button>
+                    </div>
+                  </div>
+                </CardBody>
+                <CardFooter className="card-footer justify-center text-center before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+                  <p className="text-tiny text-white/80">
+                    Optimized and redesigned 15+ pages during a dynamic front-end
+                    internship.
+                  </p>
+                </CardFooter>
+              </Card>
+              <div className="tech-stack">
+                <div className={`slider ${isRightHovered ? "slider--active" : ""}`}>
+                  <Marquee reverse className="[--duration:18s] [--gap:1rem]">
+                    {rightStack.map((tech) => (
+                      <TechLogo key={tech.name} {...tech} />
+                    ))}
+                  </Marquee>
+                </div>
+              </div>
             </div>
           </div>
         </div>

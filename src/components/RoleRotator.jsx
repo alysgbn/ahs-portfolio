@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 const defaultRoles = [
   "Data Solutions Engineer",
   "Full Stack Developer",
-  "Data Scientist",
 ];
 
 export default function RoleRotator({ roles = defaultRoles, interval = 2400 }) {

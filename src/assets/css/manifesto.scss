@@ -1,15 +1,23 @@
+// Pinned: the section is taller than the viewport and its content holds
+// centered while the words fill, so the highlight tracks scroll exactly.
 .manifesto-section {
-  min-height: 100vh;
-  padding: 10rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 240vh;
   position: relative;
   z-index: 1;
   scroll-margin-top: 5rem;
 
-  @media (max-width: 640px) {
-    padding: 6rem 1.25rem;
+  .manifesto-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 5rem 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 640px) {
+      padding: 4rem 1.25rem 0;
+    }
   }
 
   .manifesto-inner {
@@ -28,7 +36,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     width: max-content;
     margin-left: auto;
     margin-right: auto;
@@ -36,10 +44,10 @@
 
   .manifesto-text {
     font-family: "Fraunces";
-    font-size: clamp(2rem, 4.6vw, 4.4rem);
-    line-height: 1.18;
+    font-size: clamp(1.6rem, 3.3vw, 3.1rem);
+    line-height: 1.2;
     color: inherit;
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
     letter-spacing: -0.005em;
   }
@@ -51,7 +59,7 @@
     text-transform: uppercase;
     color: inherit;
     opacity: 0.5;
-    margin-top: 4rem;
+    margin-top: 2.5rem;
   }
 
   .manifesto-corner {
