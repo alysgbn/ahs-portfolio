@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import {
   motion,
-  useInView,
   useScroll,
   useSpring,
   useTransform,
@@ -145,36 +144,6 @@ const item = {
   }),
 };
 
-function CountUpYear({ target, className }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.5 });
-  const [value, setValue] = useState(target - 5);
-
-  useEffect(() => {
-    if (!inView) return;
-    const start = target - 5;
-    const end = target;
-    const duration = 700;
-    const startTime = performance.now();
-    let raf;
-    const tick = (now) => {
-      const p = Math.min(1, (now - startTime) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const current = Math.round(start + (end - start) * eased);
-      setValue(current);
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, target]);
-
-  return (
-    <span ref={ref} className={className}>
-      {value}
-    </span>
-  );
-}
-
 function TimelineItem({ entry, i }) {
   const itemRef = useRef(null);
 
@@ -183,8 +152,7 @@ function TimelineItem({ entry, i }) {
     offset: ["start end", "end start"],
   });
 
-  const rawImageY = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const rawImageRotate = useTransform(scrollYProgress, [0, 1], [-4, 4]);
+  const rawImageY = useTransform(scrollYProgress, [0, 1], [32, -32]);
   const imageOpacity = useTransform(
     scrollYProgress,
     [0.05, 0.25, 0.75, 0.95],
@@ -197,10 +165,6 @@ function TimelineItem({ entry, i }) {
   );
 
   const imageY = useSpring(rawImageY, { stiffness: 90, damping: 20 });
-  const imageRotate = useSpring(rawImageRotate, {
-    stiffness: 90,
-    damping: 20,
-  });
 
   const yearScale = useTransform(scrollYProgress, [0.3, 0.55], [1, 1.08]);
   const yearColor = useTransform(
@@ -230,7 +194,7 @@ function TimelineItem({ entry, i }) {
         className="timeline-date"
         style={{ scale: yearScale, color: yearColor }}
       >
-        <CountUpYear target={entry.year} />
+        <span>{entry.year}</span>
         {entry.dateSuffix && (
           <span className="timeline-date-suffix"> {entry.dateSuffix}</span>
         )}
@@ -255,7 +219,9 @@ function TimelineItem({ entry, i }) {
         </span>
         <div className="timeline-role">{entry.role}</div>
         <div className="timeline-org">{entry.org}</div>
-        <ScrubbedText className="timeline-body">{entry.body}</ScrubbedText>
+        <ScrubbedText className="timeline-body" offset={["start 0.92", "end 0.62"]}>
+          {entry.body}
+        </ScrubbedText>
       </div>
 
       {(entry.image || entry.visual) && (
@@ -263,7 +229,6 @@ function TimelineItem({ entry, i }) {
           className="timeline-image"
           style={{
             y: imageY,
-            rotate: imageRotate,
             opacity: imageOpacity,
             scale: imageScale,
           }}
