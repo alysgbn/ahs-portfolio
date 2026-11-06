@@ -142,17 +142,8 @@ const Journey = () => {
                     width={800}
                   />
                 </CardBody>
-                <CardFooter className=" card-footer justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+                <CardFooter className="card-footer justify-center text-center before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
                   <p className="text-tiny text-white/80">Shipped · v2 enhancements.</p>
-                  <Button
-                    className="text-tiny text-white bg-black/20"
-                    color="default"
-                    radius="lg"
-                    size="sm"
-                    variant="flat"
-                  >
-                    Notify me
-                  </Button>
                 </CardFooter>
               </Card>
               <div className="tech-stack">
@@ -214,20 +205,11 @@ const Journey = () => {
                     </div>
                   </div>
                 </CardBody>
-                <CardFooter className="card-footer justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+                <CardFooter className="card-footer justify-center text-center before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
                   <p className="text-tiny text-white/80">
                     Optimized and redesigned 15+ pages during a dynamic front-end
                     internship.
                   </p>
-                  <Button
-                    className="text-tiny text-white bg-black/20"
-                    color="default"
-                    radius="lg"
-                    size="sm"
-                    variant="flat"
-                  >
-                    Visit App
-                  </Button>
                 </CardFooter>
               </Card>
               <div className="tech-stack">
