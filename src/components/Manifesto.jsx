@@ -22,8 +22,8 @@ export default function Manifesto() {
           A PHILOSOPHY
         </motion.p>
         <ScrubbedText className="manifesto-text">
-          I notice what most people scroll past: a query that runs twice, a
-          pipeline that quietly drops a row, an API name that almost fits. I
+          I notice what most people scroll past: an error the backend quietly
+          swallows, a form that submits twice, a pipeline that drops a row. I
           like structure, numbers that add up, and work that holds up when
           someone looks closely. I hold my own work to that bar first, and
           raise it a little every time I ship.
