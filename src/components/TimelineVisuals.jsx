@@ -585,3 +585,222 @@ export function ScatterVisual() {
     </Canvas>
   );
 }
+
+/* AIQUE full stack — a live booking dashboard: concurrent users trending up,
+   and the v2 features switching on one by one. */
+export function BookingVisual() {
+  const { ref, play, tr, loop } = usePlay();
+  const id = useId().replace(/:/g, "");
+  const data = [184, 172, 178, 154, 160, 132, 140, 112, 118, 92];
+  const step = 192 / (data.length - 1);
+  const pts = data.map((y, i) => [46 + i * step, y]);
+  const line = pts.map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(1)} ${y}`).join(" ");
+  const area = `${line} L${pts[pts.length - 1][0].toFixed(1)} 214 L46 214 Z`;
+  const head = pts[pts.length - 1];
+  const features = ["Filter", "Sort", "Auth", "Bundles"];
+
+  return (
+    <Canvas innerRef={ref} accent="#ff6b08" label="Booking dashboard with concurrent users rising and v2 features enabled">
+      <defs>
+        <linearGradient id={`${id}-area`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#ff6b08" stopOpacity="0.45" />
+          <stop offset="1" stopColor="#ff6b08" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id={`${id}-grad`} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#ff6b08" />
+          <stop offset="1" stopColor="#f32170" />
+        </linearGradient>
+      </defs>
+
+      <motion.g initial={{ opacity: 0, y: 10 }} animate={play ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }} transition={tr(0.6)}>
+        <rect x="28" y="40" width="228" height="200" rx="16" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeOpacity="0.12" />
+        <text x="46" y="68" fill="currentColor" fillOpacity="0.55" style={label}>Concurrent users</text>
+        <motion.circle
+          cx="216"
+          cy="64"
+          r="3.5"
+          fill="#ff6b08"
+          animate={play ? { opacity: [1, 0.3, 1] } : { opacity: 0 }}
+          transition={loop(1.6, 0.8)}
+        />
+        <text x="224" y="68" fill="#ff6b08" style={{ ...label, fontSize: 9, fontWeight: 600 }}>LIVE</text>
+        {[124, 154, 184].map((y) => (
+          <line key={y} x1="46" x2="238" y1={y} y2={y} stroke="currentColor" strokeOpacity="0.06" />
+        ))}
+        <line x1="46" x2="238" y1="214" y2="214" stroke="currentColor" strokeOpacity="0.2" />
+      </motion.g>
+
+      <motion.path
+        d={area}
+        fill={`url(#${id}-area)`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: play ? 1 : 0 }}
+        transition={tr(0.8, 1.2)}
+      />
+      <motion.path
+        d={line}
+        stroke={`url(#${id}-grad)`}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: play ? 1 : 0 }}
+        transition={tr(1.3, 0.4)}
+      />
+      <motion.circle
+        cx={head[0]}
+        cy={head[1]}
+        r="5"
+        stroke="#f32170"
+        strokeWidth="1.5"
+        initial={{ opacity: 0 }}
+        animate={play ? { r: [5, 15], opacity: [0.7, 0] } : { opacity: 0 }}
+        transition={loop(2, 1.8)}
+      />
+      <motion.circle
+        cx={head[0]}
+        cy={head[1]}
+        r="4.5"
+        fill="#f32170"
+        initial={{ scale: 0 }}
+        animate={{ scale: play ? 1 : 0 }}
+        transition={tr(0.4, 1.6)}
+      />
+
+      {features.map((f, i) => {
+        const y = 56 + i * 38;
+        return (
+          <motion.g
+            key={f}
+            initial={{ opacity: 0, x: 14 }}
+            animate={play ? { opacity: 1, x: 0 } : { opacity: 0, x: 14 }}
+            transition={tr(0.5, 0.5 + i * 0.12)}
+          >
+            <rect x="270" y={y} width="104" height="28" rx="14" fill="currentColor" fillOpacity="0.05" stroke="currentColor" strokeOpacity="0.14" />
+            <circle cx="286" cy={y + 14} r="7" stroke="currentColor" strokeOpacity="0.3" />
+            <motion.circle
+              cx="286"
+              cy={y + 14}
+              r="7"
+              fill={`url(#${id}-grad)`}
+              initial={{ scale: 0 }}
+              animate={{ scale: play ? 1 : 0 }}
+              transition={tr(0.35, 1.2 + i * 0.25)}
+            />
+            <motion.path
+              d={`M282.5 ${y + 14} l2.5 2.5 4.5 -5`}
+              stroke="#fff"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: play ? 1 : 0 }}
+              transition={tr(0.3, 1.4 + i * 0.25)}
+            />
+            <text x="300" y={y + 18} fill="currentColor" fillOpacity="0.8" style={label}>{f}</text>
+          </motion.g>
+        );
+      })}
+
+      <motion.g
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={play ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+        transition={tr(0.5, 2.3)}
+      >
+        <rect x="270" y="210" width="104" height="28" rx="14" fill={`url(#${id}-grad)`} />
+        <text x="322" y="228" textAnchor="middle" fill="#fff" style={{ ...label, fontWeight: 600 }}>v2 shipped</text>
+      </motion.g>
+    </Canvas>
+  );
+}
+
+/* AIQUE intern — a waffle of 15 pages turning from wireframe to redesigned,
+   beside the three breakpoints they were built for. */
+export function PagesVisual() {
+  const { ref, play, tr } = usePlay();
+  const id = useId().replace(/:/g, "");
+  const cells = Array.from({ length: 15 }, (_, i) => [36 + (i % 5) * 46, 58 + Math.floor(i / 5) * 60]);
+  const devices = [
+    { x: 290, y: 64, w: 82, h: 52, r: 6 },
+    { x: 290, y: 132, w: 44, h: 60, r: 6 },
+    { x: 346, y: 140, w: 26, h: 52, r: 5 },
+  ];
+
+  return (
+    <Canvas innerRef={ref} accent="#ff6b08" label="Fifteen pages redesigned, shown responsive across desktop, tablet and phone">
+      <defs>
+        <linearGradient id={`${id}-page`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#ff6b08" />
+          <stop offset="1" stopColor="#f32170" />
+        </linearGradient>
+      </defs>
+
+      {cells.map(([x, y], i) => (
+        <g key={i}>
+          <motion.g initial={{ opacity: 0 }} animate={{ opacity: play ? 1 : 0 }} transition={tr(0.4, 0.05 + i * 0.03)}>
+            <rect x={x} y={y} width="38" height="50" rx="6" fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeOpacity="0.16" />
+            <line x1={x + 7} x2={x + 31} y1={y + 12} y2={y + 12} stroke="currentColor" strokeOpacity="0.25" strokeWidth="2" strokeLinecap="round" />
+            <line x1={x + 7} x2={x + 22} y1={y + 20} y2={y + 20} stroke="currentColor" strokeOpacity="0.15" strokeWidth="2" strokeLinecap="round" />
+          </motion.g>
+          <motion.g
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={play ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
+            transition={tr(0.45, 0.8 + i * 0.07)}
+          >
+            <rect x={x} y={y} width="38" height="50" rx="6" fill={`url(#${id}-page)`} fillOpacity={0.55 + (i % 5) * 0.09} />
+            <rect x={x + 6} y={y + 7} width="26" height="14" rx="3" fill="#fff" fillOpacity="0.28" />
+            <line x1={x + 7} x2={x + 28} y1={y + 30} y2={y + 30} stroke="#fff" strokeOpacity="0.6" strokeWidth="2" strokeLinecap="round" />
+            <line x1={x + 7} x2={x + 20} y1={y + 38} y2={y + 38} stroke="#fff" strokeOpacity="0.4" strokeWidth="2" strokeLinecap="round" />
+          </motion.g>
+        </g>
+      ))}
+
+      {devices.map((d, i) => (
+        <motion.g
+          key={i}
+          initial={{ opacity: 0, y: 10 }}
+          animate={play ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={tr(0.5, 0.4 + i * 0.12)}
+        >
+          <rect x={d.x} y={d.y} width={d.w} height={d.h} rx={d.r} fill="currentColor" fillOpacity="0.04" stroke="currentColor" strokeOpacity="0.5" strokeWidth="1.5" />
+          <motion.rect
+            x={d.x + 5}
+            y={d.y + 6}
+            height="8"
+            rx="3"
+            fill={`url(#${id}-page)`}
+            initial={{ width: 0 }}
+            animate={{ width: play ? d.w - 10 : 0 }}
+            transition={tr(0.6, 1.6 + i * 0.15)}
+          />
+          {[20, 30].map((o, j) => (
+            <motion.rect
+              key={o}
+              x={d.x + 5}
+              y={d.y + o}
+              height="4"
+              rx="2"
+              fill="currentColor"
+              fillOpacity="0.25"
+              initial={{ width: 0 }}
+              animate={{ width: play ? (d.w - 10) * (j ? 0.55 : 0.8) : 0 }}
+              transition={tr(0.5, 1.8 + i * 0.15 + j * 0.08)}
+            />
+          ))}
+        </motion.g>
+      ))}
+      <line x1="290" x2="372" y1="210" y2="210" stroke="currentColor" strokeOpacity="0.15" />
+      <motion.text
+        x="290"
+        y="230"
+        fill="currentColor"
+        style={label}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: play ? 0.55 : 0 }}
+        transition={tr(0.4, 2)}
+      >
+        Responsive
+      </motion.text>
+    </Canvas>
+  );
+}

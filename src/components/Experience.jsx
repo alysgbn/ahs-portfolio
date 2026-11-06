@@ -8,8 +8,6 @@ import {
 } from "framer-motion";
 import ScrubbedText from "./ScrubbedText";
 import WordReveal from "./WordReveal";
-import WebDeveloper from "../assets/images/WebDeveloper.png";
-import Galago1 from "../assets/images/Galago1.png";
 import DataDevVisual from "./DataDevVisual";
 import {
   IntranetVisual,
@@ -18,6 +16,8 @@ import {
   MedalsVisual,
   BroadcastVisual,
   ScatterVisual,
+  BookingVisual,
+  PagesVisual,
 } from "./TimelineVisuals";
 import "../assets/css/experience.scss";
 
@@ -61,9 +61,8 @@ const timeline = [
     role: "Junior Full Stack Developer",
     org: "AIQUE Innovation Technology Corp. · Taguig City, BGC",
     body: "Built and maintained a production hotel booking platform serving hundreds of concurrent users, and shipped v2 with filtering, sorting, authentication, and bundled bookings. Improved v2 front-end performance and UX with GSAP and Framer Motion animations, and resolved critical bugs on schedule. Stack: React, Next.js, TypeScript, Tailwind CSS, NestJS.",
-    image: WebDeveloper,
-    imageAlt: "AIQUE booking platform screenshot",
-    imageCaption: "AIQUE · Travel + Hotel Booking",
+    visual: <BookingVisual />,
+    imageCaption: "hotel booking · v2 shipped",
   },
   {
     year: 2025,
@@ -82,9 +81,8 @@ const timeline = [
     role: "Web Developer Intern",
     org: "AIQUE Innovation Technology Corp. · Taguig City, BGC",
     body: "Optimized and redesigned 15+ responsive web pages using HTML, CSS, React, TypeScript, Tailwind CSS, and SASS. Contributed to CMS development with Next.js and Postman for API testing.",
-    image: Galago1,
-    imageAlt: "GalaGO! travel product screenshot",
-    imageCaption: "GalaGO! · redesigned 15+ pages",
+    visual: <PagesVisual />,
+    imageCaption: "15+ pages · responsive redesign",
   },
   {
     year: 2023,
