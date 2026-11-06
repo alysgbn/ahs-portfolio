@@ -36,7 +36,7 @@ const typeColor = {
 const timeline = [
   {
     year: 2026,
-    dateSuffix: "— Present",
+    dateSuffix: "– Present",
     type: "Work",
     role: "Data Analyst (Data Solutions & Full-Stack Engineering)",
     org: "Docquity · Taguig City, BGC",
@@ -46,7 +46,7 @@ const timeline = [
   },
   {
     year: 2025,
-    dateSuffix: "— 2026",
+    dateSuffix: "– 2026",
     type: "Work",
     role: "Associate Web Developer",
     org: "Merck Group · Taguig City, BGC",
@@ -56,7 +56,7 @@ const timeline = [
   },
   {
     year: 2024,
-    dateSuffix: "— 2025",
+    dateSuffix: "– 2025",
     type: "Work",
     role: "Junior Full Stack Developer",
     org: "AIQUE Innovation Technology Corp. · Taguig City, BGC",
@@ -86,7 +86,7 @@ const timeline = [
   },
   {
     year: 2023,
-    dateSuffix: "— 2024",
+    dateSuffix: "– 2024",
     type: "Project",
     role: "Image Forgery Detection & Localization",
     org: "University Project · T.I.P. Quezon City",
@@ -98,7 +98,7 @@ const timeline = [
     year: 2022,
     dateSuffix: "",
     type: "Competition",
-    role: "Gold Medalist — TESDA Skills Competition",
+    role: "Gold Medalist, TESDA Skills Competition",
     org: "Web Technology, Regional & District",
     body: "Gold at both the Regional (September 2022) and District (June 2022) TESDA skills competitions in Web Technology.",
     visual: <MedalsVisual />,
@@ -106,7 +106,7 @@ const timeline = [
   },
   {
     year: 2020,
-    dateSuffix: "— 2022",
+    dateSuffix: "– 2022",
     type: "Organization",
     role: "Vice-President for Communications",
     org: "ACM Student Chapter · T.I.P. Quezon City",
@@ -116,7 +116,7 @@ const timeline = [
   },
   {
     year: 2020,
-    dateSuffix: "— 2024",
+    dateSuffix: "– 2024",
     type: "Education",
     role: "BS Computer Science, Major in Data Science",
     org: "Technological Institute of the Philippines · Quezon City",

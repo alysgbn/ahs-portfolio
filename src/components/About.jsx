@@ -20,7 +20,7 @@ const values = [
   },
   {
     title: "Motion with purpose",
-    body: "Every animation earns its place. If it doesn't guide, respond, or explain — it doesn't ship.",
+    body: "Every animation earns its place. If it doesn't guide, respond, or explain, it doesn't ship.",
   },
 ];
 
@@ -108,7 +108,7 @@ export default function About() {
           transition={{ duration: 0.7, delay: 0.3, ease }}
         >
           Full-stack developer with a Data Science major, currently at{" "}
-          <strong>Docquity</strong> — where full-stack dev, data engineering,
+          <strong>Docquity</strong>, where full-stack dev, data engineering,
           and client analytics roll into one role.
         </motion.p>
 

@@ -35,7 +35,7 @@ export default function Manifesto() {
           transition={{ duration: 0.55, delay: 0.3, ease }}
           viewport={{ once: true, amount: 0.5 }}
         >
-          — Aliyah
+          Aliyah
         </motion.div>
       </div>
     </section>

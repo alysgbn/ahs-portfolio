@@ -71,7 +71,7 @@ export default function Contact() {
           delayOffset={0.35}
           amount={0.6}
         >
-          Full-stack work, data engineering, or just a chat about the web and data — the inbox is open.
+          Full-stack work, data engineering, or just a chat about the web and data. The inbox is open.
         </WordReveal>
 
         <motion.a

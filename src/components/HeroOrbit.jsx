@@ -226,7 +226,7 @@ export default function HeroOrbit() {
             transition={{ duration: 0.55, delay: 0.85, ease }}
           >
             I build full-stack web apps, data pipelines, and the analysis
-            tools that connect them. Currently at Docquity — wearing hats
+            tools that connect them. Currently at Docquity, wearing hats
             across Next.js, FastAPI, Python, and SQL.
           </motion.p>
 
