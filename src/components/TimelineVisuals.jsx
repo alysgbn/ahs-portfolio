@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useId, useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 
 // Animated companions for the experience timeline. Each one draws its ink in
@@ -21,7 +21,27 @@ function usePlay() {
   return { ref, play, reduce, tr, loop };
 }
 
-function Canvas({ innerRef, label, children }) {
+// Shared depth layer: a faint dot grid and a soft glow in the entry's accent.
+export function Backdrop({ accent = "#ff6b08" }) {
+  const id = useId().replace(/:/g, "");
+  return (
+    <>
+      <defs>
+        <pattern id={`${id}-dots`} width="16" height="16" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="1" fill="currentColor" fillOpacity="0.09" />
+        </pattern>
+        <radialGradient id={`${id}-glow`} cx="0.5" cy="0.55" r="0.6">
+          <stop offset="0" stopColor={accent} stopOpacity="0.16" />
+          <stop offset="1" stopColor={accent} stopOpacity="0" />
+        </radialGradient>
+      </defs>
+      <rect width="400" height="300" fill={`url(#${id}-dots)`} />
+      <rect width="400" height="300" fill={`url(#${id}-glow)`} />
+    </>
+  );
+}
+
+function Canvas({ innerRef, label, accent, children }) {
   return (
     <svg
       ref={innerRef}
@@ -31,6 +51,7 @@ function Canvas({ innerRef, label, children }) {
       aria-label={label}
       style={{ width: "100%", height: "100%", display: "block" }}
     >
+      <Backdrop accent={accent} />
       {children}
     </svg>
   );
@@ -59,7 +80,7 @@ export function IntranetVisual() {
   ];
 
   return (
-    <Canvas innerRef={ref} label="Web apps on a global intranet reaching Poland, Japan and other markets">
+    <Canvas innerRef={ref} accent="#ff6b08" label="Web apps on a global intranet reaching Poland, Japan and other markets">
       <defs>
         <linearGradient id="tv-intra" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#ff6b08" />
@@ -152,7 +173,7 @@ export function LeaderboardVisual() {
   const rows = [250, 204, 186, 168, 150, 128, 108];
 
   return (
-    <Canvas innerRef={ref} label="Leaderboard of seven developers with the top score highlighted">
+    <Canvas innerRef={ref} accent="#f32170" label="Leaderboard of seven developers with the top score highlighted">
       <defs>
         <linearGradient id="tv-lead" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stopColor="#ff6b08" />
@@ -231,7 +252,7 @@ export function ForgeryVisual() {
   const u = nodes.map(([x, y], i) => `${i ? "L" : "M"}${x} ${y}`).join(" ");
 
   return (
-    <Canvas innerRef={ref} label="An image being scanned with a forged region localized, next to a U-Net diagram">
+    <Canvas innerRef={ref} accent="#ff6b08" label="An image being scanned with a forged region localized, next to a U-Net diagram">
       <defs>
         <linearGradient id="tv-scan" x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stopColor="#ff6b08" stopOpacity="0" />
@@ -336,7 +357,7 @@ export function MedalsVisual() {
   ];
 
   return (
-    <Canvas innerRef={ref} label="Two gold medals, District and Regional">
+    <Canvas innerRef={ref} accent="#eedd44" label="Two gold medals, District and Regional">
       <defs>
         <linearGradient id="tv-gold" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#eedd44" />
@@ -408,7 +429,7 @@ export function BroadcastVisual() {
   const steps = "M196 224 H262 V146 H364";
 
   return (
-    <Canvas innerRef={ref} label="Broadcast waves beside a step from Jr Officer up to Vice-President">
+    <Canvas innerRef={ref} accent="#eedd44" label="Broadcast waves beside a step from Jr Officer up to Vice-President">
       {!reduce &&
         play &&
         [0, 1, 2].map((i) => (
@@ -502,7 +523,7 @@ export function ScatterVisual() {
   const star = [334, 78];
 
   return (
-    <Canvas innerRef={ref} label="Scatter plot with a regression line and one standout point">
+    <Canvas innerRef={ref} accent="#cf23cf" label="Scatter plot with a regression line and one standout point">
       <defs>
         <linearGradient id="tv-fit" x1="0" y1="1" x2="1" y2="0">
           <stop offset="0" stopColor="#cf23cf" />

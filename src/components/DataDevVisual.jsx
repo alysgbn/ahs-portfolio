@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import { Backdrop } from "./TimelineVisuals";
 
 const ease = [0.23, 1, 0.32, 1];
 
@@ -47,6 +48,8 @@ export default function DataDevVisual() {
           <stop offset="1" stopColor="#ff6b08" stopOpacity="0" />
         </radialGradient>
       </defs>
+
+      <Backdrop accent="#ff6b08" />
 
       {/* gridlines */}
       {[86, 136, 186, 236].map((y) => (
