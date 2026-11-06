@@ -11,6 +11,7 @@ import Skills from "./components/Skills";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import ScrollProgress from "./components/ScrollProgress";
+import StoryBackdrop from "./components/StoryBackdrop";
 
 function App() {
   return (
@@ -18,8 +19,10 @@ function App() {
       <ScrollProgress />
       <MyNavbar className="w-100" />
       <HeroOrbit />
-      <About />
-      <Manifesto />
+      <StoryBackdrop>
+        <About />
+        <Manifesto />
+      </StoryBackdrop>
       <Journey />
       <Experience />
       <Skills />
