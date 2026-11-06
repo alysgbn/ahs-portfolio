@@ -10,11 +10,16 @@ function Word({ progress, range, children }) {
   );
 }
 
-export default function ScrubbedText({ children, className, as: Tag = "p" }) {
+export default function ScrubbedText({
+  children,
+  className,
+  as: Tag = "p",
+  offset = ["start 0.85", "start 0.2"],
+}) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.85", "start 0.2"],
+    offset,
   });
 
   const words = String(children).split(" ");

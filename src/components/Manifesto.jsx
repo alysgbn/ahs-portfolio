@@ -21,7 +21,10 @@ export default function Manifesto() {
         >
           A PHILOSOPHY
         </motion.p>
-        <ScrubbedText className="manifesto-text">
+        <ScrubbedText
+          className="manifesto-text"
+          offset={["start 0.9", "start 0.4"]}
+        >
           I notice what most people scroll past: an error the backend quietly
           swallows, a form that submits twice, a pipeline that drops a row. I
           like structure, numbers that add up, and work that holds up when
