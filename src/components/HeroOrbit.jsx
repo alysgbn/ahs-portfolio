@@ -19,6 +19,7 @@ import TypeScriptLogo from "../assets/logos/TypeScriptLogo.png";
 import TailwindLogo from "../assets/logos/TailwindLogo.png";
 import PostmanLogo from "../assets/logos/PostmanLogo.png";
 import GithubLogo from "../assets/logos/GithubLogo.png";
+import PythonLogo from "../assets/logos/PythonLogo.svg";
 
 // Hero avatars: WebP for size (~50KB each) with PNG fallback (~1MB each)
 // for old Safari. Both source variants get shipped through webpack so
@@ -36,10 +37,11 @@ const ease = [0.23, 1, 0.32, 1];
 // so each angle is chosen so both its start and end positions miss the
 // avatar's head: at scroll end the head covers ~205°–300° on the inner
 // ring and ~240°–280° on the outer ring.
-//   inner: 15 → 60, 90 → 135, 315 → 0
+//   inner: 15 → 60, 50 → 95, 90 → 135, 315 → 0
 //   outer: 125 → 170, 240 → 285 (clears the hair), 340 → 25
 const orbitConfig = [
   { logo: NextJSLogo, angle: 15, ring: "inner", alt: "Next.js" },
+  { logo: PythonLogo, angle: 50, ring: "inner", alt: "Python" },
   { logo: TypeScriptLogo, angle: 90, ring: "inner", alt: "TypeScript" },
   { logo: PostmanLogo, angle: 315, ring: "inner", alt: "Postman" },
   { logo: TailwindLogo, angle: 340, ring: "outer", alt: "Tailwind" },
