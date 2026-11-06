@@ -32,18 +32,20 @@ export default function ContactForm() {
     if (form.botcheck.checked) return;
 
     setStatus("sending");
+    // Sent as FormData, not JSON: a JSON body triggers a CORS preflight,
+    // which Web3Forms' Cloudflare edge rejects (403) before the real POST.
+    const body = new FormData();
+    body.append("access_key", ACCESS_KEY);
+    body.append("subject", `Portfolio: ${values.subject.trim()}`);
+    body.append("from_name", values.name.trim());
+    body.append("name", values.name.trim());
+    body.append("email", values.email.trim());
+    body.append("message", values.message.trim());
     try {
       const res = await fetch(ENDPOINT, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          access_key: ACCESS_KEY,
-          subject: `Portfolio: ${values.subject.trim()}`,
-          from_name: values.name.trim(),
-          name: values.name.trim(),
-          email: values.email.trim(),
-          message: values.message.trim(),
-        }),
+        headers: { Accept: "application/json" },
+        body,
       });
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.message || "Send failed");
