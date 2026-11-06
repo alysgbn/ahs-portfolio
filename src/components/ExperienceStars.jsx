@@ -42,8 +42,8 @@ const rand = (a, b) => a + Math.random() * (b - a);
 function makeSky(w, h, leftW, rightW) {
   const wrapH = h + WRAP_PAD;
   const stars = [];
-  // density follows the margin size: roughly one star per 1,800px² of sky
-  const count = Math.round(((leftW + rightW) * h) / 1800);
+  // density follows the margin size: roughly one star per 3,400px² of sky
+  const count = Math.round(((leftW + rightW) * h) / 3400);
   for (let i = 0; i < count; i++) {
     const left = i % 2 === 0;
     const gutterPx = left ? leftW : rightW;
@@ -52,23 +52,23 @@ function makeSky(w, h, leftW, rightW) {
       // bias toward the outer edge so the field thins toward the content
       x: left ? u * u * gutterPx : w - u * u * gutterPx,
       y: Math.random() * wrapH,
-      r: rand(0.4, 1.5),
+      r: rand(0.35, 1.2),
       depth: rand(0.06, 0.3),
-      base: rand(0.25, 0.75),
+      base: rand(0.12, 0.45),
       phase: rand(0, Math.PI * 2),
       speed: rand(0.2, 0.6),
     });
   }
 
-  // Constellations: three per side, spaced down the sky, only where the
+  // Constellations: two per side, spaced down the sky, only where the
   // margin is wide enough to hold a figure without touching the content.
   const figures = [];
-  const order = [0, 1, 2, 3, 4, 2];
-  for (let i = 0; i < 6; i++) {
+  const order = [0, 1, 2, 3];
+  for (let i = 0; i < 4; i++) {
     const left = i % 2 === 0;
     const gutterPx = left ? leftW : rightW;
     if (gutterPx < 130) continue;
-    const scale = Math.min(gutterPx * 0.7, 190);
+    const scale = Math.min(gutterPx * 0.6, 160);
     const slack = Math.max(0, gutterPx - scale - 32);
     const slot = Math.floor(i / 2);
     const fig = FIGURES[order[i]];
@@ -76,7 +76,7 @@ function makeSky(w, h, leftW, rightW) {
     figures.push({
       fig,
       x0,
-      y0: (slot + (left ? 0.1 : 0.55)) * (wrapH / 3),
+      y0: (slot + (left ? 0.15 : 0.65)) * (wrapH / 2),
       scale,
       depth: rand(0.12, 0.2),
       phase: rand(0, Math.PI * 2),
@@ -92,13 +92,13 @@ const wrapY = (y, wrapH) => {
 };
 
 function drawStar(ctx, x, y, r, alpha) {
-  if (r > 1.1) {
-    const g = ctx.createRadialGradient(x, y, 0, x, y, r * 5);
-    g.addColorStop(0, `rgba(255, 214, 232, ${alpha * 0.35})`);
+  if (r > 1.15) {
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r * 4);
+    g.addColorStop(0, `rgba(255, 214, 232, ${alpha * 0.2})`);
     g.addColorStop(1, "rgba(255, 214, 232, 0)");
     ctx.fillStyle = g;
     ctx.beginPath();
-    ctx.arc(x, y, r * 5, 0, Math.PI * 2);
+    ctx.arc(x, y, r * 4, 0, Math.PI * 2);
     ctx.fill();
   }
   ctx.fillStyle = `rgba(255, 244, 248, ${alpha})`;
@@ -151,17 +151,17 @@ export default function ExperienceStars({ sectionRef }) {
 
       for (const s of sky.stars) {
         const y = wrapY(s.y - scrolled * s.depth, sky.wrapH);
-        const breathe = reduce ? 1 : 0.65 + 0.35 * Math.sin(time * s.speed + s.phase);
+        const breathe = reduce ? 1 : 0.75 + 0.25 * Math.sin(time * s.speed * 0.6 + s.phase);
         drawStar(ctx, s.x, y, s.r, s.base * breathe);
       }
 
       for (const f of sky.figures) {
         const oy = wrapY(f.y0 - scrolled * f.depth, sky.wrapH);
         const pts = f.fig.pts.map(([px, py]) => [f.x0 + px * f.scale, oy + py * f.scale]);
-        const pulse = reduce ? 1 : 0.8 + 0.2 * Math.sin(time * 0.35 + f.phase);
+        const pulse = reduce ? 1 : 0.85 + 0.15 * Math.sin(time * 0.2 + f.phase);
 
-        ctx.strokeStyle = `rgba(245, 160, 196, ${0.28 * pulse})`;
-        ctx.lineWidth = 0.8;
+        ctx.strokeStyle = `rgba(240, 200, 218, ${0.11 * pulse})`;
+        ctx.lineWidth = 0.6;
         ctx.beginPath();
         for (const [a, b] of f.fig.edges) {
           ctx.moveTo(pts[a][0], pts[a][1]);
@@ -170,7 +170,7 @@ export default function ExperienceStars({ sectionRef }) {
         ctx.stroke();
 
         pts.forEach(([x, y], i) => {
-          drawStar(ctx, x, y, i % 3 === 0 ? 1.8 : 1.3, 0.85 * pulse);
+          drawStar(ctx, x, y, i % 3 === 0 ? 1.25 : 0.95, 0.5 * pulse);
         });
       }
     };
