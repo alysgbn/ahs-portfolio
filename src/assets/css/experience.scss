@@ -15,6 +15,27 @@
   .experience-inner {
     max-width: 1240px;
     width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  // Starfield layer: spans the section, canvas pinned to the viewport.
+  .experience-stars {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .experience-stars__canvas {
+    position: sticky;
+    top: 0;
+    display: block;
+    width: 100%;
+    height: 100vh;
+    // keep the middle clear: stars fade out toward the content column
+    -webkit-mask-image: linear-gradient(to right, #000 0, #000 8%, transparent 20%, transparent 80%, #000 92%, #000 100%);
+    mask-image: linear-gradient(to right, #000 0, #000 8%, transparent 20%, transparent 80%, #000 92%, #000 100%);
   }
 
   .experience-header {

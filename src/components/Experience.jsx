@@ -7,6 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import ScrubbedText from "./ScrubbedText";
+import ExperienceStars from "./ExperienceStars";
 import WordReveal from "./WordReveal";
 import DataDevVisual from "./DataDevVisual";
 import {
@@ -295,6 +296,7 @@ function TimelineItem({ entry, i }) {
 }
 
 export default function Experience() {
+  const sectionRef = useRef(null);
   const timelineRef = useRef(null);
 
   const { scrollYProgress: timelineProgress } = useScroll({
@@ -309,7 +311,8 @@ export default function Experience() {
   });
 
   return (
-    <section id="experience" className="experience-section">
+    <section ref={sectionRef} id="experience" className="experience-section">
+      <ExperienceStars sectionRef={sectionRef} />
       <div className="experience-inner">
         <motion.div
           className="experience-header"
