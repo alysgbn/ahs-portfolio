@@ -32,15 +32,18 @@ import "../assets/css/hero-orbit.scss";
 
 const ease = [0.23, 1, 0.32, 1];
 
-// 6 icons distributed at 60° intervals around the full circle. Inner and
-// outer offset by 60° so no two icons stack. Avoids putting anything
-// directly at 270° (top), which is where the extended avatar's face lives.
+// Start angles (0° = right, clockwise). Icons rotate +45° across the pin,
+// so each angle is chosen so both its start and end positions miss the
+// avatar's head: at scroll end the head covers ~205°–300° on the inner
+// ring and ~240°–280° on the outer ring.
+//   inner: 15 → 60, 90 → 135, 315 → 0
+//   outer: 125 → 170, 240 → 285 (clears the hair), 340 → 25
 const orbitConfig = [
-  { logo: NextJSLogo, angle: 30, ring: "inner", alt: "Next.js" },
-  { logo: TypeScriptLogo, angle: 150, ring: "inner", alt: "TypeScript" },
-  { logo: PostmanLogo, angle: 210, ring: "inner", alt: "Postman" },
-  { logo: TailwindLogo, angle: 330, ring: "outer", alt: "Tailwind" },
-  { logo: GithubLogo, angle: 90, ring: "outer", alt: "GitHub" },
+  { logo: NextJSLogo, angle: 15, ring: "inner", alt: "Next.js" },
+  { logo: TypeScriptLogo, angle: 90, ring: "inner", alt: "TypeScript" },
+  { logo: PostmanLogo, angle: 315, ring: "inner", alt: "Postman" },
+  { logo: TailwindLogo, angle: 340, ring: "outer", alt: "Tailwind" },
+  { logo: GithubLogo, angle: 125, ring: "outer", alt: "GitHub" },
   { logo: ReactLogo, angle: 240, ring: "outer", alt: "React" },
 ];
 
