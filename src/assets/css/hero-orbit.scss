@@ -311,9 +311,10 @@
   // `align-items: flex-end`), the bottom half of each ring extends past
   // the section edge and gets clipped by the section's `overflow: hidden`.
   // That produces the reference's "orbit cut off at the bottom" look.
+  // Sized so the orbit icons (radius 0.52 of the stage) sit on its line.
   &__ring--inner {
-    width: 88%;
-    height: 88%;
+    width: 104%;
+    height: 104%;
   }
 
   &__ring--outer {
@@ -358,6 +359,14 @@
     max-width: none;
     object-fit: contain;
     object-position: center bottom;
+
+    // The laptop pose sits left of centre in its source image; shift it so
+    // her head shares one axis with the portrait pose (0.13 of the stage,
+    // i.e. 7.34% of this 1.77x-stage-wide image). Keeps the crossfade from
+    // jumping and lets the orbit icons mirror around her.
+    &--laptop {
+      transform: translateX(-42.66%);
+    }
   }
 
   // Modernised icon: circular glass chip. Cream fill with a soft inner

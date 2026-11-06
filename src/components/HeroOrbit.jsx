@@ -17,7 +17,6 @@ import ReactLogo from "../assets/logos/ReactLogo.png";
 import NextJSLogo from "../assets/logos/NextJSLogo.png";
 import TypeScriptLogo from "../assets/logos/TypeScriptLogo.png";
 import TailwindLogo from "../assets/logos/TailwindLogo.png";
-import PostmanLogo from "../assets/logos/PostmanLogo.png";
 import GithubLogo from "../assets/logos/GithubLogo.png";
 import PythonLogo from "../assets/logos/PythonLogo.svg";
 
@@ -33,30 +32,27 @@ import "../assets/css/hero-orbit.scss";
 
 const ease = [0.23, 1, 0.32, 1];
 
-// Start angles (0° = right, clockwise). Icons rotate +45° across the pin,
-// so each angle is chosen so both its start and end positions miss the
-// avatar's head: at scroll end the head covers ~205°–300° on the inner
-// ring and ~240°–280° on the outer ring.
-//   inner: 15 → 60, 50 → 95, 90 → 135, 315 → 0
-//   outer: 125 → 170, 240 → 285 (clears the hair), 340 → 25
+// Three icons per side, mirrored around the avatar's head (the laptop pose
+// is shifted in CSS so both poses share one head axis). Angles: 0° = right,
+// clockwise. Right-side icons turn clockwise across the pin and their mirrors
+// turn counter-clockwise, so the layout stays symmetric at every frame.
+// Placement was solved against both avatars' alpha masks: every icon clears
+// the body, face and laptop for the whole scroll, stays on screen at 1366px,
+// and misses the availability pill.
+//   right: 304 → 320, 324 → 340, 344 → 0     left: mirrors (180 − angle)
+const ICON_TURN = 16; // degrees each icon turns across the pin
 const orbitConfig = [
-  { logo: NextJSLogo, angle: 15, ring: "inner", alt: "Next.js" },
-  { logo: PythonLogo, angle: 50, ring: "inner", alt: "Python" },
-  { logo: TypeScriptLogo, angle: 90, ring: "inner", alt: "TypeScript" },
-  { logo: PostmanLogo, angle: 315, ring: "inner", alt: "Postman" },
-  { logo: TailwindLogo, angle: 340, ring: "outer", alt: "Tailwind" },
-  { logo: GithubLogo, angle: 125, ring: "outer", alt: "GitHub" },
-  { logo: ReactLogo, angle: 240, ring: "outer", alt: "React" },
+  { logo: NextJSLogo, angle: 304, dir: 1, alt: "Next.js" },
+  { logo: PythonLogo, angle: 324, dir: 1, alt: "Python" },
+  { logo: TailwindLogo, angle: 344, dir: 1, alt: "Tailwind" },
+  { logo: ReactLogo, angle: 236, dir: -1, alt: "React" },
+  { logo: TypeScriptLogo, angle: 216, dir: -1, alt: "TypeScript" },
+  { logo: GithubLogo, angle: 196, dir: -1, alt: "GitHub" },
 ];
 
-// Fractions of stage width — icons START at .start radius (initial),
-// drift OUT to .end radius on scroll. .end matches the visual ring width
-// (88%/2 = 0.44 inner, 128%/2 = 0.64 outer) so at scroll-end the icons
-// land exactly on the ring line.
-const RADIUS_FRACTIONS = {
-  inner: { start: 0.34, end: 0.44 },
-  outer: { start: 0.5, end: 0.64 },
-};
+// Fractions of stage width. Icons ride the inner ring (104% / 2 = 0.52),
+// easing out onto its line from just inside it.
+const RADIUS_FRACTIONS = { start: 0.5, end: 0.52 };
 
 const DEG_TO_RAD = Math.PI / 180;
 
@@ -73,7 +69,7 @@ const OrbitIcon = React.memo(function OrbitIcon({
   scale,
   opacity,
 }) {
-  const fractions = RADIUS_FRACTIONS[config.ring];
+  const fractions = RADIUS_FRACTIONS;
 
   // Precompute what doesn't need to recompute per frame. Only rotation and
   // progress change during scroll — angle-in-radians and the two radius
@@ -84,12 +80,13 @@ const OrbitIcon = React.memo(function OrbitIcon({
 
   // Per frame: 2 multiplies, 1 add, 1 sin/cos. Was: 3 multiplies + 2
   // divides + 2 adds + trig, twice (once per axis).
+  const turn = config.dir * DEG_TO_RAD;
   const x = useTransform([progress, rotation], ([p, rot]) =>
-    Math.cos(baseAngleRad + rot * DEG_TO_RAD) * (radiusStart + p * radiusDelta)
+    Math.cos(baseAngleRad + rot * turn) * (radiusStart + p * radiusDelta)
   );
 
   const y = useTransform([progress, rotation], ([p, rot]) =>
-    Math.sin(baseAngleRad + rot * DEG_TO_RAD) * (radiusStart + p * radiusDelta)
+    Math.sin(baseAngleRad + rot * turn) * (radiusStart + p * radiusDelta)
   );
 
   return (
@@ -129,8 +126,8 @@ export default function HeroOrbit() {
   const staticProgress = useMotionValue(0);
   const progress = reduced ? staticProgress : scrollYProgress;
 
-  // Subtle icon orbital drift (~45°) across the full pin.
-  const iconRotation = useTransform(progress, [0, 1], [0, 45]);
+  // Subtle mirrored orbital drift across the full pin.
+  const iconRotation = useTransform(progress, [0, 1], [0, ICON_TURN]);
 
   // Sequenced across the pinned range so each beat has its own moment.
   // Phase 1 (0 → 0.35): avatar cross-fade from portrait to laptop pose
@@ -315,7 +312,7 @@ export default function HeroOrbit() {
                   src={AvatarLaptopPng}
                   alt=""
                   aria-hidden
-                  className="hero-orbit__avatar-img"
+                  className="hero-orbit__avatar-img hero-orbit__avatar-img--laptop"
                   style={{ opacity: avatar2Opacity }}
                   decoding="async"
                 />
