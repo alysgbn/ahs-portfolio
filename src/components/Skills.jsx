@@ -24,7 +24,15 @@ const groups = [
   },
   {
     label: "Backend & APIs",
-    items: ["Node.js", "Express.js", "NestJS", "FastAPI", "REST APIs"],
+    items: [
+      "Node.js",
+      "Express.js",
+      "NestJS",
+      "FastAPI",
+      "Django",
+      "Flask",
+      "REST APIs",
+    ],
   },
   {
     label: "Databases",
