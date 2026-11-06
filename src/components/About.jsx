@@ -11,8 +11,8 @@ const ease = [0.23, 1, 0.32, 1];
 
 const values = [
   {
-    title: "Craft over speed",
-    body: "A rushed interface is easy to spot. I sweat the small details because they compound into something that just feels right.",
+    title: "Ship it, then sharpen it",
+    body: "A perfect product nobody can use yet is worth nothing. I ship a solid MVP fast, put it in real hands, and keep refining until it feels right.",
   },
   {
     title: "Full-stack, honestly",
