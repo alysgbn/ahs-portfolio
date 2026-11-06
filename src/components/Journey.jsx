@@ -110,7 +110,7 @@ const Journey = () => {
             ease: [0.23, 1, 0.32, 1],
           },
         }}
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: true, amount: 0.05 }}
       >
         <div className="journey-projects">
           <div className="containers">
